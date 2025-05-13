@@ -32,7 +32,7 @@
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
         </svg>
       </span>
-      <span>CyberPortfolio</span>
+      <span>DUARDZ</span>
     </a>
     
     <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -61,7 +61,7 @@
 
 <footer class="footer">
   <div class="container footer-content">
-    <p class="footer-text">© {new Date().getFullYear()} CyberPortfolio. All rights reserved.</p>
+    <p class="footer-text">© {new Date().getFullYear()} Duardz. All rights reserved.</p>
     <ul class="social-links">
       <li>
         <!-- svelte-ignore a11y_consider_explicit_label -->

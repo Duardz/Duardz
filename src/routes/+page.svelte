@@ -68,12 +68,12 @@
 </script>
 
 <svelte:head>
-  <title>Home | CyberPortfolio</title>
+  <title>Home | Duardz</title>
 </svelte:head>
 
 <section class="hero">
   <div class="container hero-content">
-    <h1 class="hero-title">John Doe</h1>
+    <h1 class="hero-title">Eduardo Camay III</h1>
     <h3 class="hero-subtitle">Cybersecurity Professional</h3>
     
     <div class="cyber-terminal">
