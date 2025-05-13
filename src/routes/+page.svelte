@@ -23,14 +23,14 @@
   // Featured sections data
   const featuredCertificates = [
     {
-      title: "Certified Ethical Hacker (CEH)",
+      title: "Certified Meow Hacker (CMH)",
       issuer: "EC-Council",
       date: "2023",
       icon: "award"
     },
     {
-      title: "CompTIA Security+",
-      issuer: "CompTIA",
+      title: "Comp Meow+",
+      issuer: "Comp",
       date: "2022",
       icon: "shield"
     }
