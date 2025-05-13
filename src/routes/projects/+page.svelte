@@ -1,5 +1,7 @@
-<!-- Projects Page: src/routes/projects/+page.svelte (continued) -->
+<!-- Projects Page (Dropdown Filtering): src/routes/projects/+page.svelte -->
 <script>
+  import { onMount } from 'svelte';
+  
   // Projects data
   const projects = [
     {
@@ -58,28 +60,49 @@
     }
   ];
   
-  // Filtered projects
-  let filteredProjects = [...projects];
-  let activeFilter = 'all';
+  // Extract all unique tags
+  /**
+	 * @type {any[]}
+	 */
+  let allTags = [];
+  projects.forEach(project => {
+    project.tags.forEach(tag => {
+      if (!allTags.includes(tag)) {
+        allTags.push(tag);
+      }
+    });
+  });
   
-  // Get all unique tags from projects
-  const allTags = [...new Set(projects.flatMap(project => project.tags))];
+  // Sort tags alphabetically
+  allTags.sort();
   
-  // Filter projects by tag
-  // @ts-ignore
-  function filterProjects(tag) {
-    activeFilter = tag;
-    
-    if (tag === 'all') {
-      filteredProjects = [...projects];
-    } else {
-      filteredProjects = projects.filter(project => project.tags.includes(tag));
-    }
+  // Add 'All Technologies' option at the beginning
+  allTags = ['All Technologies', ...allTags];
+  
+  // Filter states
+  let selectedTag = 'All Technologies';
+  let showFeaturedOnly = false;
+  
+  // Clear all filters
+  function clearFilters() {
+    selectedTag = 'All Technologies';
+    showFeaturedOnly = false;
   }
+  
+  // Filter projects based on selected filters
+  $: filteredProjects = projects.filter(project => {
+    // Check if project matches tag filter
+    const matchesTag = selectedTag === 'All Technologies' || project.tags.includes(selectedTag);
+    
+    // Check if project matches featured filter
+    const matchesFeatured = !showFeaturedOnly || project.featured;
+    
+    return matchesTag && matchesFeatured;
+  });
   
   // Current project for modal
   /**
-	 * @type {{ image: any; title: any; tags: any; longDescription: any; github: any; } | null}
+	 * @type {{ image: any; title: any; featured: any; tags: any; longDescription: any; github: any; } | null}
 	 */
   let currentProject = null;
   let isModalOpen = false;
@@ -95,6 +118,39 @@
     isModalOpen = false;
     document.body.style.overflow = 'auto';
   }
+  
+  // Dropdown state
+  let isDropdownOpen = false;
+  
+  function toggleDropdown() {
+    isDropdownOpen = !isDropdownOpen;
+  }
+  
+  // @ts-ignore
+  function selectTag(tag) {
+    selectedTag = tag;
+    isDropdownOpen = false;
+  }
+  
+  // Close dropdown when clicking outside
+  // @ts-ignore
+  function handleClickOutside(event) {
+    const dropdown = document.querySelector('.dropdown-menu');
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    
+    // @ts-ignore
+    if (dropdown && !dropdown.contains(event.target) && !dropdownToggle.contains(event.target)) {
+      isDropdownOpen = false;
+    }
+  }
+  
+  onMount(() => {
+    document.addEventListener('click', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  });
 </script>
 
 <svelte:head>
@@ -104,86 +160,253 @@
 <section class="section">
   <div class="container">
     <h1>Projects</h1>
-    <p style="margin-bottom: 2rem;">Explore my cybersecurity projects, ranging from vulnerability scanners to secure authentication systems. Each project showcases different aspects of my skills and expertise in the field.</p>
+    <p style="margin-bottom: 2rem; max-width: 800px;">Explore my cybersecurity projects, ranging from vulnerability scanners to secure authentication systems. Each project showcases different aspects of my skills and expertise in the field.</p>
     
-    <!-- Filter buttons -->
-    <div style="margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      <button 
-        class="btn btn-outline" 
-        style={activeFilter === 'all' ? 'background-color: var(--primary); color: white;' : ''}
-        on:click={() => filterProjects('all')}
-      >
-        All
-      </button>
-      
-      {#each allTags as tag}
-        <button 
-          class="btn btn-outline" 
-          style={activeFilter === tag ? 'background-color: var(--primary); color: white;' : ''}
-          on:click={() => filterProjects(tag)}
-        >
-          {tag}
-        </button>
-      {/each}
+    <!-- Improved Filter UI with Dropdown -->
+    <div class="card" style="margin-bottom: 2rem; background-color: var(--dark-elevated); border-left-color: var(--primary);">
+      <div class="card-content">
+        <h3 style="margin-top: 0; margin-bottom: 1rem; display: flex; align-items: center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+          </svg>
+          Filter Projects
+        </h3>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; align-items: center;">
+          <!-- Featured Projects Toggle -->
+          <div style="display: flex; align-items: center;">
+            <label class="checkbox-container" style="cursor: pointer; display: flex; align-items: center; user-select: none; margin-bottom: 0;">
+              <input 
+                type="checkbox" 
+                checked={showFeaturedOnly} 
+                on:change={() => showFeaturedOnly = !showFeaturedOnly}
+                style="margin-right: 0.5rem;"
+              />
+              <span style="display: flex; align-items: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem; color: var(--secondary);">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                Featured Projects Only
+              </span>
+            </label>
+          </div>
+          
+          <!-- Technology Dropdown -->
+          <div style="position: relative;">
+            <!-- svelte-ignore a11y_label_has_associated_control -->
+            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Filter by technology:</label>
+            <div class="dropdown">
+              <button 
+                class="dropdown-toggle"
+                on:click={toggleDropdown}
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  width: 250px;
+                  padding: 0.5rem 1rem;
+                  background-color: var(--dark-surface);
+                  border: 1px solid var(--border-color);
+                  border-radius: 4px;
+                  color: var(--text-primary);
+                  cursor: pointer;
+                "
+              >
+                <span style="display: flex; align-items: center;">
+                  {#if selectedTag !== 'All Technologies'}
+                    <span style="
+                      display: inline-block;
+                      font-size: 0.8rem;
+                      padding: 0.15rem 0.5rem;
+                      margin-right: 0.5rem;
+                      border-radius: 20px;
+                      background-color: var(--primary);
+                      color: white;
+                    ">
+                      {selectedTag}
+                    </span>
+                  {:else}
+                    {selectedTag}
+                  {/if}
+                </span>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  stroke-width="2" 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round"
+                  style="transition: transform 0.2s ease; transform: rotate({isDropdownOpen ? '180deg' : '0deg'});"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              
+              {#if isDropdownOpen}
+                <div 
+                  class="dropdown-menu"
+                  style="
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 250px;
+                    max-height: 300px;
+                    overflow-y: auto;
+                    background-color: var(--dark-surface);
+                    border: 1px solid var(--border-color);
+                    border-radius: 4px;
+                    margin-top: 0.25rem;
+                    z-index: 10;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                  "
+                >
+                  {#each allTags as tag}
+                    <button 
+                      class="dropdown-item"
+                      on:click={() => selectTag(tag)}
+                      style="
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        padding: 0.5rem 1rem;
+                        background: none;
+                        border: none;
+                        text-align: left;
+                        color: var(--text-primary);
+                        cursor: pointer;
+                        transition: background-color 0.2s ease;
+                        
+                        ${selectedTag === tag ? 'background-color: var(--primary); color: white;' : ''}
+                      "
+                    >
+                      {#if selectedTag === tag}
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          width="16" 
+                          height="16" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          stroke-width="2" 
+                          stroke-linecap="round" 
+                          stroke-linejoin="round"
+                          style="margin-right: 0.5rem;"
+                        >
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      {/if}
+                      <span style={selectedTag === tag ? 'margin-left: ' + (selectedTag === tag ? '0' : '1.5rem') : ''}>
+                        {tag}
+                      </span>
+                    </button>
+                  {/each}
+                </div>
+              {/if}
+            </div>
+          </div>
+          
+          {#if selectedTag !== 'All Technologies' || showFeaturedOnly}
+            <button 
+              on:click={clearFilters}
+              style="
+                background: none;
+                border: none;
+                color: var(--primary-light);
+                cursor: pointer;
+                font-size: 0.9rem;
+                display: flex;
+                align-items: center;
+                margin-top: 2rem;
+              "
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              Clear Filters
+            </button>
+          {/if}
+        </div>
+        
+        <div>
+          <span style="font-size: 0.9rem; color: var(--text-secondary);">
+            Showing <strong style="color: var(--secondary);">{filteredProjects.length}</strong> of <strong>{projects.length}</strong> projects
+          </span>
+        </div>
+      </div>
     </div>
     
-    <!-- Featured Projects -->
-    {#if activeFilter === 'all'}
-      <h2>Featured Projects</h2>
-      <div class="grid grid-2">
-        {#each projects.filter(p => p.featured) as project}
-          <!-- svelte-ignore a11y_no_static_element_interactions -->
+    <!-- Project Grid -->
+    {#if filteredProjects.length > 0}
+      <div class="grid grid-3">
+        {#each filteredProjects as project}
           <!-- svelte-ignore a11y_click_events_have_key_events -->
+          <!-- svelte-ignore a11y_no_static_element_interactions -->
           <div class="card project-card" on:click={() => openProjectModal(project)}>
             <div class="card-content">
+              {#if project.featured}
+                <div style="position: absolute; top: -10px; right: -10px; background-color: var(--secondary); color: var(--dark); font-size: 0.7rem; padding: 0.25rem 0.5rem; border-radius: 4px; display: flex; align-items: center; z-index: 2;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                  Featured
+                </div>
+              {/if}
+              
               <img src={project.image} alt={project.title} class="project-image" />
               <h3 class="card-title">{project.title}</h3>
-              <div class="project-tags">
+              
+              <div style="margin-bottom: 0.75rem;">
                 {#each project.tags as tag}
-                  <span class="project-tag">{tag}</span>
+                  <span style="
+                    display: inline-block;
+                    font-size: 0.7rem;
+                    padding: 0.15rem 0.5rem;
+                    margin-right: 0.5rem;
+                    margin-bottom: 0.5rem;
+                    border-radius: 20px;
+                    background-color: {selectedTag === tag ? 'var(--primary)' : 'rgba(98, 0, 234, 0.1)'};
+                    color: {selectedTag === tag ? 'white' : 'var(--primary-light)'};
+                  ">
+                    {tag}
+                  </span>
                 {/each}
               </div>
-              <p>{project.description}</p>
-              <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                <button class="btn" on:click|stopPropagation={() => openProjectModal(project)}>View Details</button>
-                <a href={project.github} target="_blank" rel="noopener noreferrer" class="btn btn-outline" on:click|stopPropagation>View Code</a>
+              
+              <p style="margin-bottom: 1.5rem; font-size: 0.9rem;">{project.description}</p>
+              
+              <div style="display: flex; gap: 1rem;">
+                <button class="btn btn-outline" on:click|stopPropagation={() => openProjectModal(project)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  Details
+                </button>
+                <a href={project.github} target="_blank" rel="noopener noreferrer" class="btn btn-outline" on:click|stopPropagation style="display: flex; align-items: center;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                  Code
+                </a>
               </div>
             </div>
           </div>
         {/each}
       </div>
-      
-      <h2 style="margin-top: 3rem;">More Projects</h2>
-    {/if}
-    
-    <!-- All Projects -->
-    <div class="grid grid-3">
-      {#each (activeFilter === 'all' ? filteredProjects.filter(p => !p.featured) : filteredProjects) as project}
-        <!-- svelte-ignore a11y_click_events_have_key_events -->
-        <!-- svelte-ignore a11y_no_static_element_interactions -->
-        <div class="card project-card" on:click={() => openProjectModal(project)}>
-          <div class="card-content">
-            <img src={project.image} alt={project.title} class="project-image" />
-            <h3 class="card-title">{project.title}</h3>
-            <div class="project-tags">
-              {#each project.tags as tag}
-                <span class="project-tag">{tag}</span>
-              {/each}
-            </div>
-            <p>{project.description}</p>
-            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-              <button class="btn" on:click|stopPropagation={() => openProjectModal(project)}>View Details</button>
-              <a href={project.github} target="_blank" rel="noopener noreferrer" class="btn btn-outline" on:click|stopPropagation>View Code</a>
-            </div>
-          </div>
-        </div>
-      {/each}
-    </div>
-    
-    {#if filteredProjects.length === 0}
-      <div style="text-align: center; padding: 3rem 0;">
-        <h3>No projects match the selected filter.</h3>
-        <button class="btn" style="margin-top: 1rem;" on:click={() => filterProjects('all')}>View All Projects</button>
+    {:else}
+      <div class="card" style="text-align: center; padding: 3rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <h3>No projects match your current filters</h3>
+        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Try adjusting your filter criteria to see more projects.</p>
+        <button class="btn" on:click={clearFilters}>Clear All Filters</button>
       </div>
     {/if}
   </div>
@@ -193,30 +416,58 @@
 {#if isModalOpen && currentProject}
   <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center; padding: 2rem;">
     <div style="position: relative; background-color: var(--dark-surface); max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2rem; border-radius: 4px; border-left: 3px solid var(--primary);">
+      <!-- svelte-ignore a11y_consider_explicit_label -->
       <button 
-        style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer;"
+        style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; transition: all 0.2s ease;"
         on:click={closeProjectModal}
       >
-        ×
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
       </button>
       
       <img src={currentProject.image} alt={currentProject.title} style="width: 100%; border-radius: 4px; margin-bottom: 1.5rem;" />
       
-      <h2 style="margin-bottom: 1rem;">{currentProject.title}</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2 style="margin: 0;">{currentProject.title}</h2>
+        
+        {#if currentProject.featured}
+          <span style="background-color: var(--secondary); color: var(--dark); font-size: 0.8rem; padding: 0.25rem 0.75rem; border-radius: 20px; display: flex; align-items: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            Featured Project
+          </span>
+        {/if}
+      </div>
       
-      <div class="project-tags" style="margin-bottom: 1.5rem;">
+      <div style="margin-bottom: 1.5rem;">
         {#each currentProject.tags as tag}
-          <span class="project-tag">{tag}</span>
+          <span style="
+            display: inline-block;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 20px;
+            background-color: rgba(98, 0, 234, 0.1);
+            color: var(--primary-light);
+          ">
+            {tag}
+          </span>
         {/each}
       </div>
       
-      <h3>Overview</h3>
-      <p style="margin-bottom: 1.5rem;">{currentProject.longDescription}</p>
+      <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">Overview</h3>
+      <p style="margin-bottom: 2rem;">{currentProject.longDescription}</p>
       
-      <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-        <a href={currentProject.github} target="_blank" rel="noopener noreferrer" class="btn">View Code</a>
-        <button class="btn btn-outline" on:click={closeProjectModal}>Close</button>
-      </div>
+      <a href={currentProject.github} target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-flex; align-items: center;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+        View Project on GitHub
+      </a>
     </div>
   </div>
 {/if}
@@ -228,3 +479,30 @@
     <a href="/contact" class="btn">Get In Touch</a>
   </div>
 </section>
+
+<style>
+  /* Additional styling for better filter UI */
+  .dropdown-item:hover {
+    background-color: var(--dark-elevated) !important;
+  }
+  
+  .project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .project-card:hover .project-image {
+    transform: scale(1.05);
+  }
+  
+  .project-image {
+    transition: transform 0.3s ease;
+  }
+</style>
