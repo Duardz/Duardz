@@ -490,7 +490,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
   }
   
   .project-card:hover {
