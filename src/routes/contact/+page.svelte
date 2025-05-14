@@ -44,8 +44,8 @@
   
   // Contact info
   const contactInfo = {
-    location: "New York, NY",
-    email: "contact@example.com",
+    location: "Auckland, New Zealand",
+    email: "contact@gmail.com",
     availability: "Available for freelance projects and consulting",
     response: "Usually responds within 24 hours"
   };
