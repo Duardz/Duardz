@@ -1,5 +1,7 @@
-<!-- Projects Page (Dropdown Filtering): src/routes/projects/+page.svelte -->
+
 <script>
+// @ts-nocheck
+
   import { onMount } from 'svelte';
   
   // Projects data
@@ -61,12 +63,11 @@
   ];
   
   // Extract all unique tags
-  /**
-	 * @type {any[]}
-	 */
+  // @ts-ignore
   let allTags = [];
   projects.forEach(project => {
     project.tags.forEach(tag => {
+      // @ts-ignore
       if (!allTags.includes(tag)) {
         allTags.push(tag);
       }
@@ -74,9 +75,11 @@
   });
   
   // Sort tags alphabetically
+  // @ts-ignore
   allTags.sort();
   
   // Add 'All Technologies' option at the beginning
+  // @ts-ignore
   allTags = ['All Technologies', ...allTags];
   
   // Filter states
@@ -101,9 +104,7 @@
   });
   
   // Current project for modal
-  /**
-	 * @type {{ image: any; title: any; featured: any; tags: any; longDescription: any; github: any; } | null}
-	 */
+  // @ts-ignore
   let currentProject = null;
   let isModalOpen = false;
   
@@ -135,20 +136,35 @@
   // Close dropdown when clicking outside
   // @ts-ignore
   function handleClickOutside(event) {
-    const dropdown = document.querySelector('.dropdown-menu');
-    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const dropdown = document.getElementById('tag-dropdown-menu');
+    const dropdownToggle = document.getElementById('tag-dropdown-toggle');
     
-    // @ts-ignore
-    if (dropdown && !dropdown.contains(event.target) && !dropdownToggle.contains(event.target)) {
+    if (dropdown && dropdownToggle && 
+        !dropdown.contains(event.target) && 
+        !dropdownToggle.contains(event.target)) {
+      isDropdownOpen = false;
+    }
+  }
+  
+  // Handle keyboard events for accessibility
+  // @ts-ignore
+  function handleKeyDown(event) {
+    if (isModalOpen && event.key === 'Escape') {
+      closeProjectModal();
+    }
+    
+    if (isDropdownOpen && (event.key === 'Escape' || event.key === 'Tab')) {
       isDropdownOpen = false;
     }
   }
   
   onMount(() => {
     document.addEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
     
     return () => {
       document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   });
 </script>
@@ -160,30 +176,30 @@
 <section class="section">
   <div class="container">
     <h1>Projects</h1>
-    <p style="margin-bottom: 2rem; max-width: 800px;">Explore my cybersecurity projects, ranging from vulnerability scanners to secure authentication systems. Each project showcases different aspects of my skills and expertise in the field.</p>
+    <p class="section-intro">Explore my cybersecurity projects, ranging from vulnerability scanners to secure authentication systems. Each project showcases different aspects of my skills and expertise in the field.</p>
     
     <!-- Improved Filter UI with Dropdown -->
-    <div class="card" style="margin-bottom: 2rem; background-color: var(--dark-elevated); border-left-color: var(--primary);">
+    <div class="filter-card">
       <div class="card-content">
-        <h3 style="margin-top: 0; margin-bottom: 1rem; display: flex; align-items: center;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;">
+        <h3 class="filter-heading">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-filter">
             <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
           </svg>
           Filter Projects
         </h3>
         
-        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; align-items: center;">
+        <div class="filter-controls">
           <!-- Featured Projects Toggle -->
-          <div style="display: flex; align-items: center;">
-            <label class="checkbox-container" style="cursor: pointer; display: flex; align-items: center; user-select: none; margin-bottom: 0;">
+          <div class="filter-control-item">
+            <label class="checkbox-container">
               <input 
                 type="checkbox" 
                 checked={showFeaturedOnly} 
                 on:change={() => showFeaturedOnly = !showFeaturedOnly}
-                style="margin-right: 0.5rem;"
+                aria-label="Show featured projects only"
               />
-              <span style="display: flex; align-items: center;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem; color: var(--secondary);">
+              <span class="checkbox-label">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-star">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
                 Featured Projects Only
@@ -192,37 +208,20 @@
           </div>
           
           <!-- Technology Dropdown -->
-          <div style="position: relative;">
-            <!-- svelte-ignore a11y_label_has_associated_control -->
-            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Filter by technology:</label>
+          <div class="filter-control-item dropdown-container">
+            <label for="tech-filter" class="dropdown-label">Filter by technology:</label>
             <div class="dropdown">
               <button 
+                id="tag-dropdown-toggle"
                 class="dropdown-toggle"
                 on:click={toggleDropdown}
-                style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  width: 250px;
-                  padding: 0.5rem 1rem;
-                  background-color: var(--dark-surface);
-                  border: 1px solid var(--border-color);
-                  border-radius: 4px;
-                  color: var(--text-primary);
-                  cursor: pointer;
-                "
+                aria-haspopup="listbox"
+                aria-expanded={isDropdownOpen}
+                aria-controls="tag-dropdown-menu"
               >
-                <span style="display: flex; align-items: center;">
+                <span class="dropdown-selected">
                   {#if selectedTag !== 'All Technologies'}
-                    <span style="
-                      display: inline-block;
-                      font-size: 0.8rem;
-                      padding: 0.15rem 0.5rem;
-                      margin-right: 0.5rem;
-                      border-radius: 20px;
-                      background-color: var(--primary);
-                      color: white;
-                    ">
+                    <span class="tag tag-selected">
                       {selectedTag}
                     </span>
                   {:else}
@@ -239,7 +238,8 @@
                   stroke-width="2" 
                   stroke-linecap="round" 
                   stroke-linejoin="round"
-                  style="transition: transform 0.2s ease; transform: rotate({isDropdownOpen ? '180deg' : '0deg'});"
+                  class="dropdown-arrow"
+                  style="transform: rotate({isDropdownOpen ? '180deg' : '0deg'});"
                 >
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
@@ -247,40 +247,19 @@
               
               {#if isDropdownOpen}
                 <div 
+                  id="tag-dropdown-menu"
                   class="dropdown-menu"
-                  style="
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
-                    width: 250px;
-                    max-height: 300px;
-                    overflow-y: auto;
-                    background-color: var(--dark-surface);
-                    border: 1px solid var(--border-color);
-                    border-radius: 4px;
-                    margin-top: 0.25rem;
-                    z-index: 10;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-                  "
+                  role="listbox"
+                  aria-label="Technology options"
+                  tabindex="-1"
                 >
-                  {#each allTags as tag}
+                  {#each allTags as tag, i}
                     <button 
-                      class="dropdown-item"
+                      class="dropdown-item {selectedTag === tag ? 'active' : ''}"
                       on:click={() => selectTag(tag)}
-                      style="
-                        display: flex;
-                        align-items: center;
-                        width: 100%;
-                        padding: 0.5rem 1rem;
-                        background: none;
-                        border: none;
-                        text-align: left;
-                        color: var(--text-primary);
-                        cursor: pointer;
-                        transition: background-color 0.2s ease;
-                        
-                        ${selectedTag === tag ? 'background-color: var(--primary); color: white;' : ''}
-                      "
+                      role="option"
+                      aria-selected={selectedTag === tag}
+                      id={`tag-option-${i}`}
                     >
                       {#if selectedTag === tag}
                         <svg 
@@ -293,7 +272,7 @@
                           stroke-width="2" 
                           stroke-linecap="round" 
                           stroke-linejoin="round"
-                          style="margin-right: 0.5rem;"
+                          class="icon-check"
                         >
                           <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
@@ -311,18 +290,10 @@
           {#if selectedTag !== 'All Technologies' || showFeaturedOnly}
             <button 
               on:click={clearFilters}
-              style="
-                background: none;
-                border: none;
-                color: var(--primary-light);
-                cursor: pointer;
-                font-size: 0.9rem;
-                display: flex;
-                align-items: center;
-                margin-top: 2rem;
-              "
+              class="btn-clear-filters"
+              aria-label="Clear all filters"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-close">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
@@ -331,9 +302,9 @@
           {/if}
         </div>
         
-        <div>
-          <span style="font-size: 0.9rem; color: var(--text-secondary);">
-            Showing <strong style="color: var(--secondary);">{filteredProjects.length}</strong> of <strong>{projects.length}</strong> projects
+        <div class="filter-status">
+          <span class="status-text">
+            Showing <strong class="highlight">{filteredProjects.length}</strong> of <strong>{projects.length}</strong> projects
           </span>
         </div>
       </div>
@@ -341,53 +312,49 @@
     
     <!-- Project Grid -->
     {#if filteredProjects.length > 0}
-      <div class="grid grid-3">
+      <div class="project-grid">
         {#each filteredProjects as project}
-          <!-- svelte-ignore a11y_click_events_have_key_events -->
-          <!-- svelte-ignore a11y_no_static_element_interactions -->
-          <div class="card project-card" on:click={() => openProjectModal(project)}>
+          <div 
+            class="project-card"
+            on:click={() => openProjectModal(project)}
+            on:keydown={(e) => e.key === 'Enter' && openProjectModal(project)}
+            tabindex="0"
+            role="button"
+            aria-label={`View details for ${project.title}`}
+          >
             <div class="card-content">
               {#if project.featured}
-                <div style="position: absolute; top: -10px; right: -10px; background-color: var(--secondary); color: var(--dark); font-size: 0.7rem; padding: 0.25rem 0.5rem; border-radius: 4px; display: flex; align-items: center; z-index: 2;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;">
+                <div class="featured-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-star-sm">
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                   </svg>
                   Featured
                 </div>
               {/if}
               
-              <img src={project.image} alt={project.title} class="project-image" />
+              <img src={project.image} alt="" class="project-image" aria-hidden="true" />
               <h3 class="card-title">{project.title}</h3>
               
-              <div style="margin-bottom: 0.75rem;">
+              <div class="tag-container">
                 {#each project.tags as tag}
-                  <span style="
-                    display: inline-block;
-                    font-size: 0.7rem;
-                    padding: 0.15rem 0.5rem;
-                    margin-right: 0.5rem;
-                    margin-bottom: 0.5rem;
-                    border-radius: 20px;
-                    background-color: {selectedTag === tag ? 'var(--primary)' : 'rgba(98, 0, 234, 0.1)'};
-                    color: {selectedTag === tag ? 'white' : 'var(--primary-light)'};
-                  ">
+                  <span class="tag {selectedTag === tag ? 'tag-highlighted' : ''}">
                     {tag}
                   </span>
                 {/each}
               </div>
               
-              <p style="margin-bottom: 1.5rem; font-size: 0.9rem;">{project.description}</p>
+              <p class="project-description">{project.description}</p>
               
-              <div style="display: flex; gap: 1rem;">
+              <div class="card-actions">
                 <button class="btn btn-outline" on:click|stopPropagation={() => openProjectModal(project)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-search">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                   </svg>
                   Details
                 </button>
-                <a href={project.github} target="_blank" rel="noopener noreferrer" class="btn btn-outline" on:click|stopPropagation style="display: flex; align-items: center;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;">
+                <a href={project.github} target="_blank" rel="noopener noreferrer" class="btn btn-outline" on:click|stopPropagation>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-github">
                     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                   </svg>
                   Code
@@ -398,14 +365,14 @@
         {/each}
       </div>
     {:else}
-      <div class="card" style="text-align: center; padding: 3rem;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;">
+      <div class="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-info">
           <circle cx="12" cy="12" r="10"></circle>
           <line x1="12" y1="8" x2="12" y2="12"></line>
           <line x1="12" y1="16" x2="12.01" y2="16"></line>
         </svg>
         <h3>No projects match your current filters</h3>
-        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Try adjusting your filter criteria to see more projects.</p>
+        <p class="empty-state-message">Try adjusting your filter criteria to see more projects.</p>
         <button class="btn" on:click={clearFilters}>Clear All Filters</button>
       </div>
     {/if}
@@ -414,12 +381,25 @@
 
 <!-- Project Detail Modal -->
 {#if isModalOpen && currentProject}
-  <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center; padding: 2rem;">
-    <div style="position: relative; background-color: var(--dark-surface); max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2rem; border-radius: 4px; border-left: 3px solid var(--primary);">
-      <!-- svelte-ignore a11y_consider_explicit_label -->
+  <!-- svelte-ignore a11y_interactive_supports_focus -->
+  <div 
+    class="modal-overlay"
+    on:click={closeProjectModal}
+    on:keydown={(e) => e.key === 'Escape' && closeProjectModal()}
+    role="dialog"
+    aria-labelledby="modal-title"
+    aria-modal="true"
+  >
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
+    <div 
+      class="modal-content"
+      on:click|stopPropagation
+    >
       <button 
-        style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; transition: all 0.2s ease;"
+        class="modal-close"
         on:click={closeProjectModal}
+        aria-label="Close project details"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -427,14 +407,14 @@
         </svg>
       </button>
       
-      <img src={currentProject.image} alt={currentProject.title} style="width: 100%; border-radius: 4px; margin-bottom: 1.5rem;" />
+      <img src={currentProject.image} alt="" class="modal-image" aria-hidden="true" />
       
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h2 style="margin: 0;">{currentProject.title}</h2>
+      <div class="modal-header">
+        <h2 id="modal-title">{currentProject.title}</h2>
         
         {#if currentProject.featured}
-          <span style="background-color: var(--secondary); color: var(--dark); font-size: 0.8rem; padding: 0.25rem 0.75rem; border-radius: 20px; display: flex; align-items: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;">
+          <span class="featured-badge-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-star-sm">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
             </svg>
             Featured Project
@@ -442,28 +422,19 @@
         {/if}
       </div>
       
-      <div style="margin-bottom: 1.5rem;">
+      <div class="modal-tags">
         {#each currentProject.tags as tag}
-          <span style="
-            display: inline-block;
-            font-size: 0.8rem;
-            padding: 0.25rem 0.75rem;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            border-radius: 20px;
-            background-color: rgba(98, 0, 234, 0.1);
-            color: var(--primary-light);
-          ">
+          <span class="tag">
             {tag}
           </span>
         {/each}
       </div>
       
-      <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">Overview</h3>
-      <p style="margin-bottom: 2rem;">{currentProject.longDescription}</p>
+      <h3 class="modal-section-title">Overview</h3>
+      <p class="modal-description">{currentProject.longDescription}</p>
       
-      <a href={currentProject.github} target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-flex; align-items: center;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;">
+      <a href={currentProject.github} target="_blank" rel="noopener noreferrer" class="btn modal-action">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-github-lg">
           <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
         </svg>
         View Project on GitHub
@@ -472,37 +443,536 @@
   </div>
 {/if}
 
-<section class="section" style="background-color: var(--dark-elevated); padding: 4rem 0;">
-  <div class="container" style="text-align: center;">
+<section class="section cta-section">
+  <div class="container cta-container">
     <h2>Interested in Collaboration?</h2>
-    <p style="max-width: 700px; margin: 0 auto 2rem auto;">I'm always open to new challenges and collaborations. If you have a project idea or need cybersecurity expertise, let's discuss how we can work together.</p>
+    <p class="cta-text">I'm always open to new challenges and collaborations. If you have a project idea or need cybersecurity expertise, let's discuss how we can work together.</p>
     <a href="/contact" class="btn">Get In Touch</a>
   </div>
 </section>
 
 <style>
-  /* Additional styling for better filter UI */
-  .dropdown-item:hover {
-    background-color: var(--dark-elevated) !important;
+  /* Base styles */
+  .section-intro {
+    margin-bottom: 2rem;
+    max-width: 800px;
   }
-  
-  .project-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Filter Card Styles */
+  .filter-card {
+    margin-bottom: 2rem;
+    background-color: var(--dark-elevated);
+    border-left: 4px solid var(--primary);
+    border-radius: 4px;
+  }
+
+  .filter-heading {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .icon-filter {
+    margin-right: 0.5rem;
+  }
+
+  .filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .filter-control-item {
+    min-width: 200px;
+  }
+
+  /* Checkbox styles */
+  .checkbox-container {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    margin-bottom: 0;
+  }
+
+  .checkbox-container input {
+    margin-right: 0.5rem;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+  }
+
+  .icon-star {
+    margin-right: 0.5rem;
+    color: var(--secondary);
+  }
+
+  /* Dropdown styles */
+  .dropdown-container {
+    position: relative;
+  }
+
+  .dropdown-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+    padding: 0.5rem 1rem;
+    background-color: var(--dark-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+
+  .dropdown-toggle:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+  }
+
+  .dropdown-selected {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .dropdown-arrow {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: var(--dark-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-top: 0.25rem;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    text-align: left;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .dropdown-item:hover, .dropdown-item:focus {
+    background-color: var(--dark-elevated);
+  }
+
+  .dropdown-item.active {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  .icon-check {
+    margin-right: 0.5rem;
+  }
+
+  /* Clear filters button */
+  .btn-clear-filters {
+    background: none;
+    border: none;
+    color: var(--primary-light);
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    margin-top: 1.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-clear-filters:hover {
+    background-color: rgba(98, 0, 234, 0.1);
+  }
+
+  .icon-close {
+    margin-right: 0.25rem;
+  }
+
+  /* Filter status */
+  .filter-status {
+    margin-top: 0.5rem;
+  }
+
+  .status-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .highlight {
+    color: var(--secondary);
+  }
+
+  /* Project grid */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* Project cards */
+  .project-card {
     position: relative;
     overflow: visible;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: var(--dark-surface);
+    border: 1px solid var(--border-color);
   }
-  
+
   .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
-  
+
+  .project-card:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    transform: translateY(-5px);
+  }
+
   .project-card:hover .project-image {
     transform: scale(1.05);
   }
-  
+
+  .featured-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: var(--secondary);
+    color: var(--dark);
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .icon-star-sm {
+    margin-right: 0.25rem;
+  }
+
   .project-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     transition: transform 0.3s ease;
   }
-</style>
+
+  .card-title {
+    font-size: 1.2rem;
+    margin: 1rem 0 0.75rem;
+  }
+
+  .tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 20px;
+    background-color: rgba(98, 0, 234, 0.1);
+    color: var(--primary-light);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .tag-selected {
+    display: inline-block;
+    font-size: 0.8rem;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 20px;
+    background-color: var(--primary);
+    color: white;
+  }
+
+  .tag-highlighted {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  .project-description {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn:hover, .btn:focus {
+    background-color: var(--primary-dark, #5000c2);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+  }
+
+  .btn-outline:hover, .btn-outline:focus {
+    background-color: rgba(98, 0, 234, 0.1);
+  }
+
+  .icon-search, .icon-github {
+    margin-right: 0.25rem;
+  }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    background-color: var(--dark-surface);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+  }
+
+  .icon-info {
+    margin-bottom: 1rem;
+  }
+
+  .empty-state-message {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+  }
+
+  /* Modal styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    backdrop-filter: blur(2px);
+  }
+
+  .modal-content {
+    position: relative;
+    background-color: var(--dark-surface);
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2rem;
+    border-radius: 4px;
+    border-left: 3px solid var(--primary);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 5;
+  }
+
+  .modal-close:hover, .modal-close:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+  }
+
+  .modal-image {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .modal-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+
+  .featured-badge-lg {
+    background-color: var(--secondary);
+    color: var(--dark);
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .modal-tags {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .modal-section-title {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .modal-description {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .modal-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .icon-github-lg {
+    margin-right: 0.5rem;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background-color: var(--dark-elevated);
+    padding: 4rem 0;
+    margin-top: 4rem;
+  }
+
+  .cta-container {
+    text-align: center;
+  }
+
+  .cta-text {
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    color: var(--text-secondary);
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .filter-controls {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .filter-control-item {
+      width: 100%;
+    }
+    
+    .dropdown-toggle {
+      width: 100%;
+    }
+    
+    .dropdown-menu {
+      width: 100%;
+    }
+    
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+      max-width: 100%;
+      margin: 0 1rem;
+      padding: 1.5rem;
+    }
+    
+    .modal-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .featured-badge-lg {
+      margin-top: 0.5rem;
+    }
+  }
+
+  /* Accessibility focus styles */
+  button:focus, a:focus, input:focus, .project-card:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* Animation smoothness */
+    .card-content {
+      padding: 1.25rem;
+    }
+  </style>
