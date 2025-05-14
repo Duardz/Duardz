@@ -40,38 +40,26 @@
   // Experience timeline
   const experiences = [
     {
-      title: "Senior Security Analyst",
+      title: "Meow Security Analyst",
       company: "CyberDefense Inc.",
       period: "2023 - Present",
-      description: "Lead security analyst responsible for conducting penetration tests, vulnerability assessments, and security architecture reviews for enterprise clients."
-    },
-    {
-      title: "Security Consultant",
-      company: "SecureNet Solutions",
-      period: "2020 - 2023",
-      description: "Provided security consulting services, implemented security controls, and performed security assessments for clients across various industries."
-    },
-    {
-      title: "Network Security Engineer",
-      company: "TechGuard Systems",
-      period: "2018 - 2020",
-      description: "Designed and implemented secure network architecture, managed firewall systems, and conducted security monitoring and incident response."
+      description: "Lead Meow analyst responsible for conducting penetration tests, vulnerability assessments, and security architecture reviews for enterprise clients."
     }
   ];
   
   // Education timeline
   const education = [
     {
-      degree: "Master of Science in Cybersecurity",
-      institution: "Tech University",
-      period: "2017 - 2019",
-      description: "Specialized in network security and offensive security operations."
+      degree: "Fullstack Web Development Bootcamp",
+      institution: "KodeGo Bootcamp",
+      period: "2022 - 2023",
+      description: "Intensive training in full-stack web development including frontend, backend, and database technologies."
     },
     {
-      degree: "Bachelor of Science in Computer Science",
-      institution: "State University",
-      period: "2013 - 2017",
-      description: "Focused on computer networks, programming, and information security."
+      degree: "Senior High School",
+      institution: "Saint Patrick's Academy Inc.",
+      period: "2018 - 2022",
+      description: "Completed senior high school education with focus on HUMSS subjects."
     }
   ];
 </script>
@@ -89,12 +77,12 @@
         <img src="/images/profile.jpg" alt="Profile" class="about-image" />
       </div>
       <div>
-        <p>I am a dedicated cybersecurity professional with over 5 years of experience in the field. My expertise spans across various domains of cybersecurity including penetration testing, vulnerability assessment, network security, and security architecture.</p>
-        
-        <p>With a background in computer science and specialized training in cybersecurity, I bring a comprehensive approach to identifying, analyzing, and mitigating security threats. I am passionate about staying ahead of emerging threats and continuously enhancing my skills to provide robust security solutions.</p>
-        
-        <p>My goal is to help organizations strengthen their security posture through effective risk assessment, implementation of security controls, and fostering a security-conscious culture.</p>
-        
+        <p>I’m an aspiring cybersecurity professional with a strong foundation in web development and a growing passion for ethical hacking and digital defense. My journey into cybersecurity began in 2024, after learning web development in 2022 and discovering how essential security is in the digital world.</p>
+
+        <p>Since then, I’ve been building hands-on skills in penetration testing, vulnerability assessment, and network security through self-study, practical labs, and real-world simulations. My interest in technology started young—from fixing gadgets and collecting parts to gaming and experimenting with systems.</p>
+
+        <p>I believe in continuous learning and aim to contribute to a safer digital environment by helping identify vulnerabilities, assess risks, and implement practical security solutions. I’m currently working toward industry certifications and expanding my portfolio with real-world cybersecurity projects.</p>
+
         <div class="cyber-terminal">
           <div class="cyber-terminal-content">
             rm -rf vulnerabilities && ./deploy-security-measures.sh && echo "System secured successfully."
@@ -107,7 +95,7 @@
 
 <section class="section" style="background-color: var(--dark-elevated); padding: 4rem 0;">
   <div class="container">
-    <h2>Skills & Expertise</h2>
+    <h2>Current Focus & Skills</h2>
     
     {#each skillCategories as category}
       <div style="margin-bottom: 2rem;">

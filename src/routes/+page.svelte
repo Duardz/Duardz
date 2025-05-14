@@ -4,7 +4,7 @@
   
   // Typing effect for the terminal text
   let terminalText = "";
-  const fullTerminalText = "Security analyst and penetration tester with expertise in network security, vulnerability assessment, and security architecture.";
+  const fullTerminalText = "I'm a cybersecurity enthusiast focused on network security, ethical hacking, and vulnerability assessments. Currently building hands-on experience through labs, personal projects, and continuous learning.";
   let terminalIndex = 0;
   
   onMount(() => {
@@ -74,7 +74,7 @@
 <section class="hero">
   <div class="container hero-content">
     <h1 class="hero-title">Eduardo Camay III</h1>
-    <h3 class="hero-subtitle">Cybersecurity Professional</h3>
+    <h3 class="hero-subtitle">Aspiring Cybersecurity Professional</h3>
     
     <div class="cyber-terminal">
       <div class="cyber-terminal-content">{terminalText}</div>
