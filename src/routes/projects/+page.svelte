@@ -673,6 +673,7 @@
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 2rem;
+    margin-top: 2rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
   
