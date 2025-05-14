@@ -3,57 +3,21 @@
   // Certificates data
   const certificates = [
     {
-      title: "Certified Ethical Hacker (CEH)",
-      issuer: "EC-Council",
+      title: "Full Stack Web Development Certificate",
+      issuer: "KodeGo PH",
       date: "2023",
-      description: "The Certified Ethical Hacker certification demonstrates expertise in identifying weaknesses and vulnerabilities in target systems and uses the same knowledge and tools as a malicious hacker.",
-      skills: ["Footprinting & Reconnaissance", "System Hacking", "Session Hijacking", "Evading IDS & Firewalls", "Hacking Web Applications", "SQL Injection"],
+      description: "Completed an immersive web development bootcamp focused on front-end and back-end technologies, including HTML, CSS, JavaScript, React, Node.js, and database integration.",
+      skills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Express", "MongoDB"],
       icon: "award",
       featured: true
     },
     {
-      title: "CompTIA Security+",
-      issuer: "CompTIA",
+      title: "Lean Six Sigma White Belt",
+      issuer: "Unknown", // You can update this later if you recall
       date: "2022",
-      description: "Security+ establishes the core knowledge required of any cybersecurity role and provides a springboard to intermediate-level cybersecurity jobs.",
-      skills: ["Threat Management", "Cryptography", "Identity Management", "Network Security", "Access Control", "Risk Management"],
-      icon: "shield",
-      featured: true
-    },
-    {
-      title: "Certified Information Systems Security Professional (CISSP)",
-      issuer: "ISC²",
-      date: "2023",
-      description: "The CISSP certification demonstrates expertise in designing, implementing, and managing a cybersecurity program.",
-      skills: ["Security & Risk Management", "Asset Security", "Security Architecture & Engineering", "Communication & Network Security", "Identity & Access Management", "Security Assessment & Testing"],
+      description: "Gained foundational knowledge of Lean Six Sigma principles, focusing on process improvement, efficiency, and problem-solving frameworks.",
+      skills: ["Process Improvement", "Efficiency Analysis", "Problem Solving", "Team Collaboration"],
       icon: "key",
-      featured: false
-    },
-    {
-      title: "Offensive Security Certified Professional (OSCP)",
-      issuer: "Offensive Security",
-      date: "2021",
-      description: "The OSCP certification demonstrates hands-on penetration testing skills and an understanding of offensive security methodologies.",
-      skills: ["Penetration Testing", "Exploit Development", "Network Security", "Web Application Security", "System Security", "Privilege Escalation"],
-      icon: "target",
-      featured: false
-    },
-    {
-      title: "Certified Information Security Manager (CISM)",
-      issuer: "ISACA",
-      date: "2022",
-      description: "The CISM certification demonstrates expertise in information security governance, program development, risk management, and incident management.",
-      skills: ["Information Security Governance", "Risk Management", "Information Security Program Development", "Information Security Incident Management"],
-      icon: "users",
-      featured: false
-    },
-    {
-      title: "AWS Certified Security - Specialty",
-      issuer: "Amazon Web Services",
-      date: "2023",
-      description: "This certification demonstrates expertise in securing AWS environments and applications.",
-      skills: ["Infrastructure Security", "Identity & Access Management", "Data Protection", "Incident Response", "Logging & Monitoring"],
-      icon: "cloud",
       featured: false
     }
   ];
@@ -65,8 +29,9 @@
 
 <section class="section">
   <div class="container">
-    <h1>Certificates & Certifications</h1>
-    <p style="margin-bottom: 2rem;">As a cybersecurity professional, I maintain and continuously expand my expertise through industry-recognized certifications. Here are the certifications I've earned throughout my career.</p>
+    <h1>Featured Certifications</h1>
+    <p style="margin-bottom: 2rem;"><p style="margin-bottom: 2rem;">
+  On my path to becoming a cybersecurity professional, I’m continuously learning and earning certifications to strengthen my expertise. Here are some of the credentials I’ve achieved so far.</p>
     
     <div class="grid grid-3">
       {#each certificates.filter(cert => cert.featured) as cert}
