@@ -1,21 +1,21 @@
 
 /* app.css */
 :root {
-  /* Color Variables */
-  --primary: #6200EA;      /* Deep Purple */
-  --primary-light: #B388FF; /* Light Purple */
-  --primary-dark: #3700B3;  /* Dark Purple */
-  --secondary: #03DAC6;     /* Teal Accent */
-  --warning: #FF9800;       /* Warning Orange */
-  --danger: #CF6679;        /* Error Red */
-  --dark: #121212;          /* Almost Black */
-  --dark-elevated: #1E1E1E; /* Slightly lighter dark */
-  --dark-surface: #262626;  /* Card/surface background */
-  --text-primary: #FFFFFF;  /* Primary Text */
-  --text-secondary: #B0B0B0;/* Secondary Text */
-  --border-color: #333333;  /* Border Color */
+  /* Color Variables - Adjusted for better readability */
+  --primary: #8A4FFF;        /* Lightened Deep Purple for better visibility */
+  --primary-light: #C4A2FF;  /* Slightly lightened Purple */
+  --primary-dark: #4B14D0;   /* Adjusted Dark Purple for better contrast */
+  --secondary: #00E6D2;      /* Brightened Teal Accent for better visibility */
+  --warning: #FFA726;        /* Slightly brightened Warning Orange */
+  --danger: #E57373;         /* Softened Error Red to reduce harshness */
+  --dark: #1A1A1A;           /* Slightly lightened Almost Black to reduce contrast */
+  --dark-elevated: #242424;  /* Adjusted elevated dark */
+  --dark-surface: #2D2D2D;   /* Lightened Card/surface background */
+  --text-primary: #F5F5F5;   /* Slightly softened Primary Text */
+  --text-secondary: #BDBDBD; /* Brightened Secondary Text for readability */
+  --border-color: #3D3D3D;   /* Lightened Border Color */
   
-  /* Font Variables */
+  /* Font Variables - Unchanged */
   --font-main: 'Space Mono', 'Consolas', monospace;
   --font-secondary: 'Inter', 'Roboto', sans-serif;
 }

@@ -5,10 +5,21 @@ const config = {
   kit: {
     adapter: adapter(),
     
-    // Add this to define your aliases
+    // Define your path aliases here
     alias: {
-      '$lib': './src/lib'
-      // Add any other path aliases you need here
+      '$lib': 'src/lib',
+      '$routes': 'src/routes'
+    }
+  },
+  
+  // Add Vite configuration
+  vite: {
+    optimizeDeps: {
+      exclude: ['clsx']
+    },
+    // This can help with certain Vite-related issues
+    ssr: {
+      noExternal: ['clsx']
     }
   }
 };

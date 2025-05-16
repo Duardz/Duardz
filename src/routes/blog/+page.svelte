@@ -1,6 +1,6 @@
-<!-- Blog Page: src/routes/blog/+page.svelte (COMPLETE VERSION - PART 2) -->
+<!-- Blog Page: src/routes/blog/+page.svelte -->
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
   // Blog posts data
   const blogPosts = [
@@ -57,13 +57,13 @@
       `,
       author: "John Doe",
       authorImage: "/images/profile.jpg",
-      coverImage: "/images/blog1.jpg"
+      coverImage: "/images/blog1.jpg",
+      readingTime: "8 min read",
     },
     // ... other blog posts would be here ...
   ];
   
   // Current blog post for detailed view
-  // @ts-ignore
   let currentPost = null;
   
   // Filter by category
@@ -74,12 +74,10 @@
     ? blogPosts 
     : blogPosts.filter(post => post.category === selectedCategory);
     
-  // @ts-ignore
   function filterByCategory(category) {
     selectedCategory = category;
   }
   
-  // @ts-ignore
   function viewPost(post) {
     currentPost = post;
     window.scrollTo(0, 0);
@@ -87,6 +85,14 @@
   
   function goBack() {
     currentPost = null;
+  }
+
+  // Calculate estimated reading time (if not already set)
+  function getReadingTime(content) {
+    const text = content.replace(/<[^>]*>?/gm, '');
+    const words = text.split(/\s+/).length;
+    const minutes = Math.ceil(words / 200); // Assuming 200 words per minute reading speed
+    return `${minutes} min read`;
   }
 </script>
 
@@ -96,16 +102,19 @@
 
 {#if !currentPost}
   <!-- Blog post list view -->
+  <div class="blog-header">
+    <div class="container">
+      <h1>Cybersecurity Insights</h1>
+      <p>Expert analysis and guides on the latest cybersecurity trends, threats, and best practices</p>
+    </div>
+  </div>
+
   <section class="section">
     <div class="container">
-      <h1>Blog</h1>
-      <p style="margin-bottom: 2rem;">Insights, analysis, and guides on various cybersecurity topics. Stay informed about the latest trends, threats, and best practices in the cybersecurity landscape.</p>
-      
       <!-- Category filter -->
-      <div style="margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+      <div class="category-filter">
         <button 
-          class="btn btn-outline" 
-          style={selectedCategory === 'All' ? 'background-color: var(--primary); color: white;' : ''}
+          class={selectedCategory === 'All' ? 'filter-btn active' : 'filter-btn'}
           on:click={() => filterByCategory('All')}
         >
           All
@@ -113,8 +122,7 @@
         
         {#each categories as category}
           <button 
-            class="btn btn-outline" 
-            style={selectedCategory === category ? 'background-color: var(--primary); color: white;' : ''}
+            class={selectedCategory === category ? 'filter-btn active' : 'filter-btn'}
             on:click={() => filterByCategory(category)}
           >
             {category}
@@ -123,29 +131,35 @@
       </div>
       
       <!-- Blog posts grid -->
-      <div class="grid grid-2">
+      <div class="blog-grid">
         {#each filteredPosts as post}
-          <!-- svelte-ignore a11y_no_static_element_interactions -->
-          <!-- svelte-ignore a11y_click_events_have_key_events -->
-          <div class="card blog-card" on:click={() => viewPost(post)}>
+          <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+          <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+          <div class="blog-card" on:click={() => viewPost(post)} on:keydown={(e) => e.key === 'Enter' && viewPost(post)} tabindex="0" role="article">
+            <div class="card-image">
+              <img src={post.coverImage} alt={post.title} />
+              <span class="blog-category-tag">{post.category}</span>
+            </div>
             <div class="card-content">
-              <img src={post.coverImage} alt={post.title} style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-bottom: 1rem;" />
-              <h3 class="card-title">{post.title}</h3>
-              <div class="blog-meta">
-                <span>{post.date}</span>
-                <span class="blog-category">{post.category}</span>
+              <div class="card-meta">
+                <span class="post-date">{post.date}</span>
+                <span class="reading-time">{post.readingTime || getReadingTime(post.content)}</span>
               </div>
-              <p>{post.excerpt}</p>
-              <button class="btn" on:click|stopPropagation={() => viewPost(post)}>Read More</button>
+              <h2 class="card-title">{post.title}</h2>
+              <p class="card-excerpt">{post.excerpt}</p>
+              <div class="author-row">
+                <img src={post.authorImage} alt={post.author} class="author-avatar" />
+                <span class="author-name">{post.author}</span>
+              </div>
             </div>
           </div>
         {/each}
       </div>
       
       {#if filteredPosts.length === 0}
-        <div style="text-align: center; padding: 3rem 0;">
-          <h3>No posts in this category yet.</h3>
-          <button class="btn" style="margin-top: 1rem;" on:click={() => filterByCategory('All')}>View All Posts</button>
+        <div class="empty-state">
+          <h3>No posts in this category yet</h3>
+          <button class="btn primary" on:click={() => filterByCategory('All')}>View All Posts</button>
         </div>
       {/if}
     </div>
@@ -154,53 +168,497 @@
   <!-- Single blog post view -->
   <section class="section">
     <div class="container">
-      <button class="btn btn-outline" style="margin-bottom: 2rem;" on:click={goBack}>
-        <span style="display: inline-flex; align-items: center;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;">
+      <div class="post-navigation">
+        <button class="back-button" on:click={goBack}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
-          Back to Blog
-        </span>
-      </button>
-      
-      <img src={currentPost.coverImage} alt={currentPost.title} style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 4px; margin-bottom: 2rem;" />
-      
-      <div class="blog-meta" style="margin-bottom: 1rem;">
-        <span style="font-size: 1rem; color: var(--text-secondary);">{currentPost.date}</span>
-        <span class="blog-category">{currentPost.category}</span>
+          Back to Articles
+        </button>
+        <span class="post-category">{currentPost.category}</span>
       </div>
       
-      <h1>{currentPost.title}</h1>
-      
-      <div class="author-info" style="display: flex; align-items: center; margin: 2rem 0; padding: 1rem; background-color: var(--dark-surface); border-radius: 4px;">
-        <img src={currentPost.authorImage} alt={currentPost.author} style="width: 60px; height: 60px; border-radius: 50%; margin-right: 1rem;" />
-        <div>
-          <h4 style="margin-bottom: 0.25rem;">{currentPost.author}</h4>
-          <p style="margin: 0; font-size: 0.9rem;">Cybersecurity Professional</p>
+      <article class="blog-post">
+        <h1 class="post-title">{currentPost.title}</h1>
+        
+        <div class="post-meta">
+          <div class="author-info">
+            <img src={currentPost.authorImage} alt={currentPost.author} class="author-avatar" />
+            <div>
+              <span class="author-name">{currentPost.author}</span>
+              <span class="post-date">{currentPost.date}</span>
+            </div>
+          </div>
+          <span class="reading-time">{currentPost.readingTime || getReadingTime(currentPost.content)}</span>
         </div>
-      </div>
-      
-      <div class="blog-content">
-        {@html currentPost.content}
-      </div>
-      
-      <div style="margin-top: 3rem; text-align: center;">
-        <button class="btn" on:click={goBack}>Back to Blog</button>
-      </div>
+        
+        <div class="featured-image">
+          <img src={currentPost.coverImage} alt={currentPost.title} />
+        </div>
+        
+        <div class="post-content">
+          {@html currentPost.content}
+        </div>
+        
+        <div class="post-footer">
+          <button class="btn primary" on:click={goBack}>Back to Articles</button>
+          
+          <div class="share-buttons">
+            <span>Share:</span>
+            <button class="share-btn" aria-label="Share on Twitter">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+              </svg>
+            </button>
+            <button class="share-btn" aria-label="Share on LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <div class="related-posts">
+          <h3>You might also like</h3>
+          <div class="related-grid">
+            {#each blogPosts.filter(post => post.id !== currentPost.id).slice(0, 2) as relatedPost}
+              <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+              <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+              <div class="related-card" on:click={() => viewPost(relatedPost)} on:keydown={(e) => e.key === 'Enter' && viewPost(relatedPost)} tabindex="0" role="article">
+                <img src={relatedPost.coverImage} alt={relatedPost.title} />
+                <h4>{relatedPost.title}</h4>
+                <span class="related-category">{relatedPost.category}</span>
+              </div>
+            {/each}
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 {/if}
 
-<section class="section" style="background-color: var(--dark-elevated); padding: 4rem 0;">
-  <div class="container" style="text-align: center;">
-    <h2>Stay Updated</h2>
-    <p style="max-width: 700px; margin: 0 auto 2rem auto;">Subscribe to my newsletter to receive the latest updates on cybersecurity trends, threats, and best practices directly in your inbox.</p>
+<style>
+  /* Reset and Base Styles */
+  h1, h2, h3, h4, p {
+    margin: 0;
+  }
+  
+  /* Blog Header */
+  .blog-header {
+    background-color: var(--dark-elevated);
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .blog-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .blog-header p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+  }
+  
+  /* Category Filter */
+  .category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .filter-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .filter-btn:hover {
+    background-color: var(--dark-surface);
+  }
+  
+  .filter-btn.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  
+  /* Blog Grid */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+  
+  /* Blog Card */
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: var(--dark-surface);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    height: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .blog-card:focus {
+    outline: 2px solid var(--primary);
+  }
+  
+  .card-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .blog-card:hover .card-image img {
+    transform: scale(1.05);
+  }
+  
+  .blog-category-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  
+  .card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+  
+  .card-excerpt {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+  
+  .author-row {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+  }
+  
+  .author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+    object-fit: cover;
+  }
+  
+  .author-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 0;
+  }
+  
+  .empty-state h3 {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+  }
+  
+  /* Single Post View */
+  .post-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+  }
+  
+  .back-button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    transition: color 0.2s ease;
+  }
+  
+  .back-button svg {
+    margin-right: 0.5rem;
+  }
+  
+  .back-button:hover {
+    color: var(--primary);
+  }
+  
+  .post-category {
+    background-color: var(--primary);
+    color: white;
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+  }
+  
+  .blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .post-title {
+    font-size: 2.5rem;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .author-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .author-info div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .author-info .author-name {
+    font-weight: 500;
+  }
+  
+  .author-info .post-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  
+  .reading-time {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  
+  .featured-image {
+    margin-bottom: 2.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .featured-image img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+  
+  /* Using :global() to target elements inserted via {@html ...} */
+  .post-content :global(h3) {
+    margin: 2rem 0 1rem;
+    font-size: 1.5rem;
+  }
+  
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-content :global(ul), .post-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  
+  .post-content :global(strong) {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .share-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .share-buttons span {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  
+  .share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--dark-elevated);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .share-btn:hover {
+    background-color: var(--primary);
+    color: white;
+  }
+  
+  /* Related Posts */
+  .related-posts {
+    margin-top: 4rem;
+  }
+  
+  .related-posts h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .related-card {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--dark-surface);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .related-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .related-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .related-card h4 {
+    padding: 1rem 1rem 0.5rem;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+  
+  .related-category {
+    display: block;
+    padding: 0 1rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+  
+  .btn.primary {
+    background-color: var(--primary);
+    color: white;
+  }
+  
+  .btn.primary:hover {
+    background-color: var(--primary-dark, #0056b3);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
     
-    <div style="display: flex; max-width: 500px; margin: 0 auto;">
-      <input type="email" placeholder="Enter your email" style="flex: 1; padding: 0.75rem; background-color: var(--dark-surface); border: 1px solid var(--border-color); border-radius: 4px 0 0 4px; color: var(--text-primary);" />
-      <button class="btn" style="border-radius: 0 4px 4px 0;">Subscribe</button>
-    </div>
-    <p style="font-size: 0.8rem; margin-top: 1rem; color: var(--text-secondary);">I respect your privacy. Your information will not be shared.</p>
-  </div>
-</section>
+    .post-title {
+      font-size: 2rem;
+    }
+    
+    .post-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .post-footer {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
