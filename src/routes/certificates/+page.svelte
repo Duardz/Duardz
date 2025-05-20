@@ -50,28 +50,6 @@
   <title>Certificates | CyberPortfolio</title>
 </svelte:head>
 
-<!-- Hero Section -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-text" class:visible>
-        <h1>Professional <span class="highlight">Certifications</span></h1>
-        <p>
-          Continuous learning and professional development are core values in my cybersecurity journey. 
-          These certifications represent my commitment to mastering the latest tools and techniques.
-        </p>
-      </div>
-      <div class="hero-graphic" class:visible>
-        <div class="cyber-badge">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--secondary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Featured Certificates -->
 {#if certificates.some(cert => cert.featured)}
   <section class="section featured-section" class:visible>
@@ -268,11 +246,6 @@
   }
   
   .section,
-  .hero {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
   
   .visible {
     opacity: 1;
@@ -280,9 +253,10 @@
   }
   
   .container {
-    width: 90%;
-    max-width: 1200px;
+    width: 95%; /* Increased from 90% to reduce side margins on mobile */
+    max-width: 1400px; /* Increased from 1200px for better use of large screens */
     margin: 0 auto;
+    padding: 0 1rem; /* Added padding to ensure content doesn't touch screen edges */
   }
   
   .highlight {
@@ -303,88 +277,6 @@
     transform: skewX(-5deg);
   }
   
-  /* Hero Section */
-  .hero {
-    padding: 6rem 0 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: -10%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(98, 0, 234, 0.1) 0%, rgba(98, 0, 234, 0) 70%);
-    border-radius: 50%;
-    z-index: -1;
-  }
-  
-  .hero-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-  
-  .hero-text {
-    flex: 1;
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  
-  .hero-text.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  
-  .hero-text h1 {
-    font-size: 3rem;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-  }
-  
-  .hero-text p {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    max-width: 540px;
-  }
-  
-  .hero-graphic {
-    flex: 0 0 220px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transform: translateX(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  
-  .hero-graphic.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  
-  .cyber-badge {
-    width: 180px;
-    height: 180px;
-    background: linear-gradient(135deg, #1c1c2e, #2b2b45);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.2), 
-                inset 0 1px 1px rgba(255,255,255,0.1),
-                inset 0 -1px 1px rgba(0,0,0,0.2);
-    animation: pulse 3s infinite;
-    position: relative;
-  }
-  
   @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(98, 0, 234, 0.4); }
     70% { box-shadow: 0 0 0 15px rgba(98, 0, 234, 0); }
@@ -393,18 +285,18 @@
   
   /* Section styling */
   .section {
-    padding: 5rem 0;
+    padding: 4rem 0; /* Reduced padding for mobile */
     position: relative;
   }
   
   .section-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem; /* Reduced margin for mobile */
     position: relative;
   }
   
   .section-header h2 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive font size */
     font-weight: 700;
     margin-bottom: 1rem;
     display: inline-block;
@@ -438,19 +330,30 @@
   /* Certificate cards */
   .certificates-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjusted for better mobile responsiveness */
+    gap: 1.5rem; /* Reduced gap for mobile */
   }
   
   .secondary-grid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Adjusted for better mobile responsiveness */
+  }
+  
+  /* Added media query for larger screens to display more columns */
+  @media (min-width: 1440px) {
+    .certificates-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .secondary-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
   
   .certificate-card {
     background-color: var(--card-bg);
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    padding: 1.75rem;
+    padding: 1.5rem; /* Reduced from 1.75rem for mobile */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -506,7 +409,7 @@
   .card-header {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem; /* Reduced from 1.5rem for mobile */
     position: relative;
   }
   
@@ -519,8 +422,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: 42px; /* Reduced from 48px for mobile */
+    height: 42px; /* Reduced from 48px for mobile */
     background-color: rgba(98, 0, 234, 0.08);
     border-radius: 12px;
     color: var(--accent-color, var(--secondary));
@@ -553,7 +456,7 @@
   }
   
   .title-wrapper h3 {
-    font-size: 1.4rem;
+    font-size: 1.3rem; /* Reduced from 1.4rem for mobile */
     margin: 0;
     line-height: 1.3;
     transition: color 0.3s ease;
@@ -589,10 +492,11 @@
   
   /* Description */
   .description {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem; /* Reduced from 1.75rem for mobile */
     flex: 1;
     line-height: 1.6;
     color: var(--text-secondary);
+    font-size: 0.95rem; /* Added for better readability on mobile */
   }
   
   /* Skills */
@@ -612,18 +516,19 @@
   .skill-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 0.5rem; /* Reduced from 0.6rem for mobile */
   }
   
   .skill-tag {
     background-color: rgba(98, 0, 234, 0.08);
     color: var(--accent-color, var(--secondary));
-    padding: 0.3rem 0.8rem;
+    padding: 0.25rem 0.7rem; /* Reduced padding for mobile */
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* Reduced from 0.8rem for mobile */
     font-weight: 500;
     transition: all 0.2s ease;
     border: 1px solid rgba(var(--accent-color, 98, 0, 234), 0.05);
+    margin-bottom: 0.25rem; /* Added to improve wrapping on small screens */
   }
   
   .skill-tag:hover {
@@ -634,7 +539,7 @@
   /* Development Section */
   .dev-section {
     background-color: var(--dark-elevated);
-    padding: 5rem 0;
+    padding: 4rem 0; /* Reduced padding for mobile */
     position: relative;
     overflow: hidden;
   }
@@ -666,7 +571,7 @@
   .dev-content {
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 2rem; /* Reduced from 3rem for mobile */
     position: relative;
     z-index: 1;
   }
@@ -677,30 +582,32 @@
   }
   
   .dev-text h2 {
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.2rem); /* Responsive font size */
+    margin-bottom: 1.25rem; /* Reduced from 1.5rem for mobile */
     font-weight: 700;
   }
   
   .dev-text p {
-    font-size: 1.05rem;
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem); /* Responsive font size */
     line-height: 1.7;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Reduced from 2rem for mobile */
     color: var(--text-secondary);
   }
   
   .dev-stats {
     display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 1.5rem; /* Reduced from 2rem for mobile */
+    margin-top: 1.5rem; /* Reduced from 2rem for mobile */
+    flex-wrap: wrap; /* Added for better mobile layout */
   }
   
   .stat-item {
     text-align: center;
+    min-width: 90px; /* Added to prevent squishing on small screens */
   }
   
   .stat-value {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.5rem); /* Responsive font size */
     font-weight: 700;
     color: var(--secondary);
     margin-bottom: 0.25rem;
@@ -708,7 +615,7 @@
   }
   
   .stat-label {
-    font-size: 0.9rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem); /* Responsive font size */
     color: var(--text-secondary);
     font-weight: 500;
   }
@@ -716,7 +623,8 @@
   /* Terminal */
   .terminal-container {
     flex: 1;
-    max-width: 550px;
+    max-width: 100%; /* Changed from 550px for mobile responsiveness */
+    width: 100%;
   }
   
   .terminal-header {
@@ -767,11 +675,12 @@
   }
   
   .terminal-lines {
-    padding: 1.5rem;
+    padding: 1.25rem; /* Reduced from 1.5rem for mobile */
     font-family: "JetBrains Mono", Consolas, Monaco, "Andale Mono", monospace;
-    font-size: 0.95rem;
+    font-size: 0.85rem; /* Reduced from 0.95rem for mobile */
     line-height: 1.7;
     color: #a9b1d6;
+    overflow-x: auto; /* Added to handle text overflow on small screens */
   }
   
   .terminal-line {
@@ -802,21 +711,17 @@
   }
   
   /* Responsive Adjustments */
+  @media (max-width: 1200px) {
+    .container {
+      width: 95%;
+    }
+    
+    .dev-content {
+      gap: 1.5rem;
+    }
+  }
+  
   @media (max-width: 1024px) {
-    .hero-content {
-      flex-direction: column;
-      text-align: center;
-    }
-    
-    .hero-text {
-      margin-bottom: 2rem;
-    }
-    
-    .hero-text p {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
     .dev-content {
       flex-direction: column;
       text-align: center;
@@ -829,44 +734,82 @@
     .dev-text {
       margin-bottom: 2rem;
     }
+    
+    .terminal-container {
+      max-width: 95%; /* Added to prevent overflow on medium screens */
+    }
   }
   
   @media (max-width: 768px) {
     .section,
-    .hero {
-      padding: 3.5rem 0;
-    }
-    
-    .hero-text h1 {
-      font-size: 2.5rem;
-    }
-    
     .certificates-grid,
     .secondary-grid {
       grid-template-columns: 1fr;
+      gap: 1.25rem; /* Further reduced gap */
     }
     
     .dev-stats {
-      flex-direction: column;
-      gap: 1.5rem;
-      align-items: center;
+      flex-direction: row; /* Changed from column to allow better wrapping */
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      justify-content: space-around; /* Evenly space stats */
+    }
+    
+    .stat-item {
+      flex: 0 0 calc(33% - 1.25rem); /* Allow 3 items per row with gap */
+      min-width: 80px; /* Minimum width for small screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      width: 92%; /* Slightly reduced width for very small screens */
+      padding: 0 0.5rem; /* Reduced padding */
+    }
+    
+    .section,
+    .dev-section {
+      padding: 2.5rem 0; /* Further reduced padding */
     }
     
     .card-header {
-      flex-direction: column;
+      flex-direction: row; /* Keep row layout on small screens for better space usage */
+      align-items: center;
     }
     
     .icon-container {
-      margin-bottom: 1rem;
-      margin-right: 0;
+      margin-bottom: 0;
     }
     
     .icon {
-      margin: 0 auto;
+      width: 36px; /* Further reduced for very small screens */
+      height: 36px;
     }
     
-    .title-wrapper {
-      text-align: center;
+    .title-wrapper h3 {
+      font-size: 1.2rem; /* Further reduced for very small screens */
     }
+    
+    .certificate-card {
+      padding: 1.25rem; /* Further reduced padding */
+    }
+    
+    .meta {
+      flex-direction: column; /* Stack meta items for very small screens */
+      gap: 0.5rem;
+    }
+    
+    .skill-tags {
+      gap: 0.4rem; /* Further reduced gap */
+    }
+    
+    .stat-item {
+      flex: 0 0 calc(50% - 1rem); /* Allow 2 items per row on very small screens */
+    }
+    
+  .terminal-lines {
+    padding: 1rem;
+    font-size: 0.8rem;
   }
+}
 </style>
