@@ -33,55 +33,57 @@
   <!-- Header Section -->
   <section class="hero-section">
     <div class="container">
-      <h1 class="main-heading">Get In Touch</h1>
-      <p class="intro-text">Have a question or interested in working together? I'm a cybersecurity enthusiast with a passion for web security and development. Feel free to reach out if you need help with vulnerability assessment or website creation.</p>
+      <div class="hero-content">
+        <h1 class="main-heading">Get In Touch</h1>
+        <p class="intro-text">Have a question or interested in working together? I'm a cybersecurity enthusiast with a passion for web security and development. Feel free to reach out if you need help with vulnerability assessment or website creation.</p>
+      </div>
     </div>
   </section>
 
   <!-- Contact Info Section -->
   <section class="contact-section">
     <div class="container">
-      <div class="section-content">
+      <div class="section-header">
         <h2 class="section-heading">Connect With Me</h2>
+      </div>
+      
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <div class="contact-details">
+            <h3>Location</h3>
+            <p>{contactInfo.location}</p>
+          </div>
+        </div>
         
-        <div class="contact-info">
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <h3>Location</h3>
-              <p>{contactInfo.location}</p>
-            </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"></path>
+              <path d="M12 6v6l4 2"></path>
+            </svg>
           </div>
-          
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"></path>
-                <path d="M12 6v6l4 2"></path>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <h3>Availability</h3>
-              <p>{contactInfo.availability}</p>
-            </div>
+          <div class="contact-details">
+            <h3>Availability</h3>
+            <p>{contactInfo.availability}</p>
           </div>
-          
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
-                <circle cx="12" cy="13" r="3"></circle>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <h3>Response Time</h3>
-              <p>{contactInfo.response}</p>
-            </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+              <circle cx="12" cy="13" r="3"></circle>
+            </svg>
+          </div>
+          <div class="contact-details">
+            <h3>Response Time</h3>
+            <p>{contactInfo.response}</p>
           </div>
         </div>
       </div>
@@ -91,28 +93,28 @@
   <!-- Social Profiles Section -->
   <section class="social-section">
     <div class="container">
-      <div class="section-content">
+      <div class="section-header">
         <h2 class="section-heading">Find Me Online</h2>
-        <div class="social-grid">
-          {#each socialProfiles as profile}
-            <a href={profile.url} target="_blank" rel="noopener noreferrer" class="social-card" aria-label={`Connect on ${profile.name}`}>
-              <span class="social-card-icon" style={`color: ${profile.color};`}>
-                {#if profile.icon === 'linkedin'}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                  </svg>
-                {:else if profile.icon === 'github'}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                  </svg>
-                {/if}
-              </span>
-              <span class="social-label">{profile.name}</span>
-            </a>
-          {/each}
-        </div>
+      </div>
+      <div class="social-grid">
+        {#each socialProfiles as profile}
+          <a href={profile.url} target="_blank" rel="noopener noreferrer" class="social-card" aria-label={`Connect on ${profile.name}`}>
+            <span class="social-card-icon" style={`color: ${profile.color};`}>
+              {#if profile.icon === 'linkedin'}
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              {:else if profile.icon === 'github'}
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              {/if}
+            </span>
+            <span class="social-label">{profile.name}</span>
+          </a>
+        {/each}
       </div>
     </div>
   </section>
@@ -120,8 +122,10 @@
   <!-- Services section -->
   <section class="services-section">
     <div class="container">
-      <h2 class="section-heading centered">How I Can Help</h2>
-      <p class="services-intro">As a cybersecurity enthusiast with web development skills, here are the services I currently offer:</p>
+      <div class="section-header">
+        <h2 class="section-heading">How I Can Help</h2>
+        <p class="services-intro">As a cybersecurity enthusiast with web development skills, here are the services I currently offer:</p>
+      </div>
       
       <div class="services-grid">
         <div class="service-card">
@@ -193,12 +197,7 @@
     width: 90%;
     margin: 0 auto;
   }
-  
-  .section-content {
-    max-width: 850px;
-    margin: 0 auto;
-  }
-  
+    
   /* Hero Section */
   .hero-section {
     position: relative;
@@ -216,6 +215,19 @@
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at top right, rgba(130, 52, 255, 0.2), transparent 70%);
+  }
+  
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+.section-header {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    text-align: center;
   }
   
   /* Typography */
@@ -257,10 +269,8 @@
   .intro-text {
     position: relative;
     text-align: center;
-    margin-bottom: 0;
+    margin: 0 auto;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
     line-height: 1.7;
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.9);
@@ -433,12 +443,11 @@
   .services-intro {
     position: relative;
     max-width: 700px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 1rem;
     text-align: center;
     color: rgba(255, 255, 255, 0.9);
     font-size: 1.1rem;
     line-height: 1.7;
-    z-index: 1;
   }
   
   .services-grid {
@@ -516,18 +525,35 @@
     .main-heading {
       font-size: 2.5rem;
     }
+    
+    .hero-content,
+    .section-header {
+      max-width: 700px;
+    }
   }
   
   @media (max-width: 900px) {
     .services-grid {
       grid-template-columns: repeat(2, 1fr);
       max-width: 700px;
+      margin: 2rem auto 0;
+    }
+    
+    .hero-content,
+    .section-header {
+      max-width: 600px;
     }
   }
   
   @media (max-width: 768px) {
     .hero-section {
       padding: 4rem 0 3rem;
+    }
+    
+    .hero-content,
+    .section-header {
+      max-width: 100%;
+      padding: 0 1.5rem;
     }
     
     .contact-section,
@@ -559,6 +585,10 @@
       width: 70px;
       height: 70px;
     }
+    
+    .intro-text {
+      font-size: 1.05rem;
+    }
   }
   
   @media (max-width: 600px) {
@@ -566,6 +596,7 @@
     .services-grid {
       grid-template-columns: 1fr;
       max-width: 450px;
+      margin: 2rem auto 0;
     }
     
     .main-heading {
@@ -580,11 +611,21 @@
       grid-template-columns: 1fr;
       gap: 1.5rem;
     }
+    
+    .hero-content,
+    .section-header {
+      padding: 0 1rem;
+    }
   }
   
   @media (max-width: 480px) {
     .hero-section {
       padding: 3rem 0 2rem;
+    }
+    
+    .hero-content,
+    .section-header {
+      padding: 0 0.5rem;
     }
     
     .contact-section,
@@ -611,6 +652,10 @@
       width: 60px;
       height: 60px;
       margin-bottom: 1.5rem;
+    }
+    
+    .intro-text {
+      line-height: 1.6;
     }
   }
 </style>
