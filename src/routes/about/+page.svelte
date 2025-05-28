@@ -1,228 +1,432 @@
-<!-- About Page: src/routes/about/+page.svelte -->
+<!-- src/routes/about/+page.svelte -->
 <script>
-  // Skill categories
-  const skillCategories = [
+// @ts-nocheck
+
+  import Section from '$lib/components/ui/Section.svelte';
+  import Card from '$lib/components/ui/Card.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
+  
+  const journey = [
     {
-      name: "Cybersecurity",
-      skills: [
-        { name: "Penetration Testing", icon: "tool" },
-        { name: "Vulnerability Assessment", icon: "search" },
-        { name: "Network Security", icon: "globe" },
-        { name: "Security Architecture", icon: "layers" },
-        { name: "Incident Response", icon: "alert-triangle" },
-        { name: "Threat Intelligence", icon: "eye" }
-      ]
+      year: '2022',
+      title: 'Started Web Development Journey',
+      description: 'Enrolled in KodeGo bootcamp to learn full-stack development, discovering my passion for creating secure web applications.',
+      icon: 'code'
     },
     {
-      name: "Technical",
-      skills: [
-        { name: "Python", icon: "code" },
-        { name: "JavaScript", icon: "code" },
-        { name: "Linux", icon: "terminal" },
-        { name: "Docker", icon: "box" },
-        { name: "AWS", icon: "cloud" },
-        { name: "SQL", icon: "database" }
-      ]
+      year: '2023',
+      title: 'Completed Full-Stack Bootcamp',
+      description: 'Graduated from intensive web development program, mastering React, Node.js, and modern development practices.',
+      icon: 'graduate'
     },
     {
-      name: "Tools & Platforms",
-      skills: [
-        { name: "Kali Linux", icon: "terminal" },
-        { name: "Wireshark", icon: "activity" },
-        { name: "Metasploit", icon: "target" },
-        { name: "Burp Suite", icon: "crosshair" },
-        { name: "Nmap", icon: "map" },
-        { name: "Splunk", icon: "bar-chart-2" }
-      ]
+      year: '2024',
+      title: 'Pivoted to Cybersecurity',
+      description: 'Realized the critical importance of security in software development and began focused study in cybersecurity.',
+      icon: 'shield'
+    },
+    {
+      year: '2025',
+      title: 'Google Cybersecurity Certificate',
+      description: 'Completed comprehensive cybersecurity training, gaining hands-on experience with security tools and incident response.',
+      icon: 'certificate'
     }
   ];
   
-  // Experience timeline
-  const experiences = [
-    {
-      title: "Meow Security Analyst",
-      company: "CyberDefense Inc.",
-      period: "2023 - Present",
-      description: "Lead Meow analyst responsible for conducting penetration tests, vulnerability assessments, and security architecture reviews for enterprise clients."
-    }
-  ];
-  
-  // Education timeline
-  const education = [
-    {
-      degree: "Fullstack Web Development Bootcamp",
-      institution: "KodeGo Bootcamp",
-      period: "2022 - 2023",
-      description: "Intensive training in full-stack web development including frontend, backend, and database technologies."
-    },
-    {
-      degree: "Senior High School",
-      institution: "Saint Patrick's Academy Inc.",
-      period: "2018 - 2022",
-      description: "Completed senior high school education with focus on HUMSS subjects."
-    }
+  const interests = [
+    'Penetration Testing',
+    'Security Research',
+    'Open Source',
+    'CTF Competitions',
+    'Tech Innovation',
+    'Continuous Learning'
   ];
 </script>
 
 <svelte:head>
-  <title>About Me | CyberPortfolio</title>
+  <title>About - Eduardo Camay III</title>
+  <meta name="description" content="Learn about my journey from web development to cybersecurity, my skills, and passion for securing digital infrastructure.">
 </svelte:head>
 
-<section class="section">
-  <div class="container">
-    <h1>About Me</h1>
-    
-    <div class="about-section">
-      <div>
-        <img src="/images/profile.jpg" alt="Profile" class="about-image" />
+<!-- Hero Section -->
+<Section background="secondary">
+  <div class="about-hero">
+    <div class="hero-content">
+      <h1 class="heading-1">About Me</h1>
+      <p class="hero-text">
+        From building websites to securing them – my journey into the world of cybersecurity.
+      </p>
+    </div>
+  </div>
+</Section>
+
+<!-- Main Content -->
+<Section background="primary">
+  <div class="about-content">
+    <div class="content-grid">
+      <!-- Profile Image -->
+      <div class="profile-section">
+        <div class="profile-image-wrapper">
+          <img src="/images/profile.jpg" alt="Eduardo Camay III" class="profile-image" />
+          <div class="profile-decoration"></div>
+        </div>
       </div>
-      <div>
-        <p>I’m an aspiring cybersecurity professional with a strong foundation in web development and a growing passion for ethical hacking and digital defense. My journey into cybersecurity began in 2024, after learning web development in 2022 and discovering how essential security is in the digital world.</p>
-
-        <p>Since then, I’ve been building hands-on skills in penetration testing, vulnerability assessment, and network security through self-study, practical labs, and real-world simulations. My interest in technology started young—from fixing gadgets and collecting parts to gaming and experimenting with systems.</p>
-
-        <p>I believe in continuous learning and aim to contribute to a safer digital environment by helping identify vulnerabilities, assess risks, and implement practical security solutions. I’m currently working toward industry certifications and expanding my portfolio with real-world cybersecurity projects.</p>
-
-        <div class="cyber-terminal">
-          <div class="cyber-terminal-content">
-            rm -rf vulnerabilities && ./deploy-security-measures.sh && echo "System secured successfully."
-          </div>
+      
+      <!-- Bio Content -->
+      <div class="bio-section">
+        <h2 class="heading-2">Hello, I'm Eduardo 👋</h2>
+        <div class="bio-text">
+          <p>
+            I'm an aspiring cybersecurity professional with a strong foundation in web development. 
+            My journey began in 2022 when I discovered my passion for technology and decided to pursue 
+            a career in software development.
+          </p>
+          <p>
+            After completing an intensive full-stack bootcamp at KodeGo, I realized that creating 
+            applications was only half the equation – securing them was equally important. This 
+            realization led me to pivot towards cybersecurity in 2024.
+          </p>
+          <p>
+            Now, I combine my development skills with security knowledge to help organizations build 
+            and maintain secure digital infrastructure. I believe that the best security professionals 
+            understand how systems are built, which gives me a unique perspective in identifying and 
+            addressing vulnerabilities.
+          </p>
         </div>
       </div>
     </div>
   </div>
-</section>
+</Section>
 
-<section class="section" style="background-color: var(--dark-elevated); padding: 4rem 0;">
-  <div class="container">
-    <h2>Current Focus & Skills</h2>
-    
-    {#each skillCategories as category}
-      <div style="margin-bottom: 2rem;">
-        <h3>{category.name}</h3>
-        <div class="skill-list">
-          {#each category.skills as skill}
-            <div class="skill-item">
-              <span class="skill-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  {#if skill.icon === 'tool'}
-                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                  {:else if skill.icon === 'search'}
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                  {:else if skill.icon === 'globe'}
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="2" y1="12" x2="22" y2="12"></line>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                  {:else if skill.icon === 'layers'}
-                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                    <polyline points="2 17 12 22 22 17"></polyline>
-                    <polyline points="2 12 12 17 22 12"></polyline>
-                  {:else if skill.icon === 'alert-triangle'}
-                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                    <line x1="12" y1="9" x2="12" y2="13"></line>
-                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                  {:else if skill.icon === 'eye'}
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  {:else if skill.icon === 'code'}
-                    <polyline points="16 18 22 12 16 6"></polyline>
-                    <polyline points="8 6 2 12 8 18"></polyline>
-                  {:else if skill.icon === 'terminal'}
-                    <polyline points="4 17 10 11 4 5"></polyline>
-                    <line x1="12" y1="19" x2="20" y2="19"></line>
-                  {:else if skill.icon === 'box'}
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                  {:else if skill.icon === 'cloud'}
-                    <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
-                  {:else if skill.icon === 'database'}
-                    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                  {:else if skill.icon === 'activity'}
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                  {:else if skill.icon === 'target'}
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <circle cx="12" cy="12" r="6"></circle>
-                    <circle cx="12" cy="12" r="2"></circle>
-                  {:else if skill.icon === 'crosshair'}
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="22" y1="12" x2="18" y2="12"></line>
-                    <line x1="6" y1="12" x2="2" y2="12"></line>
-                    <line x1="12" y1="6" x2="12" y2="2"></line>
-                    <line x1="12" y1="22" x2="12" y2="18"></line>
-                  {:else if skill.icon === 'map'}
-                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
-                    <line x1="8" y1="2" x2="8" y2="18"></line>
-                    <line x1="16" y1="6" x2="16" y2="22"></line>
-                  {:else if skill.icon === 'bar-chart-2'}
-                    <line x1="18" y1="20" x2="18" y2="10"></line>
-                    <line x1="12" y1="20" x2="12" y2="4"></line>
-                    <line x1="6" y1="20" x2="6" y2="14"></line>
-                  {:else}
-                    <circle cx="12" cy="12" r="10"></circle>
-                  {/if}
-                </svg>
-              </span>
-              {skill.name}
-            </div>
-          {/each}
+<!-- Journey Timeline -->
+<Section background="secondary">
+  <div class="section-header">
+    <h2 class="heading-2">My Journey</h2>
+    <p class="text-lead">From curious beginner to security-focused developer</p>
+  </div>
+  
+  <div class="timeline">
+    {#each journey as milestone, i}
+      <div class="timeline-item" style="--delay: {i * 0.1}s">
+        <div class="timeline-marker">
+          <div class="timeline-icon">
+            {#if milestone.icon === 'code'}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            {:else if milestone.icon === 'graduate'}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+              </svg>
+            {:else if milestone.icon === 'shield'}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            {:else if milestone.icon === 'certificate'}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="7"/>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+              </svg>
+            {/if}
+          </div>
         </div>
+        <Card animate>
+          <div class="timeline-content">
+            <span class="timeline-year">{milestone.year}</span>
+            <h3 class="timeline-title">{milestone.title}</h3>
+            <p class="timeline-description">{milestone.description}</p>
+          </div>
+        </Card>
       </div>
     {/each}
   </div>
-</section>
+</Section>
 
-<section class="section">
-  <div class="container">
-    <h2>Professional Experience</h2>
+<!-- Interests & Values -->
+<Section background="primary">
+  <div class="interests-section">
+    <div class="section-header">
+      <h2 class="heading-2">What Drives Me</h2>
+      <p class="text-lead">My interests and values in technology and security</p>
+    </div>
     
-    <div class="timeline">
-      {#each experiences as experience, i}
-        <div class="card" style="position: relative; padding-left: 2rem;">
-          <div style="position: absolute; left: -10px; top: 1.5rem; width: 20px; height: 20px; background-color: var(--primary); border-radius: 50%;"></div>
-          <div class="card-content">
-            <h3 class="card-title">{experience.title}</h3>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-              <span style="color: var(--secondary);">{experience.company}</span>
-              <span style="color: var(--text-secondary);">{experience.period}</span>
-            </div>
-            <p>{experience.description}</p>
-          </div>
+    <div class="interests-grid">
+      {#each interests as interest}
+        <div class="interest-item">
+          <div class="interest-icon">✦</div>
+          <span>{interest}</span>
         </div>
       {/each}
     </div>
-  </div>
-</section>
-
-<section class="section" style="background-color: var(--dark-elevated); padding: 4rem 0;">
-  <div class="container">
-    <h2>Education</h2>
     
-    <div class="timeline">
-      {#each education as edu, i}
-        <div class="card" style="position: relative; padding-left: 2rem;">
-          <div style="position: absolute; left: -10px; top: 1.5rem; width: 20px; height: 20px; background-color: var(--secondary); border-radius: 50%;"></div>
-          <div class="card-content">
-            <h3 class="card-title">{edu.degree}</h3>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-              <span style="color: var(--secondary);">{edu.institution}</span>
-              <span style="color: var(--text-secondary);">{edu.period}</span>
-            </div>
-            <p>{edu.description}</p>
-          </div>
-        </div>
-      {/each}
+    <div class="values-content">
+      <Card>
+        <blockquote class="quote">
+          "In a world where technology touches every aspect of our lives, security isn't just about 
+          protecting data – it's about protecting people, their privacy, and their digital freedom."
+        </blockquote>
+      </Card>
     </div>
   </div>
-</section>
+</Section>
 
-<section class="section">
-  <div class="container" style="text-align: center;">
-    <h2>Interested in Working Together?</h2>
-    <p style="max-width: 600px; margin: 0 auto 2rem auto;">If you're looking for a cybersecurity professional for your project or want to discuss potential collaborations, I'd love to connect.</p>
-    <a href="/contact" class="btn">Get In Touch</a>
+<!-- CTA -->
+<Section background="secondary">
+  <div class="cta-section">
+    <h2 class="heading-2">Let's Connect</h2>
+    <p class="text-lead mb-8">
+      Whether you need security consultation, web development, or just want to chat about tech – I'm always open to new connections.
+    </p>
+    <div class="cta-buttons">
+      <Button href="/contact" size="lg">Get In Touch</Button>
+      <Button href="/projects" variant="secondary" size="lg">View My Work</Button>
+    </div>
   </div>
-</section>
+</Section>
+
+<style>
+  /* Hero */
+  .about-hero {
+    text-align: center;
+    padding: var(--space-8) 0;
+  }
+  
+  .hero-text {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Content Grid */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-12);
+    align-items: start;
+  }
+  
+  /* Profile Section */
+  .profile-section {
+    position: sticky;
+    top: calc(4rem + var(--space-8));
+  }
+  
+  .profile-image-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+  }
+  
+  .profile-decoration {
+    position: absolute;
+    inset: -20px;
+    background: linear-gradient(135deg, var(--primary-600), var(--accent-600));
+    border-radius: var(--radius-xl);
+    z-index: -1;
+    opacity: 0.3;
+    filter: blur(20px);
+  }
+  
+  /* Bio Section */
+  .bio-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  
+  .bio-text p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: var(--text-lg);
+  }
+  
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: var(--space-8);
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary-600), var(--accent-600));
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: var(--space-8);
+    animation: fadeIn 0.6s ease-out backwards;
+    animation-delay: var(--delay);
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    left: -23px;
+    top: 0;
+  }
+  
+  .timeline-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--surface);
+    border: 2px solid var(--primary-600);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-400);
+  }
+  
+  .timeline-content {
+    padding-left: var(--space-6);
+  }
+  
+  .timeline-year {
+    font-size: var(--text-sm);
+    color: var(--primary-400);
+    font-weight: 600;
+  }
+  
+  .timeline-title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin: var(--space-2) 0;
+  }
+  
+  .timeline-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  
+  /* Interests */
+  .interests-section {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+    margin: var(--space-8) 0;
+  }
+  
+  .interest-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+  }
+  
+  .interest-item:hover {
+    border-color: var(--primary-600);
+    transform: translateY(-2px);
+  }
+  
+  .interest-icon {
+    color: var(--primary-400);
+    font-size: var(--text-xl);
+  }
+  
+  .values-content {
+    margin-top: var(--space-8);
+  }
+  
+  .quote {
+    font-size: var(--text-xl);
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-style: italic;
+    border-left: 4px solid var(--primary-600);
+    padding-left: var(--space-6);
+    margin: 0;
+  }
+  
+  /* CTA */
+  .cta-section {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  /* Section Headers */
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+  
+  .section-header .text-lead {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+    
+    .profile-section {
+      position: relative;
+      top: 0;
+      text-align: center;
+    }
+    
+    .profile-image {
+      max-width: 250px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .timeline {
+      padding-left: var(--space-6);
+    }
+    
+    .timeline-marker {
+      left: -18px;
+    }
+    
+    .timeline-icon {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .interests-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+    }
+    
+    .cta-buttons :global(.btn) {
+      width: 100%;
+    }
+  }
+</style>
