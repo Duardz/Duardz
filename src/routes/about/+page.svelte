@@ -217,7 +217,11 @@
   .profile-image-wrapper {
     position: relative;
     display: inline-block;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 300px;
   }
+
   
   .profile-image {
     width: 100%;
