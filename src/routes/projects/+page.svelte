@@ -11,7 +11,7 @@
       description: "A custom-built network vulnerability scanner that identifies security weaknesses in network infrastructure. The scanner performs comprehensive scans to detect open ports, vulnerable services, and potential entry points for attackers.",
       longDescription: "This custom-built network vulnerability scanner is designed to identify security weaknesses in network infrastructure. The scanner performs comprehensive scans to detect open ports, vulnerable services, and potential entry points for attackers. It includes features such as service enumeration, vulnerability mapping against known CVEs, and detailed reporting with remediation recommendations. The tool was built using Python with libraries like Scapy for packet manipulation and integrates with various security databases to provide up-to-date vulnerability information.",
       tags: ["Python", "Network Security", "Penetration Testing"],
-      image: "/images/project1.jpg",
+      image: "../images/project1.jpg",
       github: "https://github.com/username/network-scanner",
       featured: true
     },
