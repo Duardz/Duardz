@@ -1,13 +1,11 @@
-<!-- lib/components/layout/Header.svelte -->
 <script>
 // @ts-nocheck
-
   import { page } from '$app/stores';
   import Button from '$lib/components/ui/Button.svelte';
-  
-  export let isMenuOpen = false;
+
   export let scrolled = false;
-  
+  let isMenuOpen = false;
+
   const navItems = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
@@ -16,10 +14,13 @@
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' }
   ];
-  
+
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }
+
+  // Close the mobile menu when a route is clicked
+  $: $page.url.pathname, isMenuOpen = false;
 </script>
 
 <header class="header" class:scrolled>
@@ -30,30 +31,24 @@
       </svg>
       <span class="logo-text">Eduardo</span>
     </a>
-    
-    <!-- Desktop Navigation -->
+
+    <!-- Desktop nav -->
     <ul class="nav-list hide-mobile">
       {#each navItems as item}
         <li>
-          <a 
-            href={item.href} 
-            class="nav-link"
-            class:active={$page.url.pathname === item.href}
-          >
+          <a href={item.href} class="nav-link" class:active={$page.url.pathname === item.href}>
             {item.label}
           </a>
         </li>
       {/each}
     </ul>
-    
+
     <div class="nav-actions hide-mobile">
-      <Button href="/contact" size="sm">
-        Get In Touch
-      </Button>
+      <Button href="/contact" size="sm">Get In Touch</Button>
     </div>
-    
-    <!-- Mobile Menu Button -->
-    <button 
+
+    <!-- Hamburger -->
+    <button
       class="menu-toggle show-mobile"
       on:click={toggleMenu}
       aria-label="Toggle menu"
@@ -61,34 +56,35 @@
     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         {#if isMenuOpen}
-          <path d="M18 6L6 18M6 6l12 12"/>
+          <path d="M18 6L6 18M6 6l12 12" />
         {:else}
-          <path d="M3 12h18M3 6h18M3 18h18"/>
+          <path d="M3 12h18M3 6h18M3 18h18" />
         {/if}
       </svg>
     </button>
   </nav>
-  
-  <!-- Mobile Navigation -->
+
+  <!-- Mobile Nav -->
   <div class="mobile-nav" class:open={isMenuOpen}>
-    <ul class="mobile-nav-list">
-      {#each navItems as item}
-        <li>
-          <a 
-            href={item.href} 
-            class="mobile-nav-link"
-            class:active={$page.url.pathname === item.href}
-            on:click={() => isMenuOpen = false}
-          >
-            {item.label}
-          </a>
-        </li>
-      {/each}
-    </ul>
-    <div class="mobile-nav-actions">
-      <Button href="/contact" variant="primary" size="lg">
-        Get In Touch
-      </Button>
+    <div class="mobile-nav-panel">
+      <ul class="mobile-nav-list">
+        {#each navItems as item}
+          <li>
+            <a 
+              href={item.href}
+              class="mobile-nav-link"
+              class:active={$page.url.pathname === item.href}
+            >
+              {item.label}
+            </a>
+          </li>
+        {/each}
+      </ul>
+      <div class="mobile-nav-actions">
+        <Button href="/contact" variant="primary" size="lg">
+          Get In Touch
+        </Button>
+      </div>
     </div>
   </div>
 </header>
@@ -102,152 +98,139 @@
     background-color: rgba(3, 7, 18, 0.8);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid transparent;
-    z-index: var(--z-sticky);
-    transition: all var(--transition-base);
+    z-index: 100;
+    transition: all 0.3s ease;
   }
-  
+
   .header.scrolled {
     background-color: rgba(3, 7, 18, 0.95);
     border-bottom-color: var(--border);
   }
-  
+
   .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 4rem;
   }
-  
+
   .logo {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: 0.5rem;
     color: var(--text-primary);
     font-weight: 700;
-    font-size: var(--text-xl);
-    transition: color var(--transition-base);
+    font-size: 1.25rem;
   }
-  
-  .logo:hover {
-    color: var(--primary-400);
-  }
-  
+
   .logo-icon {
     color: var(--primary-400);
   }
-  
+
   .nav-list {
     display: flex;
-    align-items: center;
-    gap: var(--space-2);
+    gap: 1rem;
     list-style: none;
-    margin: 0;
-    padding: 0;
   }
-  
+
   .nav-link {
-    padding: var(--space-2) var(--space-3);
+    padding: 0.5rem 0.75rem;
     color: var(--text-secondary);
-    font-weight: 500;
-    border-radius: var(--radius-md);
-    transition: all var(--transition-base);
+    border-radius: 0.375rem;
   }
-  
-  .nav-link:hover {
-    color: var(--text-primary);
-    background-color: var(--surface);
-  }
-  
+
+  .nav-link:hover,
   .nav-link.active {
     color: var(--primary-400);
   }
-  
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-  }
-  
+
   .menu-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
     background: none;
     border: none;
-    color: var(--text-primary);
+    padding: 0.5rem;
+    border-radius: 0.375rem;
     cursor: pointer;
-    border-radius: var(--radius-md);
-    transition: all var(--transition-base);
+    color: var(--text-primary);
   }
-  
+
   .menu-toggle:hover {
     background-color: var(--surface);
   }
-  
-  /* Mobile Navigation */
+
+  /* Mobile nav */
   .mobile-nav {
     position: fixed;
     top: 4rem;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--bg-secondary);
+    background-color: transparent;
     transform: translateX(100%);
-    transition: transform var(--transition-base);
-    overflow-y: auto;
-    z-index: var(--z-fixed);
+    transition: transform 0.3s ease;
+    z-index: 90;
+    display: none;
   }
-  
+
   .mobile-nav.open {
+    display: block;
     transform: translateX(0);
   }
-  
-  .mobile-nav-list {
-    list-style: none;
-    padding: var(--space-4);
-    margin: 0;
+
+  .mobile-nav-panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+    height: fit-content;
+    max-width: 300px;
+    background-color: #111827;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  
+
+  .mobile-nav-list {
+    padding: 1rem;
+    list-style: none;
+    text-align: left;
+    background-color: var(--surface);
+  }
+
   .mobile-nav-link {
     display: block;
-    padding: var(--space-4);
+    text-align: left;
+    padding: 1rem;
     color: var(--text-primary);
-    font-size: var(--text-lg);
-    font-weight: 500;
-    border-radius: var(--radius-md);
-    transition: all var(--transition-base);
+    font-size: 1.125rem;
+    border-radius: 0.375rem;
   }
-  
+
+  .mobile-nav-link.active,
   .mobile-nav-link:hover {
     background-color: var(--surface);
-  }
-  
-  .mobile-nav-link.active {
     color: var(--primary-400);
-    background-color: var(--surface);
   }
-  
+
   .mobile-nav-actions {
-    padding: var(--space-4);
+    padding: 1rem;
     border-top: 1px solid var(--border);
   }
-  
-  /* Responsive utilities */
+
+  /* Responsive helpers */
   @media (max-width: 768px) {
     .hide-mobile {
       display: none !important;
     }
   }
-  
+
   @media (min-width: 769px) {
     .show-mobile {
       display: none !important;
     }
-    
+
     .mobile-nav {
-      display: none;
+      display: none !important;
     }
   }
 </style>
