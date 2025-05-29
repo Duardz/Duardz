@@ -13,7 +13,7 @@ export const blogPosts = [
       name: 'Eduardo Camay III',
       image: '/images/profile.jpg'
     },
-    coverImage: '/images/blog/zero-trust.jpg',
+    coverImage: '/images/blog/blog1.jpg',
     excerpt: 'A comprehensive guide to implementing Zero Trust Architecture in enterprise environments. Learn about the key principles and practical steps to enhance your security posture.',
     tags: ['Zero Trust', 'Network Security', 'Architecture', 'Enterprise'],
     content: `
@@ -74,9 +74,9 @@ Zero Trust Architecture is not a single product or solution but a strategic appr
       name: 'Eduardo Camay III',
       image: '/images/profile.jpg'
     },
-    coverImage: '/images/blog/ransomware.jpg',
+    coverImage: '/images/blog/blog2.jpg',
     excerpt: 'Breaking down the techniques used in recent high-profile ransomware attacks and what organizations can learn to improve their defenses.',
-    tags: ['Ransomware', 'Threat Intelligence', 'Incident Response', 'Malware'],
+    tags: ['Ransomware', 'Threat Intelligence', 'Incident Response'],
     content: `
 # Analyzing Recent Ransomware Attacks: Lessons Learned
 
@@ -130,7 +130,7 @@ The fight against ransomware requires a multi-layered approach combining technol
       name: 'Eduardo Camay III',
       image: '/images/profile.jpg'
     },
-    coverImage: '/images/blog/web-security.jpg',
+    coverImage: '/images/blog/blog1.jpg',
     excerpt: 'Essential security practices every web developer should implement to protect applications from common vulnerabilities.',
     tags: ['Web Security', 'OWASP', 'Development', 'Best Practices'],
     content: `
@@ -184,7 +184,7 @@ Security is not a one-time effort but an ongoing process. Stay informed about ne
       name: 'Eduardo Camay III',
       image: '/images/profile.jpg'
     },
-    coverImage: '/images/blog/aws-security.jpg',
+    coverImage: '/images/blog/blog2.jpg',
     excerpt: 'Learn how to implement security best practices in AWS, from IAM policies to network segmentation and monitoring.',
     tags: ['AWS', 'Cloud Security', 'IAM', 'Infrastructure'],
     content: `
