@@ -124,7 +124,7 @@ $ ./start-journey.sh
 <!-- Skills & Expertise -->
 <Section background="primary">
   <div class="section-header">
-    <h2 class="heading-2">Skills & Expertise</h2>
+    <h2 class="heading-2">Skills</h2>
     <p class="text-lead">
       Building a strong foundation in both security and development
     </p>
