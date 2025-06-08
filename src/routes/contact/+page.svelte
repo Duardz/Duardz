@@ -131,7 +131,7 @@
         
         <div class="social-links">
           <a 
-            href="https://linkedin.com/in/username" 
+            href="https://www.linkedin.com/in/eduardo-iii-camay-2a232a237/" 
             target="_blank" 
             rel="noopener noreferrer"
             class="social-button linkedin"
@@ -143,7 +143,7 @@
           </a>
           
           <a 
-            href="https://github.com/username" 
+            href="https://github.com/Duardz" 
             target="_blank" 
             rel="noopener noreferrer"
             class="social-button github"
