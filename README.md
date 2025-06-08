@@ -1,38 +1,23 @@
-# sv
+# Hey, I'm Duardz 👋
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+I love building things with AI and turning silly ideas into actual apps.
 
-## Creating a project
+## What I'm working on
 
-If you're seeing this, you've probably already done this step. Congrats!
+**Love Survival Kit** - A relationship quiz game where every answer is wrong but somehow that's the point. Built with SvelteKit and way too many late nights.
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Current vibe
 
-# create a new project in my-app
-npx sv create my-app
-```
+Building random stuff, breaking things, fixing them, then breaking them again. Usually with help from Claude AI at 2am.
 
-## Developing
+## Tech I use
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+JavaScript, SvelteKit, CSS, and whatever else gets the job done.
 
-```bash
-npm run dev
+## Find me
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Working on code or pretending to understand git.
 
-## Building
+---
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+*"Ship it before you overthink it"* 🚀
