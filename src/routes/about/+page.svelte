@@ -67,7 +67,7 @@
       <!-- Enhanced Profile Image -->
       <div class="profile-section">
         <div class="profile-hexagon-wrapper">
-          <img src="/images/duardz-profile.jpg" alt="DUARDZ Profile" />
+          <img src="/images/profile.jpg" alt="DUARDZ Profile" />
         </div>
       </div>
       

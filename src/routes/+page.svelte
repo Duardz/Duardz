@@ -258,22 +258,24 @@ $ ./learning-journey.sh
 </Section>
 
 <style>
-  /* Hero Styles */
+  /* Hero Styles - Fixed Version */
   .hero {
     position: relative;
-    min-height: calc(100vh - 4rem);
+    min-height: 100vh; /* Changed from calc(100vh - 4rem) */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: var(--space-8) 0; /* Added padding for safety */
   }
   
   .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 10; /* Increased z-index to ensure content stays on top */
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+    padding: 0 var(--space-4); /* Added horizontal padding */
   }
   
   .hero-title {
@@ -306,7 +308,7 @@ $ ./learning-journey.sh
     margin-right: auto;
   }
   
-  /* Terminal */
+  /* Terminal - Fixed */
   .hero-terminal {
     background-color: var(--gray-900);
     border: 1px solid var(--border);
@@ -315,6 +317,8 @@ $ ./learning-journey.sh
     margin: 0 auto var(--space-8);
     overflow: hidden;
     box-shadow: var(--shadow-xl);
+    position: relative; /* Added for proper stacking */
+    z-index: 5; /* Ensure terminal stays above background */
   }
   
   .terminal-header {
@@ -374,7 +378,7 @@ $ ./learning-journey.sh
     flex-wrap: wrap;
   }
   
-  /* Hero Decoration */
+  /* Hero Decoration - Fixed */
   .hero-decoration {
     position: absolute;
     inset: 0;
@@ -384,49 +388,70 @@ $ ./learning-journey.sh
   }
   
   .floating-shapes {
-    position: relative;
+    position: absolute; /* Changed from relative */
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
   }
   
   .shape {
     position: absolute;
     border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.3;
+    filter: blur(60px); /* Increased blur for softer effect */
+    opacity: 0.2; /* Reduced opacity for subtlety */
+    will-change: transform; /* Optimization for animations */
   }
   
   .shape-1 {
-    width: 400px;
-    height: 400px;
-    background: var(--primary-600);
-    top: -200px;
-    left: -200px;
-    animation: float 20s ease-in-out infinite;
+    width: 300px; /* Reduced size */
+    height: 300px;
+    background: linear-gradient(135deg, var(--primary-600), var(--primary-400));
+    top: -150px;
+    left: -150px;
+    animation: float 25s ease-in-out infinite;
   }
   
   .shape-2 {
-    width: 300px;
-    height: 300px;
-    background: var(--accent-600);
-    bottom: -150px;
-    right: -150px;
-    animation: float 15s ease-in-out infinite reverse;
+    width: 250px; /* Reduced size */
+    height: 250px;
+    background: linear-gradient(135deg, var(--accent-600), var(--accent-400));
+    bottom: -125px;
+    right: -125px;
+    animation: float 20s ease-in-out infinite reverse;
   }
   
   .shape-3 {
-    width: 200px;
-    height: 200px;
-    background: var(--primary-400);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: pulse 10s ease-in-out infinite;
+    width: 150px; /* Reduced size */
+    height: 150px;
+    background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+    top: 20%;
+    right: 20%;
+    animation: pulse 15s ease-in-out infinite;
   }
   
+  /* Improved animations */
   @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
+    0%, 100% { 
+      transform: translateY(0) rotate(0deg) scale(1); 
+    }
+    33% { 
+      transform: translateY(-30px) rotate(120deg) scale(1.1); 
+    }
+    66% { 
+      transform: translateY(20px) rotate(240deg) scale(0.9); 
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { 
+      transform: scale(1) rotate(0deg); 
+      opacity: 0.2; 
+    }
+    50% { 
+      transform: scale(1.2) rotate(180deg); 
+      opacity: 0.3; 
+    }
   }
   
   /* Section Headers */
@@ -457,11 +482,7 @@ $ ./learning-journey.sh
     border-radius: var(--radius-xl);
     transition: transform var(--transition-base);
   }
-  
-  .card:hover .skill-icon {
-    transform: scale(1.1);
-  }
-  
+
   .skill-list {
     list-style: none;
     padding: 0;
@@ -541,24 +562,61 @@ $ ./learning-journey.sh
     margin-bottom: var(--space-8);
   }
   
-  /* Responsive */
+  /* Responsive improvements */
   @media (max-width: 768px) {
     .hero {
-      min-height: auto;
-      padding: var(--space-8) 0;
+      min-height: 90vh; /* Adjusted for mobile */
+      padding: var(--space-4) 0;
+    }
+    
+    .hero-content {
+      padding: 0 var(--space-2);
     }
     
     .hero-actions {
       flex-direction: column;
       width: 100%;
+      gap: var(--space-3);
     }
     
     .hero-actions :global(.btn) {
       width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
     }
     
     .terminal-content {
       font-size: var(--text-xs);
+      padding: var(--space-3);
+    }
+    
+    /* Reduce shape sizes on mobile */
+    .shape-1 {
+      width: 200px;
+      height: 200px;
+      top: -100px;
+      left: -100px;
+    }
+    
+    .shape-2 {
+      width: 150px;
+      height: 150px;
+      bottom: -75px;
+      right: -75px;
+    }
+    
+    .shape-3 {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  /* Performance optimization */
+  @media (prefers-reduced-motion: reduce) {
+    .shape-1,
+    .shape-2,
+    .shape-3 {
+      animation: none;
     }
   }
 </style>

@@ -26,10 +26,20 @@
 <header class="header" class:scrolled>
   <nav class="nav container">
     <a href="/" class="logo">
-      <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-      </svg>
-      <span class="logo-text">Eduardo</span>
+      <div class="logo-icon-wrapper">
+        <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <div class="logo-glow"></div>
+      </div>
+      <span class="logo-text">
+        <span class="logo-letter logo-d">D</span>
+        <span class="logo-letter logo-u">U</span>
+        <span class="logo-letter logo-a">A</span>
+        <span class="logo-letter logo-r">R</span>
+        <span class="logo-letter logo-d2">D</span>
+        <span class="logo-letter logo-z">Z</span>
+      </span>
     </a>
 
     <!-- Desktop nav -->
@@ -114,17 +124,149 @@
     height: 4rem;
   }
 
+  /* Enhanced Logo Styles */
   .logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     color: var(--text-primary);
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    transition: all var(--transition-base);
+    text-decoration: none;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  .logo-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-600), var(--accent-600));
+    border-radius: 8px;
+    transition: all var(--transition-base);
+  }
+
+  .logo:hover .logo-icon-wrapper {
+    background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+    box-shadow: 0 0 20px var(--primary-400);
   }
 
   .logo-icon {
+    color: white;
+    z-index: 2;
+    position: relative;
+  }
+
+  .logo-glow {
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, var(--primary-400), var(--accent-400));
+    border-radius: 10px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity var(--transition-base);
+  }
+
+  .logo:hover .logo-glow {
+    opacity: 0.6;
+    animation: logo-pulse 2s ease-in-out infinite;
+  }
+
+  .logo-text {
+    font-family: var(--font-mono);
+    font-weight: 800;
+    letter-spacing: 2px;
+    display: flex;
+    gap: 1px;
+  }
+
+  .logo-letter {
+    display: inline-block;
+    transition: all var(--transition-base);
+    position: relative;
+  }
+
+  /* Individual letter effects */
+  .logo-d {
     color: var(--primary-400);
+  }
+
+  .logo-u {
+    color: var(--accent-400);
+  }
+
+  .logo-a {
+    color: var(--primary-300);
+  }
+
+  .logo-r {
+    color: var(--accent-300);
+  }
+
+  .logo-d2 {
+    color: var(--primary-400);
+  }
+
+  .logo-z {
+    color: var(--accent-400);
+    font-weight: 900;
+  }
+
+  /* Hover effects for letters */
+  .logo:hover .logo-letter {
+    animation: letter-glow 0.6s ease-in-out;
+  }
+
+  .logo:hover .logo-d {
+    animation-delay: 0s;
+  }
+
+  .logo:hover .logo-u {
+    animation-delay: 0.1s;
+  }
+
+  .logo:hover .logo-a {
+    animation-delay: 0.2s;
+  }
+
+  .logo:hover .logo-r {
+    animation-delay: 0.3s;
+  }
+
+  .logo:hover .logo-d2 {
+    animation-delay: 0.4s;
+  }
+
+  .logo:hover .logo-z {
+    animation-delay: 0.5s;
+  }
+
+  @keyframes logo-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes letter-glow {
+    0%, 100% {
+      text-shadow: none;
+      transform: translateY(0);
+    }
+    50% {
+      text-shadow: 0 0 10px currentColor;
+      transform: translateY(-2px);
+    }
   }
 
   .nav-list {
@@ -137,11 +279,13 @@
     padding: 0.5rem 0.75rem;
     color: var(--text-secondary);
     border-radius: 0.375rem;
+    transition: all var(--transition-base);
   }
 
   .nav-link:hover,
   .nav-link.active {
     color: var(--primary-400);
+    background-color: rgba(79, 70, 229, 0.1);
   }
 
   .menu-toggle {
@@ -151,10 +295,12 @@
     border-radius: 0.375rem;
     cursor: pointer;
     color: var(--text-primary);
+    transition: all var(--transition-base);
   }
 
   .menu-toggle:hover {
     background-color: var(--surface);
+    color: var(--primary-400);
   }
 
   /* Mobile nav */
@@ -188,6 +334,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-left: 1px solid var(--border);
   }
 
   .mobile-nav-list {
@@ -204,6 +351,7 @@
     color: var(--text-primary);
     font-size: 1.125rem;
     border-radius: 0.375rem;
+    transition: all var(--transition-base);
   }
 
   .mobile-nav-link.active,
@@ -221,6 +369,19 @@
   @media (max-width: 768px) {
     .hide-mobile {
       display: none !important;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+    }
+
+    .logo-icon-wrapper {
+      width: 36px;
+      height: 36px;
+    }
+
+    .logo-text {
+      letter-spacing: 1px;
     }
   }
 
