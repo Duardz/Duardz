@@ -246,7 +246,7 @@ $ ./learning-journey.sh
       Always excited to connect with fellow learners, share knowledge, or collaborate on projects.<br>
       Whether you're into cybersecurity, web dev, or just want to chat about tech!
     </p>
-    <div class="flex justify-center gap-4">
+    <div class="cta-buttons flex justify-center gap-4">
       <Button href="/contact" size="lg">
         Get In Touch
       </Button>
@@ -564,6 +564,11 @@ $ ./learning-journey.sh
   
   /* Responsive improvements */
   @media (max-width: 768px) {
+    .cta-buttons {
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
     .hero {
       min-height: 90vh; /* Adjusted for mobile */
       padding: var(--space-4) 0;
