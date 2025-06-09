@@ -34,7 +34,7 @@
           <svg class="brand-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
-          <span class="brand-text">Eduardo Camay III</span>
+          <span class="brand-text">DUARDZ</span>
         </a>
         <p class="brand-tagline">
           Securing the digital world, one line of code at a time.
@@ -83,7 +83,7 @@
     <!-- Footer Bottom -->
     <div class="footer-bottom">
       <p class="copyright">
-        © {currentYear} Eduardo Camay III. All rights reserved.
+        © {currentYear} DUARDZ. All rights reserved.
       </p>
       <p class="footer-note">
         Built with <span class="heart">♥</span> using SvelteKit

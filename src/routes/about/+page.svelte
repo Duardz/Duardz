@@ -9,43 +9,43 @@
   const journey = [
     {
       year: '2022',
-      title: 'Started Web Development Journey',
-      description: 'Enrolled in KodeGo bootcamp to learn full-stack development, discovering my passion for creating secure web applications.',
+      title: 'Started My Tech Journey',
+      description: 'Enrolled in KodeGo bootcamp to learn web development, discovering my love for building things with code.',
       icon: 'code'
     },
     {
       year: '2023',
-      title: 'Completed Full-Stack Bootcamp',
-      description: 'Graduated from intensive web development program, mastering React, Node.js, and modern development practices.',
+      title: 'Completed Bootcamp & Started Building',
+      description: 'Graduated and began creating projects with SvelteKit, diving deep into modern web development.',
       icon: 'graduate'
     },
     {
       year: '2024',
-      title: 'Pivoted to Cybersecurity',
-      description: 'Realized the critical importance of security in software development and began focused study in cybersecurity.',
+      title: 'Discovered Cybersecurity',
+      description: 'Got fascinated by the security side of things - started learning about CTFs, web pentesting, and bug bounties.',
       icon: 'shield'
     },
     {
       year: '2025',
-      title: 'Google Cybersecurity Certificate',
-      description: 'Completed comprehensive cybersecurity training, gaining hands-on experience with security tools and incident response.',
-      icon: 'certificate'
+      title: 'Deep Diving into Security',
+      description: 'Currently grinding through CTF challenges, learning web pentesting, and exploring the bug bounty world.',
+      icon: 'target'
     }
   ];
   
   const interests = [
-    'Penetration Testing',
-    'Security Research',
-    'Open Source',
-    'CTF Competitions',
-    'Tech Innovation',
-    'Continuous Learning'
+    'CTF Challenges',
+    'Web Pentesting',
+    'Bug Bounty Hunting',
+    'Building Cool Projects',
+    'AI-Assisted Coding',
+    'Learning New Things'
   ];
 </script>
 
 <svelte:head>
   <title>About - Eduardo Camay III</title>
-  <meta name="description" content="Learn about my journey from web development to cybersecurity, my skills, and passion for securing digital infrastructure.">
+  <meta name="description" content="Learn about my self-taught journey from web development to cybersecurity, my passion for CTFs and building things.">
 </svelte:head>
 
 <!-- Hero Section -->
@@ -54,7 +54,7 @@
     <div class="hero-content">
       <h1 class="heading-1">About Me</h1>
       <p class="hero-text">
-        From building websites to securing them – my journey into the world of cybersecurity.
+        A self-taught journey from building websites to understanding how to break (and secure) them.
       </p>
     </div>
   </div>
@@ -77,20 +77,25 @@
         <h2 class="heading-2">Hello, I'm Eduardo 👋</h2>
         <div class="bio-text">
           <p>
-            I'm an aspiring cybersecurity professional with a strong foundation in web development. 
-            My journey began in 2022 when I discovered my passion for technology and decided to pursue 
-            a career in software development.
+            I'm a cybersecurity enthusiast who loves building things and figuring out how they work 
+            (and sometimes how they break). My journey started in 2022 when I decided to dive into 
+            web development through a bootcamp at KodeGo.
           </p>
           <p>
-            After completing an intensive full-stack bootcamp at KodeGo, I realized that creating 
-            applications was only half the equation – securing them was equally important. This 
-            realization led me to pivot towards cybersecurity in 2024.
+            What started as learning to build websites quickly evolved into a fascination with the 
+            security side of things. I discovered CTF challenges, got hooked on web pentesting, and 
+            realized there's this whole world of ethical hacking and bug bounties out there.
           </p>
           <p>
-            Now, I combine my development skills with security knowledge to help organizations build 
-            and maintain secure digital infrastructure. I believe that the best security professionals 
-            understand how systems are built, which gives me a unique perspective in identifying and 
-            addressing vulnerabilities.
+            I'm completely self-taught in the cybersecurity space, learning through hands-on CTFs, 
+            online resources, and lots of trial and error. I love combining my development background 
+            with security knowledge - understanding how things are built really helps when you're 
+            trying to find vulnerabilities.
+          </p>
+          <p>
+            When I'm not breaking things for educational purposes, I enjoy building projects with 
+            SvelteKit and experimenting with AI tools to speed up my coding. Always learning, 
+            always curious!
           </p>
         </div>
       </div>
@@ -101,8 +106,8 @@
 <!-- Journey Timeline -->
 <Section background="secondary">
   <div class="section-header">
-    <h2 class="heading-2">My Journey</h2>
-    <p class="text-lead">From curious beginner to security-focused developer</p>
+    <h2 class="heading-2">My Learning Journey</h2>
+    <p class="text-lead">From curious beginner to security enthusiast</p>
   </div>
   
   <div class="timeline">
@@ -124,10 +129,11 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
-            {:else if milestone.icon === 'certificate'}
+            {:else if milestone.icon === 'target'}
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="8" r="7"/>
-                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <circle cx="12" cy="12" r="2"/>
               </svg>
             {/if}
           </div>
@@ -148,8 +154,8 @@
 <Section background="primary">
   <div class="interests-section">
     <div class="section-header">
-      <h2 class="heading-2">What Drives Me</h2>
-      <p class="text-lead">My interests and values in technology and security</p>
+      <h2 class="heading-2">What I'm Into</h2>
+      <p class="text-lead">The things that keep me motivated and excited about tech</p>
     </div>
     
     <div class="interests-grid">
@@ -164,24 +170,77 @@
     <div class="values-content">
       <Card>
         <blockquote class="quote">
-          "In a world where technology touches every aspect of our lives, security isn't just about 
-          protecting data – it's about protecting people, their privacy, and their digital freedom."
+          "I believe the best way to learn cybersecurity is by doing - breaking things, solving 
+          challenges, and getting your hands dirty. Every CTF flag captured and every vulnerability 
+          found is a step closer to understanding how to build more secure systems."
         </blockquote>
       </Card>
     </div>
   </div>
 </Section>
 
-<!-- CTA -->
+<!-- Current Focus -->
 <Section background="secondary">
+  <div class="focus-section">
+    <div class="section-header">
+      <h2 class="heading-2">What I'm Working On</h2>
+      <p class="text-lead">Current projects and learning goals</p>
+    </div>
+    
+    <div class="focus-grid">
+      <Card hover animate>
+        <div class="focus-item">
+          <div class="focus-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="heading-4">CTF Grinding</h3>
+          <p>Spending time on platforms like TryHackMe, HackTheBox, and PicoCTF to sharpen my skills and learn new attack vectors.</p>
+        </div>
+      </Card>
+      
+      <Card hover animate>
+        <div class="focus-item">
+          <div class="focus-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
+              <polyline points="7.5 19.79 7.5 14.6 3 12"/>
+              <polyline points="21 12 16.5 14.6 16.5 19.79"/>
+            </svg>
+          </div>
+          <h3 class="heading-4">Building Projects</h3>
+          <p>Creating web applications with SvelteKit and Firebase, always thinking about security from the ground up.</p>
+        </div>
+      </Card>
+      
+      <Card hover animate>
+        <div class="focus-item">
+          <div class="focus-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="21 21l-4.35-4.35"/>
+            </svg>
+          </div>
+          <h3 class="heading-4">Bug Bounty Learning</h3>
+          <p>Exploring the bug bounty world, understanding how to responsibly find and report vulnerabilities in real applications.</p>
+        </div>
+      </Card>
+    </div>
+  </div>
+</Section>
+
+<!-- CTA -->
+<Section background="primary">
   <div class="cta-section">
-    <h2 class="heading-2">Let's Connect</h2>
+    <h2 class="heading-2">Let's Connect!</h2>
     <p class="text-lead mb-8">
-      Whether you need security consultation, web development, or just want to chat about tech – I'm always open to new connections.
+      Always excited to connect with fellow learners, share knowledge, or just chat about tech, CTFs, or anything cybersecurity related!
     </p>
     <div class="cta-buttons">
       <Button href="/contact" size="lg">Get In Touch</Button>
-      <Button href="/projects" variant="secondary" size="lg">View My Work</Button>
+      <Button href="/projects" variant="secondary" size="lg">Check Out My Projects</Button>
     </div>
   </div>
 </Section>
@@ -364,6 +423,44 @@
     margin: 0;
   }
   
+  /* Focus Section */
+  .focus-section {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-6);
+  }
+  
+  .focus-item {
+    text-align: center;
+  }
+  
+  .focus-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-4);
+    background-color: var(--primary-600);
+    color: white;
+    border-radius: var(--radius-xl);
+    transition: transform var(--transition-base);
+  }
+  
+  .card:hover .focus-icon {
+    transform: scale(1.1);
+  }
+  
+  .focus-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  
   /* CTA */
   .cta-section {
     text-align: center;
@@ -422,6 +519,10 @@
     }
     
     .interests-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .focus-grid {
       grid-template-columns: 1fr;
     }
     

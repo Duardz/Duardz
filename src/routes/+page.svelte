@@ -19,12 +19,12 @@
   let terminalText = '';
   let terminalCursor = true;
   const fullText = `$ whoami
-> Cybersecurity enthusiast & Full-stack developer
-$ cat skills.txt
-> Penetration Testing | Web Security | Network Analysis
-> Python | JavaScript | React | Node.js
-$ ./start-journey.sh
-> Ready to secure the digital world...`;
+> Learning cybersecurity through CTFs & bug bounties
+$ cat current_focus.txt
+> Web Pentesting | CTF Challenges | Bug Bounty Hunting
+> SvelteKit | HTML/CSS/JS | Firebase | AI-Assisted Development
+$ ./learning-journey.sh
+> Building, breaking, and securing things...`;
   
   onMount(() => {
     let index = 0;
@@ -50,8 +50,8 @@ $ ./start-journey.sh
 </script>
 
 <svelte:head>
-  <title>Eduardo Camay III - Cybersecurity Professional & Developer</title>
-  <meta name="description" content="Aspiring cybersecurity professional with expertise in penetration testing, web security, and full-stack development.">
+  <title>DUARDZ - Cybersecurity Enthusiast & Developer</title>
+  <meta name="description" content="Self-taught cybersecurity enthusiast learning through CTFs and bug bounties, building cool stuff with SvelteKit.">
 </svelte:head>
 
 <!-- Hero Section -->
@@ -59,14 +59,14 @@ $ ./start-journey.sh
   <div class="hero">
     <div class="hero-content">
       <h1 class="hero-title animate-fadeIn">
-        Hi, I'm <span class="text-gradient">Eduardo</span>
+        Hi, I'm <span class="text-gradient">Duardz</span>
       </h1>
       <p class="hero-subtitle animate-fadeIn" style="animation-delay: 0.1s">
-        Aspiring Cybersecurity Professional & Full-Stack Developer
+        Cybersecurity Enthusiast & Self-Taught Developer
       </p>
       <p class="hero-description animate-fadeIn" style="animation-delay: 0.2s">
-        Passionate about securing digital infrastructure and building robust applications. 
-        Currently focused on penetration testing, network security, and modern web technologies.
+        I'm on a self-taught journey into cybersecurity, diving deep into CTF challenges and bug bounty hunting. 
+        I love building things with SvelteKit and exploring web pentesting. Always learning, always curious!
       </p>
       
       <div class="hero-terminal animate-fadeIn" style="animation-delay: 0.3s">
@@ -81,10 +81,10 @@ $ ./start-journey.sh
       
       <div class="hero-actions animate-fadeIn" style="animation-delay: 0.4s">
         <Button href="/projects" size="lg">
-          View My Projects
+          Check Out My Projects
         </Button>
         <Button href="/contact" variant="secondary" size="lg">
-          Get In Touch
+          Let's Connect
         </Button>
       </div>
     </div>
@@ -102,9 +102,9 @@ $ ./start-journey.sh
 <!-- Featured Projects -->
 <Section background="secondary">
   <div class="section-header">
-    <h2 class="heading-2">Featured Projects</h2>
+    <h2 class="heading-2">What I've Been Building</h2>
     <p class="text-lead">
-      Recent projects showcasing my skills in cybersecurity and web development
+      Projects I've worked on while learning cybersecurity and web development
     </p>
   </div>
   
@@ -116,7 +116,7 @@ $ ./start-journey.sh
   
   <div class="text-center">
     <Button href="/projects" variant="secondary">
-      View All Projects
+      See All My Projects
     </Button>
   </div>
 </Section>
@@ -124,9 +124,9 @@ $ ./start-journey.sh
 <!-- Skills & Expertise -->
 <Section background="primary">
   <div class="section-header">
-    <h2 class="heading-2">Skills</h2>
+    <h2 class="heading-2">What I'm Learning</h2>
     <p class="text-lead">
-      Building a strong foundation in both security and development
+      Currently diving into cybersecurity and web development - here's what I'm working with
     </p>
   </div>
   
@@ -138,13 +138,13 @@ $ ./start-journey.sh
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
-        <h3 class="heading-4">Cybersecurity</h3>
+        <h3 class="heading-4">Cybersecurity Learning</h3>
         <ul class="skill-list">
-          <li>Penetration Testing</li>
-          <li>Vulnerability Assessment</li>
-          <li>Network Security</li>
-          <li>Security Audits</li>
-          <li>Incident Response</li>
+          <li>CTF Challenges</li>
+          <li>Web Pentesting</li>
+          <li>Bug Bounty Hunting</li>
+          <li>Security Research</li>
+          <li>Ethical Hacking</li>
         </ul>
       </div>
     </Card>
@@ -157,13 +157,13 @@ $ ./start-journey.sh
             <polyline points="8 6 2 12 8 18"></polyline>
           </svg>
         </div>
-        <h3 class="heading-4">Development</h3>
+        <h3 class="heading-4">Development Stack</h3>
         <ul class="skill-list">
-          <li>Python & JavaScript</li>
-          <li>React & Node.js</li>
-          <li>API Development</li>
-          <li>Database Design</li>
-          <li>Cloud Services</li>
+          <li>SvelteKit</li>
+          <li>HTML/CSS/JavaScript</li>
+          <li>Firebase</li>
+          <li>Node.js & NPM</li>
+          <li>SEO Optimization</li>
         </ul>
       </div>
     </Card>
@@ -175,13 +175,13 @@ $ ./start-journey.sh
             <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
           </svg>
         </div>
-        <h3 class="heading-4">Tools</h3>
+        <h3 class="heading-4">Tools I Use</h3>
         <ul class="skill-list">
-          <li>Kali Linux</li>
-          <li>Wireshark</li>
-          <li>Burp Suite</li>
-          <li>Git & Docker</li>
-          <li>SIEM Tools</li>
+          <li>Git & GitHub</li>
+          <li>Figma</li>
+          <li>AI Code Generation</li>
+          <li>CTF Platforms</li>
+          <li>Bug Bounty Tools</li>
         </ul>
       </div>
     </Card>
@@ -191,9 +191,9 @@ $ ./start-journey.sh
 <!-- Certifications -->
 <Section background="secondary">
   <div class="section-header">
-    <h2 class="heading-2">Certifications</h2>
+    <h2 class="heading-2">Learning Journey</h2>
     <p class="text-lead">
-      Continuous learning through industry-recognized certifications
+      Courses and certifications I'm working through in my self-taught journey
     </p>
   </div>
   
@@ -233,7 +233,7 @@ $ ./start-journey.sh
   
   <div class="text-center">
     <Button href="/certificates" variant="secondary">
-      View All Certificates
+      See My Learning Path
     </Button>
   </div>
 </Section>
@@ -241,17 +241,17 @@ $ ./start-journey.sh
 <!-- CTA Section -->
 <Section size="lg" background="primary">
   <div class="cta">
-    <h2 class="heading-2 mb-4">Let's Work Together</h2>
+    <h2 class="heading-2 mb-4">Let's Connect!</h2>
     <p class="text-lead mb-8">
-      Looking for a cybersecurity professional or need help with a project?<br>
-      I'm available for freelance work and exciting opportunities.
+      Always excited to connect with fellow learners, share knowledge, or collaborate on projects.<br>
+      Whether you're into cybersecurity, web dev, or just want to chat about tech!
     </p>
     <div class="flex justify-center gap-4">
       <Button href="/contact" size="lg">
         Get In Touch
       </Button>
       <Button href="/about" variant="secondary" size="lg">
-        Learn More About Me
+        More About My Journey
       </Button>
     </div>
   </div>

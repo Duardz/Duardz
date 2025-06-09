@@ -52,7 +52,7 @@
 
 <svelte:head>
   {#if post}
-    <title>{post.title} - Eduardo Camay III</title>
+    <title>{post.title} - DUARDZ</title>
     <meta name="description" content={post.excerpt}>
     <meta property="og:title" content={post.title}>
     <meta property="og:description" content={post.excerpt}>
@@ -60,7 +60,7 @@
     <meta property="og:type" content="article">
     <meta name="twitter:card" content="summary_large_image">
   {:else}
-    <title>Post Not Found - Eduardo Camay III</title>
+    <title>Post Not Found - DUARDZ</title>
   {/if}
 </svelte:head>
 
@@ -84,7 +84,7 @@
         <img src={post.author.image} alt={post.author.name} class="author-image" />
         <div class="author-info">
           <span class="author-name">{post.author.name}</span>
-          <span class="author-role">Cybersecurity Professional</span>
+          <span class="author-role">Cybersecurity Enthusiast</span>
         </div>
       </div>
     </div>
