@@ -44,7 +44,7 @@
 </script>
 
 <svelte:head>
-  <title>About - Eduardo Camay III</title>
+  <title>About - DUARDZ</title>
   <meta name="description" content="Learn about my self-taught journey from web development to cybersecurity, my passion for CTFs and building things.">
 </svelte:head>
 
@@ -64,17 +64,16 @@
 <Section background="primary">
   <div class="about-content">
     <div class="content-grid">
-      <!-- Profile Image -->
+      <!-- Enhanced Profile Image -->
       <div class="profile-section">
-        <div class="profile-image-wrapper">
-          <img src="/images/profile.jpg" alt="Eduardo Camay III" class="profile-image" />
-          <div class="profile-decoration"></div>
+        <div class="profile-hexagon-wrapper">
+          <img src="/images/duardz-profile.jpg" alt="DUARDZ Profile" />
         </div>
       </div>
       
       <!-- Bio Content -->
       <div class="bio-section">
-        <h2 class="heading-2">Hello, I'm Eduardo 👋</h2>
+        <h2 class="heading-2">Hello, I'm Duardz 👋</h2>
         <div class="bio-text">
           <p>
             I'm a cybersecurity enthusiast who loves building things and figuring out how they work 
@@ -267,37 +266,91 @@
     align-items: start;
   }
   
-  /* Profile Section */
+  /* Enhanced Profile Section */
   .profile-section {
     position: sticky;
     top: calc(4rem + var(--space-8));
+    text-align: center;
   }
   
-  .profile-image-wrapper {
+  /* Cyberpunk Hexagon Profile */
+  .profile-hexagon-wrapper {
     position: relative;
-    display: inline-block;
-    aspect-ratio: 1 / 1;
-    width: 100%;
-    max-width: 300px;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    background: linear-gradient(45deg, var(--primary-600), var(--accent-600));
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: hexagon-glow 3s ease-in-out infinite alternate;
+    cursor: pointer;
+    transition: all var(--transition-base);
   }
 
-  
-  .profile-image {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-xl);
+  .profile-hexagon-wrapper:hover {
+    transform: scale(1.05);
+    animation-duration: 1.5s;
   }
-  
-  .profile-decoration {
+
+  .profile-hexagon-wrapper::before {
+    content: '';
     position: absolute;
-    inset: -20px;
-    background: linear-gradient(135deg, var(--primary-600), var(--accent-600));
-    border-radius: var(--radius-xl);
+    inset: 8px;
+    background: var(--bg-primary);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    z-index: 1;
+  }
+
+  .profile-hexagon-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: linear-gradient(45deg, 
+      transparent, var(--accent-400), transparent, 
+      var(--primary-400), transparent, var(--accent-600), transparent);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
     z-index: -1;
-    opacity: 0.3;
-    filter: blur(20px);
+    opacity: 0.5;
+    animation: hexagon-rotate 8s linear infinite;
+  }
+
+  .profile-hexagon-wrapper img {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    object-fit: cover;
+    z-index: 2;
+    transition: all var(--transition-base);
+  }
+
+  .profile-hexagon-wrapper:hover img {
+    filter: brightness(1.1) contrast(1.1);
+  }
+
+
+  @keyframes hexagon-glow {
+    from {
+      filter: drop-shadow(0 0 20px var(--primary-600)) 
+              drop-shadow(0 0 40px var(--accent-600));
+      transform: scale(1);
+    }
+    to {
+      filter: drop-shadow(0 0 30px var(--primary-400)) 
+              drop-shadow(0 0 60px var(--accent-400));
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes hexagon-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
   
   /* Bio Section */
@@ -451,11 +504,6 @@
     border-radius: var(--radius-xl);
     transition: transform var(--transition-base);
   }
-  
-  .card:hover .focus-icon {
-    transform: scale(1.1);
-  }
-  
   .focus-item p {
     color: var(--text-secondary);
     line-height: 1.6;
@@ -499,9 +547,18 @@
       text-align: center;
     }
     
-    .profile-image {
-      max-width: 250px;
+    .profile-hexagon-wrapper {
+      width: 240px;
+      height: 240px;
     }
+
+    .profile-hexagon-wrapper img {
+      width: calc(100% - 12px);
+      height: calc(100% - 12px);
+      top: 6px;
+      left: 6px;
+    }
+
   }
   
   @media (max-width: 768px) {
@@ -511,11 +568,6 @@
     
     .timeline-marker {
       left: -18px;
-    }
-    
-    .timeline-icon {
-      width: 36px;
-      height: 36px;
     }
     
     .interests-grid {
@@ -533,5 +585,18 @@
     .cta-buttons :global(.btn) {
       width: 100%;
     }
+
+    .profile-hexagon-wrapper {
+      width: 200px;
+      height: 200px;
+    }
+
+    .profile-hexagon-wrapper img {
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+      top: 5px;
+      left: 5px;
+    }
+
   }
 </style>
