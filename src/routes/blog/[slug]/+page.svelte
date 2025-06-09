@@ -480,14 +480,19 @@
   /* Author Bio Section - Enhanced Responsive Design */
   .author-bio {
     display: flex;
+    flex-direction: column;
     gap: var(--space-6);
-    align-items: flex-start;
+    align-items: center; /* center image and text horizontally */
+    justify-content: center; /* center vertically if needed */
+    text-align: center; /* center text inside content */
     padding: var(--space-6);
   }
+
   
   .bio-image {
     width: 100px;
     height: 100px;
+    align-self: center;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
@@ -531,7 +536,10 @@
     display: flex;
     gap: var(--space-3);
     flex-wrap: wrap;
+    justify-content: center; 
+    margin: 0 auto;
   }
+
   
   /* Related Posts - Responsive */
   .related-posts {
@@ -824,6 +832,7 @@
     
     .bio-links {
       flex-direction: column;
+      justify-content: center; 
       gap: var(--space-2);
       width: 100%;
       max-width: 240px;
