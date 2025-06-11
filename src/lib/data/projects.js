@@ -36,7 +36,7 @@ export const projects = [
     id: 'papa-juns-pos',
     title: "Papa Jun's POS",
     description:
-      'A simple yet functional point-of-sale system built using SvelteKit and Firebase. Designed for local businesses with a clean interface.',
+      'A lightweight point-of-sale system built with SvelteKit and Firebase, designed for small businesses. Currently, only the frontend is available for demo purposes. Users can request access to a full test environment with backend functionality.',
     featured: true,
     image: '/images/projects/papajuns-pos.jpg',
     technologies: ['SvelteKit', 'Tailwind', 'Vercel', 'Firebase'],
@@ -64,7 +64,40 @@ export const projects = [
       results:
         'A lightweight POS that’s fast, easy to use, and ready for real-world application.'
     }
+  },
+  {
+  id: 'power-zone',
+  title: 'Power Zone',
+  description:
+    'A gym website built with SvelteKit and Firebase, featuring membership registration, a modern admin dashboard, and responsive UI for mobile and desktop.',
+  featured: true,
+  image: '/images/projects/power-zone.jpg', // replace with your actual image path
+  technologies: ['SvelteKit', 'Tailwind', 'Firebase', 'Vercel'],
+  category: 'Website',
+  github: null, // update if private or not hosted
+  demo: 'https://power-zone.vercel.app/', // replace if different or coming soon
+  details: {
+    overview:
+      'Power Zone is a modern gym website focused on seamless user experience for both clients and admins. It includes features like contact forms, real-time data with Firebase, and an elegant design using Tailwind CSS.',
+    features: [
+      'Mobile-first responsive design',
+      'Membership and contact forms',
+      'Admin dashboard with Firebase integration',
+      'Animated UI with Tailwind transitions',
+      'Deployed on Vercel'
+    ],
+    techStack: [
+      'SvelteKit for building dynamic routes and components',
+      'Tailwind CSS for consistent and clean design',
+      'Firebase for real-time database and auth',
+      'Vercel for easy and fast deployment'
+    ],
+    challenges:
+      'Handling form validation, Firebase integration, and mobile responsiveness while keeping the experience smooth across devices.',
+    results:
+      'Launched a stylish, functional gym website that is ready for both customer engagement and admin use on mobile or desktop.'
   }
+}
 ];
 
 // Helper functions
