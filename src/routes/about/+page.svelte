@@ -9,170 +9,389 @@
   const journey = [
     {
       year: '2022',
-      title: 'Started My Tech Journey',
-      description: 'Enrolled in KodeGo bootcamp to learn web development, discovering my love for building things with code.',
-      icon: 'code'
+      title: 'The Spark',
+      description: 'Started getting curious about cybersecurity after watching some YouTube videos. Decided to dive deeper and began exploring online resources and communities.',
+      icon: 'power',
+      status: 'COMPLETED'
     },
     {
       year: '2023',
-      title: 'Completed Bootcamp & Started Building',
-      description: 'Graduated and began creating projects with SvelteKit, diving deep into modern web development.',
-      icon: 'graduate'
+      title: 'Learning to Code',
+      description: 'Jumped into web development through online courses and tutorials. Built my first websites and started understanding how the internet actually works.',
+      icon: 'code',
+      status: 'COMPLETED'
     },
     {
       year: '2024',
-      title: 'Discovered Cybersecurity',
-      description: 'Got fascinated by the security side of things - started learning about CTFs, web pentesting, and bug bounties.',
-      icon: 'shield'
+      title: 'Security Meets Development',
+      description: 'Started connecting the dots between coding and security. Began exploring CTF challenges and learning about web application vulnerabilities.',
+      icon: 'shield',
+      status: 'COMPLETED'
     },
     {
       year: '2025',
-      title: 'Deep Diving into Security',
-      description: 'Currently grinding through CTF challenges, learning web pentesting, and exploring the bug bounty world.',
-      icon: 'target'
+      title: 'Continuous Learning',
+      description: 'Currently balancing learning cybersecurity fundamentals with building cool projects. Every day brings something new to discover and understand.',
+      icon: 'target',
+      status: 'ACTIVE'
     }
   ];
   
-  const interests = [
-    'CTF Challenges',
-    'Web Pentesting',
-    'Bug Bounty Hunting',
-    'Building Cool Projects',
-    'AI-Assisted Coding',
-    'Learning New Things'
+  const learningAreas = [
+    { name: 'Web Development', color: '#00D4FF', status: 'Leading Projects at Work' },
+    { name: 'SvelteKit & Modern JS', color: '#9D4EDD', status: 'Building Real Applications' },
+    { name: 'Database Design', color: '#39FF14', status: 'Learning for Work Projects' },
+    { name: 'UI/UX Design', color: '#FF6B35', status: 'Improving Daily' },
+    { name: 'Basic Security Concepts', color: '#FFA500', status: 'Side Learning' },
+    { name: 'Problem Solving', color: '#FF073A', status: 'Always Improving' }
   ];
 </script>
 
 <svelte:head>
-  <title>About - DUARDZ</title>
-  <meta name="description" content="Learn about my self-taught journey from web development to cybersecurity, my passion for CTFs and building things.">
+  <title>About - DUARDZ | Learning Cybersecurity & Development</title>
+  <meta name="description" content="Self-taught cybersecurity enthusiast and web developer. Currently learning through online courses, CTF challenges, and building projects. Always curious and eager to grow!">
 </svelte:head>
 
 <!-- Hero Section -->
 <Section background="secondary">
   <div class="about-hero">
-    <div class="hero-content">
-      <h1 class="heading-1">About Me</h1>
-      <p class="hero-text">
-        A self-taught journey from building websites to understanding how to break (and secure) them.
-      </p>
+    <div class="hero-badge">
+      <div class="badge-pulse"></div>
+      <span>STUDENT STATUS: ALWAYS LEARNING</span>
     </div>
+    <h1 class="heading-1">MY LEARNING JOURNEY</h1>
+    <p class="hero-text">
+      Self-taught enthusiast exploring cybersecurity and web development, 
+      one tutorial and challenge at a time. Still figuring things out, but loving every minute of it!
+    </p>
   </div>
 </Section>
 
-<!-- Main Content -->
+<!-- Main Profile Section -->
 <Section background="primary">
-  <div class="about-content">
-    <div class="content-grid">
-      <!-- Enhanced Profile Image -->
-      <div class="profile-section">
-        <div class="profile-hexagon-wrapper">
-          <img src="/images/profile.jpg" alt="DUARDZ Profile" />
+  <div class="profile-section">
+    <div class="profile-grid">
+      <!-- Profile Display -->
+      <div class="profile-container">
+        <div class="profile-frame">
+          <div class="frame-corner tl"></div>
+          <div class="frame-corner tr"></div>
+          <div class="frame-corner bl"></div>
+          <div class="frame-corner br"></div>
+          <div class="scan-overlay"></div>
+          <img src="/images/profile.jpg" alt="DUARDZ - Learning Cybersecurity" class="profile-image" />
+          <div class="profile-status">
+            <div class="status-indicator learning"></div>
+            <span>LEARNING</span>
+          </div>
+        </div>
+        
+        <div class="profile-stats">
+          <div class="stat-item">
+            <div class="stat-value">3+</div>
+            <div class="stat-label">Years Curious</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">10+</div>
+            <div class="stat-label">Projects Built</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">∞</div>
+            <div class="stat-label">Things to Learn</div>
+          </div>
         </div>
       </div>
       
       <!-- Bio Content -->
       <div class="bio-section">
-        <h2 class="heading-2">Hello, I'm Duardz 👋</h2>
-        <div class="bio-text">
-          <p>
-            I'm a cybersecurity enthusiast who loves building things and figuring out how they work 
-            (and sometimes how they break). My journey started in 2022 when I decided to dive into 
-            web development through a bootcamp at KodeGo.
-          </p>
-          <p>
-            What started as learning to build websites quickly evolved into a fascination with the 
-            security side of things. I discovered CTF challenges, got hooked on web pentesting, and 
-            realized there's this whole world of ethical hacking and bug bounties out there.
-          </p>
-          <p>
-            I'm completely self-taught in the cybersecurity space, learning through hands-on CTFs, 
-            online resources, and lots of trial and error. I love combining my development background 
-            with security knowledge - understanding how things are built really helps when you're 
-            trying to find vulnerabilities.
-          </p>
-          <p>
-            When I'm not breaking things for educational purposes, I enjoy building projects with 
-            SvelteKit and experimenting with AI tools to speed up my coding. Always learning, 
-            always curious!
-          </p>
+        <div class="section-header">
+          <div class="header-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            LEARNER PROFILE
+          </div>
+          <h2 class="heading-2">Hey, I'm DUARDZ!</h2>
+        </div>
+        
+        <div class="bio-content">
+          <div class="bio-terminal">
+            <div class="terminal-header">
+              <div class="terminal-controls">
+                <span class="control active"></span>
+                <span class="control"></span>
+                <span class="control"></span>
+              </div>
+              <span class="terminal-title">learning_log.txt</span>
+            </div>
+            <div class="terminal-body">
+              <div class="log-entry">
+                <span class="timestamp">[2022]</span>
+                <span class="event">STATUS: Got curious about cybersecurity</span>
+              </div>
+              <div class="log-entry">
+                <span class="timestamp">[2023]</span>
+                <span class="event">PROGRESS: Started learning web development</span>
+              </div>
+              <div class="log-entry">
+                <span class="timestamp">[2024]</span>
+                <span class="event">MILESTONE: First CTF challenges attempted</span>
+              </div>
+              <div class="log-entry active">
+                <span class="timestamp">[NOW]</span>
+                <span class="event">CURRENT: Learning every day, building stuff!</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bio-text">
+            <p>
+              <strong>Current Status:</strong> Web development intern at Saint Patrick's Academy, where I'm leading the development 
+              of their enrollment and information website. It's my first real professional project and I'm learning so much!
+            </p>
+            <p>
+              <strong>What I Do:</strong> Working with modern web technologies, designing user interfaces, handling databases, 
+              and making sure everything works smoothly. Leading a project has taught me about planning, problem-solving, 
+              and communicating with stakeholders.
+            </p>
+            <p>
+              <strong>My Focus:</strong> Right now I'm all-in on web development - mastering the fundamentals while building 
+              real applications. Cybersecurity is still my long-term interest, but I'm focused on becoming really good at 
+              development first since that's where I can make the biggest impact right now.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </Section>
 
-<!-- Journey Timeline -->
+<!-- Learning Timeline -->
 <Section background="secondary">
-  <div class="section-header">
-    <h2 class="heading-2">My Learning Journey</h2>
-    <p class="text-lead">From curious beginner to security enthusiast</p>
-  </div>
-  
-  <div class="timeline">
-    {#each journey as milestone, i}
-      <div class="timeline-item" style="--delay: {i * 0.1}s">
-        <div class="timeline-marker">
-          <div class="timeline-icon">
-            {#if milestone.icon === 'code'}
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-              </svg>
-            {:else if milestone.icon === 'graduate'}
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-              </svg>
-            {:else if milestone.icon === 'shield'}
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            {:else if milestone.icon === 'target'}
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <circle cx="12" cy="12" r="6"/>
-                <circle cx="12" cy="12" r="2"/>
-              </svg>
-            {/if}
-          </div>
-        </div>
-        <Card animate>
-          <div class="timeline-content">
-            <span class="timeline-year">{milestone.year}</span>
-            <h3 class="timeline-title">{milestone.title}</h3>
-            <p class="timeline-description">{milestone.description}</p>
-          </div>
-        </Card>
-      </div>
-    {/each}
-  </div>
-</Section>
-
-<!-- Interests & Values -->
-<Section background="primary">
-  <div class="interests-section">
+  <div class="timeline-section">
     <div class="section-header">
-      <h2 class="heading-2">What I'm Into</h2>
-      <p class="text-lead">The things that keep me motivated and excited about tech</p>
+      <div class="header-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        LEARNING TIMELINE
+      </div>
+      <h2 class="heading-2">My Learning Path</h2>
+      <p class="text-lead">The journey so far - from curious beginner to... well, still a beginner, but a more informed one!</p>
     </div>
     
-    <div class="interests-grid">
-      {#each interests as interest}
-        <div class="interest-item">
-          <div class="interest-icon">✦</div>
-          <span>{interest}</span>
+    <div class="timeline">
+      {#each journey as milestone, i}
+        <div class="timeline-item" style="--delay: {i * 0.2}s">
+          <div class="timeline-marker">
+            <div class="marker-ring"></div>
+            <div class="marker-core">
+              {#if milestone.icon === 'power'}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
+                  <line x1="12" y1="2" x2="12" y2="12"/>
+                </svg>
+              {:else if milestone.icon === 'code'}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"/>
+                  <polyline points="8 6 2 12 8 18"/>
+                </svg>
+              {:else if milestone.icon === 'shield'}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              {:else if milestone.icon === 'target'}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+              {/if}
+            </div>
+          </div>
+          
+          <Card hover animate variant="cyber">
+            <div class="timeline-content">
+              <div class="content-header">
+                <div class="year-badge">{milestone.year}</div>
+                <div class="status-badge {milestone.status.toLowerCase()}">
+                  <div class="status-dot"></div>
+                  <span>{milestone.status}</span>
+                </div>
+              </div>
+              <h3 class="timeline-title">{milestone.title}</h3>
+              <p class="timeline-description">{milestone.description}</p>
+            </div>
+          </Card>
         </div>
       {/each}
     </div>
+  </div>
+</Section>
+
+<!-- Tech Stack & Tools -->
+<Section background="primary">
+  <div class="tech-section">
+    <div class="section-header">
+      <div class="header-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        TECH STACK
+      </div>
+      <h2 class="heading-2">Tools & Technologies</h2>
+      <p class="text-lead">The technologies I'm working with daily at Saint Patrick's Academy and in my personal projects</p>
+    </div>
     
-    <div class="values-content">
-      <Card>
-        <blockquote class="quote">
-          "I believe the best way to learn cybersecurity is by doing - breaking things, solving 
-          challenges, and getting your hands dirty. Every CTF flag captured and every vulnerability 
-          found is a step closer to understanding how to build more secure systems."
-        </blockquote>
+    <div class="tech-categories">
+      <!-- Frontend -->
+      <Card hover animate variant="glass">
+        <div class="tech-category">
+          <div class="category-header">
+            <div class="category-icon frontend">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <h3 class="category-title">Frontend Development</h3>
+          </div>
+          <div class="tech-items">
+            <div class="tech-item">
+              <div class="tech-dot primary"></div>
+              <span>SvelteKit</span>
+              <div class="tech-badge">Main Framework</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot primary"></div>
+              <span>TypeScript</span>
+              <div class="tech-badge">Daily Use</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot primary"></div>
+              <span>Tailwind CSS</span>
+              <div class="tech-badge">Styling</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot secondary"></div>
+              <span>Responsive Design</span>
+              <div class="tech-badge">Mobile-First</div>
+            </div>
+          </div>
+        </div>
+      </Card>
+      
+      <!-- Backend & Database -->
+      <Card hover animate variant="glass">
+        <div class="tech-category">
+          <div class="category-header">
+            <div class="category-icon backend">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h3 class="category-title">Backend & Database</h3>
+          </div>
+          <div class="tech-items">
+            <div class="tech-item">
+              <div class="tech-dot primary"></div>
+              <span>Firebase</span>
+              <div class="tech-badge">Backend Platform</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot primary"></div>
+              <span>Firestore</span>
+              <div class="tech-badge">Database</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot primary"></div>
+              <span>Firebase Auth</span>
+              <div class="tech-badge">Authentication</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot secondary"></div>
+              <span>AES Encryption</span>
+              <div class="tech-badge">Data Security</div>
+            </div>
+          </div>
+        </div>
+      </Card>
+      
+      <!-- Tools & Workflow -->
+      <Card hover animate variant="glass">
+        <div class="tech-category">
+          <div class="category-header">
+            <div class="category-icon tools">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <h3 class="category-title">Tools & Workflow</h3>
+          </div>
+          <div class="tech-items">
+            <div class="tech-item">
+              <div class="tech-dot primary"></div>
+              <span>Git & GitHub</span>
+              <div class="tech-badge">Version Control</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot primary"></div>
+              <span>Figma</span>
+              <div class="tech-badge">Design & Prototyping</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot primary"></div>
+              <span>Claude AI</span>
+              <div class="tech-badge">Code Generation</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot secondary"></div>
+              <span>VS Code</span>
+              <div class="tech-badge">Development</div>
+            </div>
+          </div>
+        </div>
+      </Card>
+      
+      <!-- Learning & Interests -->
+      <Card hover animate variant="glass">
+        <div class="tech-category">
+          <div class="category-header">
+            <div class="category-icon learning">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3 class="category-title">Security & Best Practices</h3>
+          </div>
+          <div class="tech-items">
+            <div class="tech-item">
+              <div class="tech-dot primary"></div>
+              <span>Data Encryption</span>
+              <div class="tech-badge">User Privacy</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot secondary"></div>
+              <span>Secure Authentication</span>
+              <div class="tech-badge">Firebase Auth</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot learning"></div>
+              <span>Web Security</span>
+              <div class="tech-badge">Learning</div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-dot learning"></div>
+              <span>Performance Optimization</span>
+              <div class="tech-badge">Improving</div>
+            </div>
+          </div>
+        </div>
       </Card>
     </div>
   </div>
@@ -182,178 +401,534 @@
 <Section background="secondary">
   <div class="focus-section">
     <div class="section-header">
+      <div class="header-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+        </svg>
+        CURRENT FOCUS
+      </div>
       <h2 class="heading-2">What I'm Working On</h2>
-      <p class="text-lead">Current projects and learning goals</p>
+      <p class="text-lead">Here's what's keeping me busy these days - always juggling learning with building!</p>
     </div>
     
     <div class="focus-grid">
-      <Card hover animate>
-        <div class="focus-item">
+      <Card hover animate variant="glow">
+        <div class="focus-card">
           <div class="focus-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-          </div>
-          <h3 class="heading-4">CTF Grinding</h3>
-          <p>Spending time on platforms like TryHackMe, HackTheBox, and PicoCTF to sharpen my skills and learn new attack vectors.</p>
-        </div>
-      </Card>
-      
-      <Card hover animate>
-        <div class="focus-item">
-          <div class="focus-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-              <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
-              <polyline points="7.5 19.79 7.5 14.6 3 12"/>
-              <polyline points="21 12 16.5 14.6 16.5 19.79"/>
-            </svg>
-          </div>
-          <h3 class="heading-4">Building Projects</h3>
-          <p>Creating web applications with SvelteKit and Firebase, always thinking about security from the ground up.</p>
-        </div>
-      </Card>
-      
-      <Card hover animate>
-        <div class="focus-item">
-          <div class="focus-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8"/>
-              <path d="21 21l-4.35-4.35"/>
+              <path d="m21 21-4.35-4.35"/>
             </svg>
+            <div class="icon-pulse"></div>
           </div>
-          <h3 class="heading-4">Bug Bounty Learning</h3>
-          <p>Exploring the bug bounty world, understanding how to responsibly find and report vulnerabilities in real applications.</p>
+          <h3 class="heading-4">Learning Web Security</h3>
+          <p class="focus-description">
+            Working through OWASP Top 10, trying to understand common vulnerabilities. 
+            It's fascinating (and a bit scary) how many ways things can go wrong!
+          </p>
+          <div class="focus-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 40%"></div>
+            </div>
+            <span class="progress-text">Still Learning...</span>
+          </div>
+        </div>
+      </Card>
+      
+      <Card hover animate variant="glow">
+        <div class="focus-card">
+          <div class="focus-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+            <div class="icon-pulse"></div>
+          </div>
+          <h3 class="heading-4">Building Cool Stuff</h3>
+          <p class="focus-description">
+            Creating projects with SvelteKit and other modern tools. Each project teaches me 
+            something new about development and helps solidify what I've learned.
+          </p>
+          <div class="focus-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+            <span class="progress-text">Always Building</span>
+          </div>
+        </div>
+      </Card>
+      
+      <Card hover animate variant="glow">
+        <div class="focus-card">
+          <div class="focus-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12l2 2 4-4"/>
+              <circle cx="12" cy="12" r="9"/>
+            </svg>
+            <div class="icon-pulse"></div>
+          </div>
+          <h3 class="heading-4">CTF Challenges</h3>
+          <p class="focus-description">
+            Slowly working through beginner CTF challenges. They're tough but super rewarding 
+            when you finally crack them. Each solve feels like a small victory!
+          </p>
+          <div class="focus-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 30%"></div>
+            </div>
+            <span class="progress-text">One Flag at a Time</span>
+          </div>
         </div>
       </Card>
     </div>
   </div>
 </Section>
 
-<!-- CTA -->
+<!-- Learning Philosophy -->
 <Section background="primary">
-  <div class="cta-section">
-    <h2 class="heading-2">Let's Connect!</h2>
-    <p class="text-lead mb-8">
-      Always excited to connect with fellow learners, share knowledge, or just chat about tech, CTFs, or anything cybersecurity related!
-    </p>
-    <div class="cta-buttons">
-      <Button href="/contact" size="lg">Get In Touch</Button>
-      <Button href="/projects" variant="secondary" size="lg">Check Out My Projects</Button>
+  <div class="philosophy-section">
+    <div class="section-header">
+      <div class="header-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9-9 9-9-1.8-9-9 1.8-9 9-9"/>
+          <path d="M12 9v4"/>
+          <path d="M12 17h.01"/>
+        </svg>
+        LEARNING MINDSET
+      </div>
+      <h2 class="heading-2">How I Approach Learning</h2>
     </div>
+    
+    <div class="philosophy-grid">
+      <Card hover variant="glass">
+        <div class="philosophy-item">
+          <div class="philosophy-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <h3 class="philosophy-title">Learning by Doing</h3>
+          <p class="philosophy-text">
+            I learn best when I'm actually building or breaking things. Reading is great, 
+            but nothing beats hands-on experience and making mistakes!
+          </p>
+        </div>
+      </Card>
+      
+      <Card hover variant="glass">
+        <div class="philosophy-item">
+          <div class="philosophy-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8 2v4"/>
+              <path d="M16 2v4"/>
+              <rect width="18" height="18" x="3" y="4" rx="2"/>
+              <path d="M3 10h18"/>
+            </svg>
+          </div>
+          <h3 class="philosophy-title">Consistency Over Intensity</h3>
+          <p class="philosophy-text">
+            I try to learn something new every day, even if it's just for 30 minutes. 
+            Small, consistent steps add up to big progress over time.
+          </p>
+        </div>
+      </Card>
+      
+      <Card hover variant="glass">
+        <div class="philosophy-item">
+          <div class="philosophy-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+              <rect width="8" height="4" x="8" y="2" rx="1"/>
+            </svg>
+          </div>
+          <h3 class="philosophy-title">Document Everything</h3>
+          <p class="philosophy-text">
+            I write down what I learn, take notes, and build projects to remember concepts. 
+            If I don't document it, I'll probably forget it next week!
+          </p>
+        </div>
+      </Card>
+      
+      <Card hover variant="glass">
+        <div class="philosophy-item">
+          <div class="philosophy-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="philosophy-title">Community Learning</h3>
+          <p class="philosophy-text">
+            The cybersecurity and dev communities are amazing! I learn so much from forums, 
+            Discord servers, and just talking to other learners and professionals.
+          </p>
+        </div>
+      </Card>
+    </div>
+  </div>
+</Section>
+
+<!-- Call to Action -->
+<Section background="secondary">
+  <div class="cta-section">
+    <Card variant="cyber">
+      <div class="cta-content">
+        <div class="cta-badge">
+          <div class="badge-scan"></div>
+          <span>ALWAYS OPEN TO CONNECT</span>
+        </div>
+        
+        <h2 class="heading-2">Let's Learn Together!</h2>
+        <p class="text-lead">
+          I'm always excited to connect with fellow learners, students, or anyone passionate 
+          about cybersecurity and development. Whether you're just starting out or you're an expert 
+          who can teach me something new!
+        </p>
+        
+        <div class="cta-features">
+          <div class="feature-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12l2 2 4-4"/>
+              <circle cx="12" cy="12" r="9"/>
+            </svg>
+            <span>Love Learning from Others</span>
+          </div>
+          <div class="feature-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12l2 2 4-4"/>
+              <circle cx="12" cy="12" r="9"/>
+            </svg>
+            <span>Happy to Share What I Know</span>
+          </div>
+          <div class="feature-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12l2 2 4-4"/>
+              <circle cx="12" cy="12" r="9"/>
+            </svg>
+            <span>Always Up for Collaboration</span>
+          </div>
+        </div>
+        
+        <div class="cta-buttons">
+          <Button href="/contact" size="lg" variant="primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Let's Chat!
+          </Button>
+          <Button href="/projects" size="lg" variant="secondary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            Check Out My Projects
+          </Button>
+        </div>
+      </div>
+    </Card>
   </div>
 </Section>
 
 <style>
-  /* Hero */
+  /* Hero Section */
   .about-hero {
     text-align: center;
-    padding: var(--space-8) 0;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .hero-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-6);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-full);
+    color: var(--neon-cyan);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    margin-bottom: var(--space-6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    overflow: hidden;
+  }
+  
+  .badge-pulse {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-primary);
+    opacity: 0.1;
+    animation: pulse 2s ease-in-out infinite;
   }
   
   .hero-text {
     font-size: var(--text-xl);
     color: var(--text-secondary);
+    line-height: 1.7;
     max-width: 600px;
     margin: 0 auto;
   }
   
-  /* Content Grid */
-  .content-grid {
+  /* Profile Section */
+  .profile-section {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .profile-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: var(--space-12);
+    grid-template-columns: 400px 1fr;
+    gap: var(--space-16);
     align-items: start;
   }
   
-  /* Enhanced Profile Section */
-  .profile-section {
+  .profile-container {
     position: sticky;
     top: calc(4rem + var(--space-8));
-    text-align: center;
   }
   
-  /* Cyberpunk Hexagon Profile */
-  .profile-hexagon-wrapper {
+  .profile-frame {
     position: relative;
     width: 300px;
     height: 300px;
-    margin: 0 auto;
-    background: linear-gradient(45deg, var(--primary-600), var(--accent-600));
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    margin: 0 auto var(--space-8);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+  
+  .frame-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--neon-cyan);
+  }
+  
+  .frame-corner.tl {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  .frame-corner.tr {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+  }
+  
+  .frame-corner.bl {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+  }
+  
+  .frame-corner.br {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+  }
+  
+  .scan-overlay {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 212, 255, 0.1) 2px,
+      rgba(0, 212, 255, 0.1) 4px
+    );
+    animation: scan 3s linear infinite;
+  }
+  
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.1) brightness(0.9);
+  }
+  
+  .profile-status {
+    position: absolute;
+    bottom: var(--space-4);
+    right: var(--space-4);
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    animation: hexagon-glow 3s ease-in-out infinite alternate;
-    cursor: pointer;
-    transition: all var(--transition-base);
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
-
-  .profile-hexagon-wrapper:hover {
-    transform: scale(1.05);
-    animation-duration: 1.5s;
+  
+  .status-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--neon-cyan);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
   }
-
-  .profile-hexagon-wrapper::before {
-    content: '';
-    position: absolute;
-    inset: 8px;
-    background: var(--bg-primary);
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-    z-index: 1;
+  
+  .status-indicator.learning {
+    background: var(--neon-cyan);
   }
-
-  .profile-hexagon-wrapper::after {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    background: linear-gradient(45deg, 
-      transparent, var(--accent-400), transparent, 
-      var(--primary-400), transparent, var(--accent-600), transparent);
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-    z-index: -1;
-    opacity: 0.5;
-    animation: hexagon-rotate 8s linear infinite;
+  
+  .profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
   }
-
-  .profile-hexagon-wrapper img {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-    width: calc(100% - 16px);
-    height: calc(100% - 16px);
-    object-fit: cover;
-    z-index: 2;
-    transition: all var(--transition-base);
+  
+  .stat-item {
+    text-align: center;
+    padding: var(--space-4);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
   }
-
-  .profile-hexagon-wrapper:hover img {
-    filter: brightness(1.1) contrast(1.1);
+  
+  .stat-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--neon-cyan);
+    line-height: 1;
+    margin-bottom: var(--space-1);
   }
-
-
-  @keyframes hexagon-glow {
-    from {
-      filter: drop-shadow(0 0 20px var(--primary-600)) 
-              drop-shadow(0 0 40px var(--accent-600));
-      transform: scale(1);
-    }
-    to {
-      filter: drop-shadow(0 0 30px var(--primary-400)) 
-              drop-shadow(0 0 60px var(--accent-400));
-      transform: scale(1.02);
-    }
+  
+  .stat-label {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
-
-  @keyframes hexagon-rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  
+  /* Section Headers */
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+  
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    margin-bottom: var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
   
   /* Bio Section */
+  .bio-section {
+    max-width: 800px;
+  }
+  
+  .bio-terminal {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    margin-bottom: var(--space-8);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .terminal-header {
+    background: var(--bg-tertiary);
+    padding: var(--space-3) var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .terminal-controls {
+    display: flex;
+    gap: var(--space-2);
+  }
+  
+  .control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  
+  .control.active {
+    background: var(--neon-cyan);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  .terminal-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+  
+  .terminal-body {
+    padding: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+  
+  .log-entry {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+    opacity: 0.7;
+    transition: opacity var(--transition-base);
+  }
+  
+  .log-entry.active {
+    opacity: 1;
+    color: var(--neon-cyan);
+  }
+  
+  .timestamp {
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+  
+  .event {
+    color: var(--text-secondary);
+  }
+  
+  .log-entry.active .event {
+    color: var(--neon-cyan);
+  }
+  
   .bio-text {
     display: flex;
     flex-direction: column;
@@ -363,157 +938,461 @@
   .bio-text p {
     color: var(--text-secondary);
     line-height: 1.8;
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
+  }
+  
+  .bio-text strong {
+    color: var(--neon-cyan);
+    font-weight: 600;
   }
   
   /* Timeline */
+  .timeline-section {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
   .timeline {
     position: relative;
-    padding-left: var(--space-8);
+    padding-left: var(--space-12);
   }
   
   .timeline::before {
     content: '';
     position: absolute;
-    left: 15px;
+    left: 20px;
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, var(--primary-600), var(--accent-600));
+    background: var(--gradient-primary);
   }
   
   .timeline-item {
     position: relative;
-    margin-bottom: var(--space-8);
-    animation: fadeIn 0.6s ease-out backwards;
+    margin-bottom: var(--space-12);
+    animation: slideInRight 0.8s ease-out backwards;
     animation-delay: var(--delay);
   }
   
   .timeline-marker {
     position: absolute;
-    left: -23px;
+    left: -32px;
     top: 0;
-  }
-  
-  .timeline-icon {
-    width: 48px;
-    height: 48px;
-    background-color: var(--surface);
-    border: 2px solid var(--primary-600);
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-400);
+  }
+  
+  .marker-ring {
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--border-glow);
+    border-radius: 50%;
+    background: var(--bg-primary);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  .marker-core {
+    position: relative;
+    z-index: 1;
+    color: var(--neon-cyan);
   }
   
   .timeline-content {
-    padding-left: var(--space-6);
+    padding: var(--space-6);
   }
   
-  .timeline-year {
-    font-size: var(--text-sm);
-    color: var(--primary-400);
+  .content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+  }
+  
+  .year-badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--neon-cyan);
+    padding: var(--space-2) var(--space-4);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-lg);
+  }
+  
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .status-badge.completed {
+    background: rgba(57, 255, 20, 0.1);
+    color: var(--success);
+    border: 1px solid var(--success);
+  }
+  
+  .status-badge.active {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--neon-cyan);
+    border: 1px solid var(--neon-cyan);
+  }
+  
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 2s ease-in-out infinite;
   }
   
   .timeline-title {
     font-size: var(--text-xl);
     font-weight: 600;
-    margin: var(--space-2) 0;
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
   }
   
   .timeline-description {
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
   }
   
-  /* Interests */
-  .interests-section {
-    max-width: 800px;
+  /* Tech Stack Section */
+  .tech-section {
+    max-width: 1200px;
     margin: 0 auto;
   }
   
-  .interests-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-4);
-    margin: var(--space-8) 0;
-  }
-  
-  .interest-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4);
-    background-color: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
-  }
-  
-  .interest-item:hover {
-    border-color: var(--primary-600);
-    transform: translateY(-2px);
-  }
-  
-  .interest-icon {
-    color: var(--primary-400);
-    font-size: var(--text-xl);
-  }
-  
-  .values-content {
-    margin-top: var(--space-8);
-  }
-  
-  .quote {
-    font-size: var(--text-xl);
-    line-height: 1.8;
-    color: var(--text-secondary);
-    font-style: italic;
-    border-left: 4px solid var(--primary-600);
-    padding-left: var(--space-6);
-    margin: 0;
-  }
-  
-  /* Focus Section */
-  .focus-section {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  
-  .focus-grid {
+  .tech-categories {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-6);
   }
   
-  .focus-item {
-    text-align: center;
+  .tech-category {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   
-  .focus-icon {
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .category-icon {
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto var(--space-4);
-    background-color: var(--primary-600);
-    color: white;
-    border-radius: var(--radius-xl);
-    transition: transform var(--transition-base);
-  }
-  .focus-item p {
-    color: var(--text-secondary);
-    line-height: 1.6;
+    border-radius: var(--radius-lg);
+    border: 2px solid;
   }
   
-  /* CTA */
-  .cta-section {
-    text-align: center;
-    max-width: 600px;
+  .category-icon.frontend {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+  }
+  
+  .category-icon.backend {
+    background: rgba(157, 78, 221, 0.1);
+    border-color: var(--neon-purple);
+    color: var(--neon-purple);
+  }
+  
+  .category-icon.tools {
+    background: rgba(255, 107, 53, 0.1);
+    border-color: var(--cyber-orange);
+    color: var(--cyber-orange);
+  }
+  
+  .category-icon.learning {
+    background: rgba(57, 255, 20, 0.1);
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+  }
+  
+  .category-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .tech-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex: 1;
+  }
+  
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+  }
+  
+  .tech-item:hover {
+    background: var(--surface-hover);
+    transform: translateX(4px);
+  }
+  
+  .tech-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  .tech-dot.primary {
+    background: var(--neon-cyan);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+  }
+  
+  .tech-dot.secondary {
+    background: var(--neon-green);
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+  }
+  
+  .tech-dot.learning {
+    background: var(--cyber-orange);
+    box-shadow: 0 0 8px rgba(255, 107, 53, 0.4);
+  }
+  
+  .tech-item span {
+    flex: 1;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  
+  .tech-badge {
+    padding: var(--space-1) var(--space-2);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Focus Section */
+  .focus-section {
+    max-width: 1200px;
     margin: 0 auto;
+  }
+  
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-8);
+  }
+  
+  .focus-card {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .focus-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto var(--space-6);
+    color: var(--neon-cyan);
+  }
+  
+  .icon-pulse {
+    position: absolute;
+    inset: -12px;
+    border: 2px solid var(--neon-cyan);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: icon-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes icon-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.6; }
+  }
+  
+  .focus-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-6);
+    flex: 1;
+  }
+  
+  .focus-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    justify-content: center;
+  }
+  
+  .status-text {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .status-dot.active {
+    background: var(--success);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  .status-dot.learning {
+    background: var(--neon-cyan);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  .status-dot.side {
+    background: var(--neon-purple);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  /* Philosophy Section */
+  .philosophy-section {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-6);
+  }
+  
+  .philosophy-item {
+    text-align: center;
+    padding: var(--space-6);
+  }
+  
+  .philosophy-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--space-4);
+    color: var(--neon-purple);
+    background: rgba(157, 78, 221, 0.1);
+    border: 1px solid var(--neon-purple);
+    border-radius: var(--radius-xl);
+  }
+  
+  .philosophy-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+  }
+  
+  .philosophy-text {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: var(--text-sm);
+  }
+  
+  /* CTA Section */
+  .cta-section {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .cta-content {
+    text-align: center;
+    padding: var(--space-8);
+  }
+  
+  .cta-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-6);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    margin-bottom: var(--space-6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    overflow: hidden;
+  }
+  
+  .badge-scan {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 4px,
+      rgba(0, 212, 255, 0.1) 4px,
+      rgba(0, 212, 255, 0.1) 8px
+    );
+    animation: scan-horizontal 3s linear infinite;
+  }
+  
+  @keyframes scan-horizontal {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .cta-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin: var(--space-8) 0;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+  }
+  
+  .feature-item svg {
+    color: var(--success);
+    flex-shrink: 0;
   }
   
   .cta-buttons {
@@ -523,80 +1402,127 @@
     flex-wrap: wrap;
   }
   
-  /* Section Headers */
-  .section-header {
-    text-align: center;
-    margin-bottom: var(--space-8);
-  }
-  
-  .section-header .text-lead {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  /* Responsive */
+  /* Responsive Design */
   @media (max-width: 1024px) {
-    .content-grid {
+    .profile-grid {
       grid-template-columns: 1fr;
       gap: var(--space-8);
     }
     
-    .profile-section {
+    .profile-container {
       position: relative;
       top: 0;
       text-align: center;
     }
     
-    .profile-hexagon-wrapper {
-      width: 240px;
-      height: 240px;
+    .profile-frame {
+      width: 250px;
+      height: 250px;
     }
-
-    .profile-hexagon-wrapper img {
-      width: calc(100% - 12px);
-      height: calc(100% - 12px);
-      top: 6px;
-      left: 6px;
+    
+    .profile-stats {
+      max-width: 400px;
+      margin: 0 auto;
     }
-
   }
   
   @media (max-width: 768px) {
     .timeline {
-      padding-left: var(--space-6);
+      padding-left: var(--space-8);
+    }
+    
+    .timeline::before {
+      left: 15px;
     }
     
     .timeline-marker {
-      left: -18px;
+      left: -27px;
+      width: 30px;
+      height: 30px;
     }
     
-    .interests-grid {
-      grid-template-columns: 1fr;
+    .tech-categories {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-4);
     }
     
     .focus-grid {
       grid-template-columns: 1fr;
     }
     
+    .philosophy-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
     .cta-buttons {
       flex-direction: column;
+      align-items: center;
     }
     
     .cta-buttons :global(.btn) {
       width: 100%;
+      max-width: 300px;
     }
-
-    .profile-hexagon-wrapper {
+  }
+  
+  @media (max-width: 480px) {
+    .profile-frame {
       width: 200px;
       height: 200px;
     }
-
-    .profile-hexagon-wrapper img {
-      width: calc(100% - 10px);
-      height: calc(100% - 10px);
-      top: 5px;
-      left: 5px;
+    
+    .profile-stats {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
     }
-
+    
+    .bio-terminal {
+      margin: 0 -var(--space-2) var(--space-6);
+    }
+    
+    .timeline-content {
+      padding: var(--space-4);
+    }
+    
+    .content-header {
+      flex-direction: column;
+      gap: var(--space-2);
+      align-items: flex-start;
+    }
+    
+    .cta-content {
+      padding: var(--space-6);
+    }
+    
+    .philosophy-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .philosophy-item {
+      padding: var(--space-4);
+    }
+  }
+  
+  /* Performance optimizations */
+  @media (prefers-reduced-motion: reduce) {
+    .badge-pulse,
+    .scan-overlay,
+    .status-indicator,
+    .marker-ring,
+    .status-dot,
+    .icon-pulse,
+    .skill-progress,
+    .progress-fill,
+    .badge-scan {
+      animation: none !important;
+    }
+    
+    .timeline-item {
+      animation: none !important;
+    }
+    
+    .skill-item {
+      animation: none !important;
+    }
   }
 </style>

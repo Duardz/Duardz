@@ -33,400 +33,502 @@
     searchQuery = '';
   }
 
-  // Whiskers the cat functionality
-  // @ts-ignore
-  let catElement;
-  let isAnimating = false;
-  let currentMessage = '';
-  let showSpeechBubble = false;
-  let catMood = 'happy'; // happy, sleepy, excited, thinking
-
-  const catMessages = [
-    { text: "Keep calm and code on! 💻", mood: 'happy' },
-    { text: "Need a break? I'm here to cheer you up! 😸", mood: 'happy' },
-    { text: "Did you know cats are expert debuggers? 🐛", mood: 'excited' },
-    { text: "Purr-fect code comes from practice! ✨", mood: 'happy' },
-    { text: "Time for a coffee break? ☕", mood: 'sleepy' },
-    { text: "I spot a bug in your code... just kidding! 😹", mood: 'excited' },
-    { text: "Remember to git commit your work! 🔄", mood: 'thinking' },
-    { text: "Meow-nificent coding skills! 🌟", mood: 'excited' },
-    { text: "404: Treats not found 🍪", mood: 'thinking' },
-    { text: "Console.log('Hello human!') 👋", mood: 'happy' },
-    { text: "Coding is better with a cat by your side! 🐱", mood: 'happy' },
-    { text: "Have you tried turning it off and on again? 🔌", mood: 'thinking' },
-    { text: "Purr-haps you need a code review? 📝", mood: 'thinking' },
-    { text: "*yawns* Late night coding session? 🌙", mood: 'sleepy' },
-    { text: "My favorite framework? Scratch.js! 😸", mood: 'excited' }
-  ];
-
-  function handleCatClick() {
-    if (isAnimating) return;
-    
-    isAnimating = true;
-    const messageObj = catMessages[Math.floor(Math.random() * catMessages.length)];
-    currentMessage = messageObj.text;
-    catMood = messageObj.mood;
-    showSpeechBubble = true;
-
-    // Add animation class
-    // @ts-ignore
-    if (catElement) {
-      catElement.classList.add('bounce');
-      setTimeout(() => {
-        // @ts-ignore
-        catElement?.classList.remove('bounce');
-      }, 600);
-    }
-
-    // Play meow sound
-    playMeowSound();
-
-    // Hide speech bubble after 3 seconds
-    setTimeout(() => {
-      showSpeechBubble = false;
-      isAnimating = false;
-      catMood = 'happy';
-    }, 3000);
-  }
-
-  function playMeowSound() {
-    try {
-      // @ts-ignore
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-      
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-      
-      // Create a more realistic meow sound
-      oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.1);
-      oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.3);
-      
-      gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
-      
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.4);
-    } catch (error) {
-      console.log('Audio not supported:', error);
-    }
-  }
-
+  // Cyber elements animation
+  let heroSection;
+  
   onMount(() => {
-    // Random idle animations
-    const idleInterval = setInterval(() => {
-      // @ts-ignore
-      if (!isAnimating && catElement) {
-        const randomAction = Math.random();
-        if (randomAction < 0.2) {
-          // Blink
-          catElement.classList.add('blink');
-          // @ts-ignore
-          setTimeout(() => catElement?.classList.remove('blink'), 300);
-        } else if (randomAction < 0.4) {
-          // Tail wag
-          catElement.classList.add('tail-wag');
-          // @ts-ignore
-          setTimeout(() => catElement?.classList.remove('tail-wag'), 1000);
-        } else if (randomAction < 0.5) {
-          // Ear twitch
-          catElement.classList.add('ear-twitch');
-          // @ts-ignore
-          setTimeout(() => catElement?.classList.remove('ear-twitch'), 500);
-        }
-      }
-    }, 3000 + Math.random() * 4000);
-
-    return () => clearInterval(idleInterval);
+    // Add some interactive animations here if needed
   });
 </script>
 
 <svelte:head>
-  <title>Blog - Eduardo Camay III</title>
-  <meta name="description" content="Insights on cybersecurity, threat intelligence, and security best practices from an aspiring security professional.">
+  <title>Cyber Insights - DUARDZ</title>
+  <meta name="description" content="Explore cybersecurity insights, threat analysis, penetration testing techniques, and security best practices from a cybersecurity enthusiast.">
 </svelte:head>
 
 <!-- Hero Section -->
-<Section background="secondary">
-  <div class="blog-hero">
-    <h1 class="heading-1">Security Insights</h1>
-    <p class="hero-text">
-      Exploring cybersecurity trends, threat analysis, and best practices
-      for building secure digital infrastructure.
-    </p>
-  </div>
-</Section>
-
-<!-- Filters Section -->
-<Section size="sm" background="primary">
-  <div class="filters">
-    <!-- Search -->
-    <div class="search-wrapper">
-      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="11" cy="11" r="8"/>
-        <path d="m21 21-4.35-4.35"/>
-      </svg>
-      <input
-        type="text"
-        bind:value={searchQuery}
-        placeholder="Search articles..."
-        class="input search-input"
-      />
+<Section size="lg" background="primary">
+  <div class="blog-hero" bind:this={heroSection}>
+    <!-- Animated Background -->
+    <div class="hero-background">
+      <div class="cyber-grid"></div>
+      <div class="security-elements">
+        <div class="security-icon icon-1">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="security-icon icon-2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <circle cx="12" cy="16" r="1"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <div class="security-icon icon-3">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+          </svg>
+        </div>
+      </div>
     </div>
     
-    <!-- Category Pills -->
-    <div class="category-pills">
-      {#each categories as category}
-        <button
-          class="category-pill"
-          class:active={selectedCategory === category}
-          on:click={() => selectedCategory = category}
-        >
-          {category}
-        </button>
-      {/each}
-    </div>
-    
-    {#if selectedCategory !== 'All' || searchQuery}
-      <Button variant="ghost" size="sm" on:click={clearFilters}>
-        Clear Filters
-      </Button>
-    {/if}
-  </div>
-  
-  <div class="filter-results">
-    {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'} found
-  </div>
-</Section>
-
-<!-- Blog Posts Grid -->
-<Section background="primary">
-  {#if sortedPosts.length > 0}
-    <div class="blog-grid">
-      {#each sortedPosts as post, i}
-        <a href="/blog/{post.slug}" class="blog-link">
-          <Card hover animate>
-            <article class="blog-card">
-              {#if post.featured}
-                <span class="featured-badge">Featured</span>
-              {/if}
-              
-              <div class="blog-image">
-                <img src={post.coverImage} alt={post.title} loading="lazy" />
-                <div class="blog-category">{post.category}</div>
-              </div>
-              
-              <div class="blog-content">
-                <div class="blog-meta">
-                  <time datetime={post.date}>{formatDate(post.date)}</time>
-                  <span class="reading-time">{post.readingTime} min read</span>
-                </div>
-                
-                <h2 class="blog-title">{post.title}</h2>
-                <p class="blog-excerpt">{post.excerpt}</p>
-                
-                <div class="blog-tags">
-                  {#each post.tags.slice(0, 3) as tag}
-                    <span class="tag">{tag}</span>
-                  {/each}
-                  {#if post.tags.length > 3}
-                    <span class="tag">+{post.tags.length - 3}</span>
-                  {/if}
-                </div>
-                
-                <div class="blog-footer">
-                  <div class="author">
-                    <img src={post.author.image} alt={post.author.name} class="author-image" />
-                    <span class="author-name">{post.author.name}</span>
-                  </div>
-                  <span class="read-more">
-                    Read More
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <line x1="5" y1="12" x2="19" y2="12"/>
-                      <polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                  </span>
-                </div>
-              </div>
-            </article>
-          </Card>
-        </a>
-      {/each}
-    </div>
-  {:else}
-    <div class="empty-state">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
-      </svg>
-      <h3 class="heading-3">No articles found</h3>
-      <p class="text-muted">Try adjusting your search or filters</p>
-      <Button variant="secondary" on:click={clearFilters}>Clear Filters</Button>
-    </div>
-  {/if}
-</Section>
-
-<!-- Whiskers the Coding Cat Section -->
-<Section background="secondary">
-  <div class="whiskers-section">
-    <div class="whiskers-content">
-      <h2 class="heading-2">Meet Whiskers, My Coding Companion! 🐱</h2>
-      <p class="whiskers-text">
-        Click on Whiskers to get some coding wisdom and see what mood they're in!
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="badge-glow"></div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <span>Cyber Intelligence</span>
+      </div>
+      
+      <h1 class="hero-title">
+        <span class="title-line">SECURITY</span>
+        <span class="title-highlight">INSIGHTS</span>
+      </h1>
+      
+      <p class="hero-description">
+        Dive deep into the world of cybersecurity with practical insights, threat analysis, 
+        penetration testing techniques, and security best practices. From vulnerability 
+        assessments to secure coding practices.
       </p>
       
-      <div class="cat-container">
-        <!-- Speech Bubble -->
-        {#if showSpeechBubble}
-          <div class="speech-bubble" class:thinking={catMood === 'thinking'}>
-            {currentMessage}
-            <div class="speech-tail"></div>
+      <!-- Security Dashboard Widget -->
+      <div class="security-dashboard">
+        <div class="dashboard-header">
+          <div class="status-indicator">
+            <div class="status-dot active"></div>
+            <span>THREAT MONITORING ACTIVE</span>
           </div>
-        {/if}
-        
-        <!-- Whiskers the Cat -->
-        <div 
-          class="cat {catMood}"
-          bind:this={catElement}
-          on:click={handleCatClick}
-          on:keydown={(e) => e.key === 'Enter' && handleCatClick()}
-          role="button"
-          tabindex="0"
-          aria-label="Click to interact with Whiskers the coding cat"
-        >
-          <!-- Cat SVG -->
-          <svg width="120" height="100" viewBox="0 0 120 100" class="cat-svg">
-            <!-- Shadow -->
-            <ellipse cx="60" cy="95" rx="30" ry="5" fill="rgba(0,0,0,0.2)" class="cat-shadow"/>
-            
-            <!-- Tail -->
-            <path d="M 85 75 Q 95 65 105 70 Q 110 75 105 80 Q 95 85 85 75" 
-                  fill="#FF6B35" stroke="#E74C3C" stroke-width="1" class="cat-tail"/>
-            
-            <!-- Body -->
-            <ellipse cx="60" cy="70" rx="25" ry="20" fill="#FF6B35" class="cat-body"/>
-            
-            <!-- Body stripes -->
-            <path d="M 40 65 Q 60 62 80 65" stroke="#E74C3C" stroke-width="2" fill="none" opacity="0.5"/>
-            <path d="M 42 72 Q 60 69 78 72" stroke="#E74C3C" stroke-width="2" fill="none" opacity="0.5"/>
-            
-            <!-- Paws -->
-            <ellipse cx="48" cy="88" rx="7" ry="5" fill="#FF6B35" class="cat-paw-left"/>
-            <ellipse cx="72" cy="88" rx="7" ry="5" fill="#FF6B35" class="cat-paw-right"/>
-            <circle cx="45" cy="88" r="2" fill="#E74C3C" opacity="0.5"/>
-            <circle cx="48" cy="90" r="2" fill="#E74C3C" opacity="0.5"/>
-            <circle cx="51" cy="88" r="2" fill="#E74C3C" opacity="0.5"/>
-            <circle cx="69" cy="88" r="2" fill="#E74C3C" opacity="0.5"/>
-            <circle cx="72" cy="90" r="2" fill="#E74C3C" opacity="0.5"/>
-            <circle cx="75" cy="88" r="2" fill="#E74C3C" opacity="0.5"/>
-            
-            <!-- Head -->
-            <circle cx="60" cy="40" r="20" fill="#FF6B35" class="cat-head"/>
-            
-            <!-- Head stripes -->
-            <path d="M 45 35 Q 60 32 75 35" stroke="#E74C3C" stroke-width="2" fill="none" opacity="0.5"/>
-            
-            <!-- Ears -->
-            <path d="M 40 25 L 45 35 L 35 35 Z" fill="#FF6B35" class="cat-ear-left"/>
-            <path d="M 80 25 L 85 35 L 75 35 Z" fill="#FF6B35" class="cat-ear-right"/>
-            <path d="M 41 28 L 44 33 L 38 33 Z" fill="#FFB6A3" class="cat-ear-inner-left"/>
-            <path d="M 79 28 L 82 33 L 76 33 Z" fill="#FFB6A3" class="cat-ear-inner-right"/>
-            
-            <!-- Eyes -->
-            <g class="cat-eyes">
-              <ellipse cx="52" cy="38" rx="4" ry="5" fill="#2C3E50" class="cat-eye-left"/>
-              <ellipse cx="68" cy="38" rx="4" ry="5" fill="#2C3E50" class="cat-eye-right"/>
-              <ellipse cx="53" cy="37" rx="2" ry="3" fill="white" opacity="0.8"/>
-              <ellipse cx="69" cy="37" rx="2" ry="3" fill="white" opacity="0.8"/>
-              <circle cx="52" cy="38" r="2" fill="#1a1a1a" class="cat-pupil-left"/>
-              <circle cx="68" cy="38" r="2" fill="#1a1a1a" class="cat-pupil-right"/>
-            </g>
-            
-            <!-- Nose -->
-            <path d="M 60 42 L 57 45 L 63 45 Z" fill="#E74C3C" stroke="#C0392B" stroke-width="0.5"/>
-            
-            <!-- Mouth -->
-            <path d="M 60 45 Q 56 47 52 45" stroke="#2C3E50" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <path d="M 60 45 Q 64 47 68 45" stroke="#2C3E50" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            
-            <!-- Whiskers -->
-            <line x1="30" y1="38" x2="45" y2="37" stroke="#2C3E50" stroke-width="1" class="whisker whisker-1"/>
-            <line x1="30" y1="42" x2="45" y2="41" stroke="#2C3E50" stroke-width="1" class="whisker whisker-2"/>
-            <line x1="30" y1="46" x2="45" y2="45" stroke="#2C3E50" stroke-width="1" class="whisker whisker-3"/>
-            <line x1="75" y1="37" x2="90" y2="38" stroke="#2C3E50" stroke-width="1" class="whisker whisker-4"/>
-            <line x1="75" y1="41" x2="90" y2="42" stroke="#2C3E50" stroke-width="1" class="whisker whisker-5"/>
-            <line x1="75" y1="45" x2="90" y2="46" stroke="#2C3E50" stroke-width="1" class="whisker whisker-6"/>
-            
-            <!-- Expression elements -->
-            <g class="cat-expression">
-              <!-- Sleepy z's (hidden by default) -->
-              <text x="85" y="30" fill="#2C3E50" font-size="12" font-weight="bold" opacity="0" class="sleepy-z z1">Z</text>
-              <text x="90" y="25" fill="#2C3E50" font-size="10" font-weight="bold" opacity="0" class="sleepy-z z2">z</text>
-              <text x="95" y="20" fill="#2C3E50" font-size="8" font-weight="bold" opacity="0" class="sleepy-z z3">z</text>
-              
-              <!-- Excited stars (hidden by default) -->
-              <text x="35" y="25" fill="#FFD700" font-size="14" opacity="0" class="excited-star star1">✨</text>
-              <text x="80" y="25" fill="#FFD700" font-size="14" opacity="0" class="excited-star star2">✨</text>
-              
-              <!-- Thinking dots (hidden by default) -->
-              <circle cx="85" cy="20" r="2" fill="#2C3E50" opacity="0" class="thinking-dot dot1"/>
-              <circle cx="90" cy="15" r="3" fill="#2C3E50" opacity="0" class="thinking-dot dot2"/>
-              <circle cx="95" cy="10" r="4" fill="#2C3E50" opacity="0" class="thinking-dot dot3"/>
-            </g>
-          </svg>
-          
-          <!-- Laptop -->
-          <div class="laptop">
-            <div class="laptop-screen">
-              <div class="code-lines">
-                <div class="code-line code-line-1"></div>
-                <div class="code-line code-line-2"></div>
-                <div class="code-line code-line-3"></div>
-              </div>
-            </div>
-            <div class="laptop-base">
-              <div class="laptop-logo"></div>
-            </div>
+          <div class="timestamp">
+            {new Date().toLocaleDateString('en-US', { 
+              month: 'short', 
+              day: 'numeric', 
+              year: 'numeric' 
+            })}
           </div>
         </div>
-        
-        <p class="cat-instruction">
-          Click me for coding wisdom! 🖱️
-        </p>
+        <div class="dashboard-stats">
+          <div class="stat-item">
+            <div class="stat-value">{blogPosts.length}</div>
+            <div class="stat-label">Articles</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{categories.length - 1}</div>
+            <div class="stat-label">Topics</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">∞</div>
+            <div class="stat-label">Learning</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </Section>
 
+<!-- Filters Section -->
+<Section size="sm" background="secondary">
+  <div class="filters-section">
+    <div class="filters-header">
+      <h2 class="heading-3">Filter Articles</h2>
+      <p class="text-secondary">Find exactly what you're looking for</p>
+    </div>
+    
+    <div class="filters-container">
+      <!-- Search -->
+      <div class="filter-group">
+        <div class="search-wrapper">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            type="text"
+            bind:value={searchQuery}
+            placeholder="Search threat analysis, pentesting, security..."
+            class="input search-input"
+          />
+        </div>
+      </div>
+      
+      <!-- Category Pills -->
+      <div class="category-section">
+        <span class="filter-label">Categories:</span>
+        <div class="category-pills">
+          {#each categories as category}
+            <button
+              class="category-pill"
+              class:active={selectedCategory === category}
+              on:click={() => selectedCategory = category}
+            >
+              {category}
+            </button>
+          {/each}
+        </div>
+      </div>
+      
+      {#if selectedCategory !== 'All' || searchQuery}
+        <Button variant="ghost" size="sm" on:click={clearFilters}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c0-1 1-2 2-2v2"/>
+          </svg>
+          Clear Filters
+        </Button>
+      {/if}
+    </div>
+    
+    <div class="filter-results">
+      <span class="results-text">
+        Showing {filteredPosts.length} of {blogPosts.length} articles
+      </span>
+      {#if filteredPosts.length > 0}
+        <div class="results-bar">
+          <div class="results-progress" style="width: {(filteredPosts.length / blogPosts.length) * 100}%"></div>
+        </div>
+      {/if}
+    </div>
+  </div>
+</Section>
+
+<!-- Blog Posts Grid -->
+<Section background="primary">
+  <div class="blog-content">
+    {#if sortedPosts.length > 0}
+      <div class="blog-grid">
+        {#each sortedPosts as post, i}
+          <a href="/blog/{post.slug}" class="blog-link">
+            <Card hover animate>
+              <article class="blog-card">
+                {#if post.featured}
+                  <div class="featured-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    Featured
+                  </div>
+                {/if}
+                
+                <div class="blog-image">
+                  <img src={post.coverImage} alt={post.title} loading="lazy" />
+                  <div class="image-overlay">
+                    <div class="category-badge">{post.category}</div>
+                  </div>
+                </div>
+                
+                <div class="blog-content-area">
+                  <div class="blog-meta">
+                    <time datetime={post.date} class="blog-date">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                      </svg>
+                      {formatDate(post.date)}
+                    </time>
+                    <span class="reading-time">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                      </svg>
+                      {post.readingTime} min read
+                    </span>
+                  </div>
+                  
+                  <h2 class="blog-title">{post.title}</h2>
+                  <p class="blog-excerpt">{post.excerpt}</p>
+                  
+                  <div class="blog-tags">
+                    {#each post.tags.slice(0, 3) as tag}
+                      <span class="tag">{tag}</span>
+                    {/each}
+                    {#if post.tags.length > 3}
+                      <span class="tag more">+{post.tags.length - 3}</span>
+                    {/if}
+                  </div>
+                  
+                  <div class="blog-footer">
+                    <div class="author">
+                      <img src={post.author.image} alt={post.author.name} class="author-image" />
+                      <span class="author-name">{post.author.name}</span>
+                    </div>
+                    <div class="read-more">
+                      <span>Read Analysis</span>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </Card>
+          </a>
+        {/each}
+      </div>
+    {:else}
+      <div class="empty-state">
+        <div class="empty-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </div>
+        <h3 class="heading-3">No Security Insights Found</h3>
+        <p class="text-secondary">
+          Try adjusting your search terms or explore different categories.
+        </p>
+        <Button variant="secondary" on:click={clearFilters}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c0-1 1-2 2-2v2"/>
+          </svg>
+          Clear All Filters
+        </Button>
+      </div>
+    {/if}
+  </div>
+</Section>
+
 <style>
-  /* Previous styles remain the same for blog sections... */
-  
-  /* Hero */
+  /* Hero Section */
   .blog-hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  
+  .cyber-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(0, 212, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: grid-pulse 15s ease-in-out infinite;
+  }
+  
+  @keyframes grid-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+  
+  .security-elements {
+    position: absolute;
+    inset: 0;
+  }
+  
+  .security-icon {
+    position: absolute;
+    color: var(--neon-cyan);
+    opacity: 0.4;
+    animation: float-security 8s ease-in-out infinite;
+  }
+  
+  .icon-1 {
+    top: 15%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+  
+  .icon-2 {
+    top: 60%;
+    right: 15%;
+    animation-delay: 3s;
+  }
+  
+  .icon-3 {
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 6s;
+  }
+  
+  @keyframes float-security {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-15px) rotate(5deg); }
+    66% { transform: translateY(-10px) rotate(-5deg); }
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
     text-align: center;
-    max-width: 700px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+  
+  .hero-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    margin-bottom: var(--space-6);
+    overflow: hidden;
+  }
+  
+  .badge-glow {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-primary);
+    opacity: 0.1;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  .title-line {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .title-highlight {
+    color: var(--text-primary);
+    position: relative;
+  }
+  
+  .title-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-secondary);
+    border-radius: var(--radius-full);
+  }
+  
+  .hero-description {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-8);
+  }
+  
+  /* Security Dashboard */
+  .security-dashboard {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--border-glow);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--neon-green);
+    font-weight: 500;
+  }
+  
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--neon-green);
+  }
+  
+  .status-dot.active {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  .timestamp {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+  
+  .dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+  
+  .stat-item {
+    text-align: center;
+  }
+  
+  .stat-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--neon-cyan);
+    line-height: 1;
+    margin-bottom: var(--space-1);
+  }
+  
+  .stat-label {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Filters Section */
+  .filters-section {
+    max-width: 1000px;
     margin: 0 auto;
   }
   
-  .hero-text {
-    font-size: var(--text-xl);
-    color: var(--text-secondary);
-    line-height: 1.6;
+  .filters-header {
+    text-align: center;
+    margin-bottom: var(--space-6);
   }
   
-  /* Filters */
-  .filters {
+  .filters-container {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
   }
   
+  .filter-group {
+    width: 100%;
+  }
+  
   .search-wrapper {
     position: relative;
-    max-width: 400px;
   }
   
   .search-icon {
@@ -443,6 +545,19 @@
     width: 100%;
   }
   
+  .category-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  
+  .filter-label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+  
   .category-pills {
     display: flex;
     flex-wrap: wrap;
@@ -451,7 +566,8 @@
   
   .category-pill {
     padding: var(--space-2) var(--space-4);
-    background-color: var(--surface);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
     border: 1px solid var(--border);
     border-radius: var(--radius-full);
     color: var(--text-secondary);
@@ -462,26 +578,55 @@
   }
   
   .category-pill:hover {
-    background-color: var(--surface-hover);
-    border-color: var(--primary-600);
+    background: var(--surface-hover);
+    border-color: var(--border-glow);
+    transform: translateY(-1px);
   }
   
   .category-pill.active {
-    background-color: var(--primary-600);
-    border-color: var(--primary-600);
-    color: white;
+    background: var(--gradient-primary);
+    border-color: var(--neon-cyan);
+    color: var(--bg-primary);
+    box-shadow: var(--shadow-glow);
   }
   
   .filter-results {
-    font-size: var(--text-sm);
-    color: var(--text-muted);
-    margin-top: var(--space-2);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
   }
   
-  /* Blog Grid */
+  .results-text {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  
+  .results-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+  
+  .results-progress {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-base);
+  }
+  
+  /* Blog Content */
+  .blog-content {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
   .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     gap: var(--space-6);
   }
   
@@ -497,26 +642,32 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow: hidden;
   }
   
   .featured-badge {
     position: absolute;
     top: var(--space-4);
     right: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
     padding: var(--space-1) var(--space-3);
-    background-color: var(--accent-600);
-    color: white;
+    background: var(--gradient-accent);
+    color: var(--bg-primary);
     font-size: var(--text-xs);
     font-weight: 600;
     border-radius: var(--radius-full);
     z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   
   .blog-image {
     position: relative;
     width: calc(100% + 3rem);
     margin: -1.5rem -1.5rem 1.5rem;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
   }
   
@@ -531,19 +682,29 @@
     transform: scale(1.05);
   }
   
-  .blog-category {
+  .image-overlay {
     position: absolute;
-    bottom: var(--space-4);
-    left: var(--space-4);
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.4) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-4);
+  }
+  
+  .category-badge {
     padding: var(--space-1) var(--space-3);
-    background-color: var(--primary-600);
-    color: white;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--border-glow);
+    color: var(--neon-cyan);
     font-size: var(--text-xs);
     font-weight: 500;
     border-radius: var(--radius-md);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   
-  .blog-content {
+  .blog-content-area {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -552,15 +713,18 @@
   .blog-meta {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    font-size: var(--text-sm);
+    gap: var(--space-4);
+    font-size: var(--text-xs);
     color: var(--text-muted);
     margin-bottom: var(--space-3);
+    font-family: var(--font-mono);
   }
   
-  .reading-time::before {
-    content: '•';
-    margin-right: var(--space-3);
+  .blog-date,
+  .reading-time {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
   }
   
   .blog-title {
@@ -568,6 +732,7 @@
     font-weight: 600;
     margin-bottom: var(--space-3);
     line-height: 1.3;
+    color: var(--text-primary);
   }
   
   .blog-excerpt {
@@ -586,11 +751,18 @@
   
   .tag {
     padding: var(--space-1) var(--space-2);
-    background-color: var(--surface);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     font-size: var(--text-xs);
     color: var(--text-secondary);
+    font-weight: 500;
+  }
+  
+  .tag.more {
+    color: var(--neon-cyan);
+    border-color: var(--border-glow);
   }
   
   .blog-footer {
@@ -612,18 +784,20 @@
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid var(--border);
   }
   
   .author-name {
     font-size: var(--text-sm);
     font-weight: 500;
+    color: var(--text-secondary);
   }
   
   .read-more {
     display: flex;
     align-items: center;
     gap: var(--space-1);
-    color: var(--primary-400);
+    color: var(--neon-cyan);
     font-size: var(--text-sm);
     font-weight: 500;
     transition: gap var(--transition-base);
@@ -637,440 +811,47 @@
   .empty-state {
     text-align: center;
     padding: var(--space-16) 0;
-    color: var(--text-muted);
   }
   
-  .empty-state svg {
-    margin: 0 auto var(--space-4);
+  .empty-icon {
+    margin: 0 auto var(--space-6);
+    color: var(--text-muted);
     opacity: 0.5;
   }
   
   .empty-state h3 {
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
   }
   
   .empty-state p {
     margin-bottom: var(--space-6);
-  }
-  
-  /* Whiskers the Coding Cat Styles */
-  .whiskers-section {
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 0 var(--space-4);
-  }
-  
-  .whiskers-content {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: var(--radius-xl);
-    padding: var(--space-8);
-    color: white;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  }
-  
-  .whiskers-content::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 0h20v20H0z'/%3E%3Cpath d='M10 0l10 10-10 10L0 10z'/%3E%3C%2Fg%3E%3C%2Fsvg%3E") repeat;
-    pointer-events: none;
-  }
-  
-  .whiskers-content h2,
-  .whiskers-text {
-    position: relative;
-    z-index: 1;
-  }
-  
-  .whiskers-text {
-    font-size: var(--text-lg);
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: var(--space-6);
-    line-height: 1.6;
-  }
-  
-  .cat-container {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-4);
-  }
-  
-  .cat {
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-2);
-    user-select: none;
-  }
-  
-  .cat:hover {
-    transform: scale(1.05);
-  }
-  
-  .cat:active {
-    transform: scale(0.95);
-  }
-  
-  .cat.bounce {
-    animation: bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-  
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-10px) rotate(-5deg); }
-    50% { transform: translateY(-15px) rotate(0deg); }
-    75% { transform: translateY(-10px) rotate(5deg); }
-  }
-  
-  .cat-svg {
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-    transition: all 0.3s ease;
-  }
-  
-  .cat-shadow {
-    transition: all 0.3s ease;
-  }
-  
-  .cat:hover .cat-shadow {
-    transform: scale(1.1);
-  }
-  
-  /* Cat animations */
-  .cat.blink .cat-eye-left,
-  .cat.blink .cat-eye-right {
-    animation: blink 0.3s ease-in-out;
-  }
-  
-  @keyframes blink {
-    0%, 100% { transform: scaleY(1); }
-    50% { transform: scaleY(0.1); }
-  }
-  
-  .cat.tail-wag .cat-tail {
-    animation: tailWag 1s ease-in-out;
-    transform-origin: 85px 75px;
-  }
-  
-  @keyframes tailWag {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(15deg); }
-    75% { transform: rotate(-15deg); }
-  }
-  
-  .cat.ear-twitch .cat-ear-left {
-    animation: earTwitchLeft 0.5s ease-in-out;
-    transform-origin: 40px 30px;
-  }
-  
-  .cat.ear-twitch .cat-ear-right {
-    animation: earTwitchRight 0.5s ease-in-out;
-    transform-origin: 80px 30px;
-  }
-  
-  @keyframes earTwitchLeft {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(-10deg); }
-  }
-  
-  @keyframes earTwitchRight {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(10deg); }
-  }
-  
-  /* Whiskers animation */
-  .cat:hover .whisker {
-    animation: whiskerTwitch 0.5s ease-in-out;
-  }
-  
-  .whisker-1, .whisker-4 { transform-origin: right center; }
-  .whisker-2, .whisker-5 { transform-origin: right center; animation-delay: 0.1s; }
-  .whisker-3, .whisker-6 { transform-origin: right center; animation-delay: 0.2s; }
-  
-  @keyframes whiskerTwitch {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(3deg); }
-  }
-  
-  /* Mood-based animations */
-  .cat.sleepy .cat-eye-left,
-  .cat.sleepy .cat-eye-right {
-    transform: scaleY(0.3);
-  }
-  
-  .cat.sleepy .sleepy-z {
-    animation: floatUp 2s ease-in-out infinite;
-  }
-  
-  .cat.sleepy .z1 { animation-delay: 0s; }
-  .cat.sleepy .z2 { animation-delay: 0.3s; }
-  .cat.sleepy .z3 { animation-delay: 0.6s; }
-  
-  @keyframes floatUp {
-    0% { 
-      opacity: 0;
-      transform: translate(0, 0);
-    }
-    20% {
-      opacity: 1;
-    }
-    80% {
-      opacity: 1;
-    }
-    100% { 
-      opacity: 0;
-      transform: translate(10px, -20px);
-    }
-  }
-  
-  .cat.excited .excited-star {
-    animation: sparkle 0.8s ease-in-out;
-  }
-  
-  .cat.excited .star1 { animation-delay: 0s; }
-  .cat.excited .star2 { animation-delay: 0.2s; }
-  
-  @keyframes sparkle {
-    0%, 100% { 
-      opacity: 0;
-      transform: scale(0) rotate(0deg);
-    }
-    50% { 
-      opacity: 1;
-      transform: scale(1) rotate(180deg);
-    }
-  }
-  
-  .cat.excited .cat-tail {
-    animation: excitedTailWag 0.3s ease-in-out infinite;
-  }
-  
-  @keyframes excitedTailWag {
-    0%, 100% { transform: rotate(-5deg); }
-    50% { transform: rotate(5deg); }
-  }
-  
-  .cat.thinking .thinking-dot {
-    animation: thinkingDots 1.5s ease-in-out infinite;
-  }
-  
-  .cat.thinking .dot1 { animation-delay: 0s; }
-  .cat.thinking .dot2 { animation-delay: 0.2s; }
-  .cat.thinking .dot3 { animation-delay: 0.4s; }
-  
-  @keyframes thinkingDots {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
-  }
-  
-  .cat.thinking .cat-head {
-    animation: headTilt 2s ease-in-out infinite;
-    transform-origin: center center;
-  }
-  
-  @keyframes headTilt {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-5deg); }
-    75% { transform: rotate(5deg); }
-  }
-  
-  /* Laptop */
-  .laptop {
-    margin-top: var(--space-3);
-    position: relative;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  }
-  
-  .laptop-screen {
-    width: 60px;
-    height: 40px;
-    background: #2C3E50;
-    border-radius: 4px 4px 0 0;
-    border: 2px solid #34495E;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
-  }
-  
-  .laptop-screen::before {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
-    background: #1a1a1a;
-    border-radius: 2px;
-  }
-  
-  .laptop-base {
-    width: 70px;
-    height: 5px;
-    background: linear-gradient(180deg, #95A5A6 0%, #7F8C8D 100%);
-    border-radius: 0 0 8px 8px;
-    margin: 0 auto;
-    position: relative;
-  }
-  
-  .laptop-base::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 2px;
-    background: #7F8C8D;
-    border-radius: 0 0 4px 4px;
-  }
-  
-  .laptop-logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
-    background: #BDC3C7;
-    border-radius: 50%;
-  }
-  
-  .code-lines {
-    padding: 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .code-line {
-    height: 2px;
-    border-radius: 1px;
-    position: relative;
-  }
-  
-  .code-line-1 {
-    width: 80%;
-    background: #27AE60;
-    animation: typing1 3s infinite;
-  }
-  
-  .code-line-2 {
-    width: 60%;
-    background: #3498DB;
-    animation: typing2 3s infinite;
-  }
-  
-  .code-line-3 {
-    width: 90%;
-    background: #E74C3C;
-    animation: typing3 3s infinite;
-  }
-  
-  @keyframes typing1 {
-    0%, 100% { opacity: 0.3; width: 20%; }
-    50% { opacity: 1; width: 80%; }
-  }
-  
-  @keyframes typing2 {
-    0%, 100% { opacity: 0.3; width: 30%; }
-    50% { opacity: 1; width: 60%; }
-  }
-  
-  @keyframes typing3 {
-    0%, 100% { opacity: 0.3; width: 40%; }
-    50% { opacity: 1; width: 90%; }
-  }
-  
-  /* Speech Bubble */
-  .speech-bubble {
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    color: #2C3E50; /* Dark text color */
-    padding: var(--space-3) var(--space-4);
-    border-radius: var(--radius-lg);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    white-space: nowrap;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    z-index: 10;
-    max-width: 250px;
-    white-space: normal;
-    text-align: center;
-    line-height: 1.4;
-  }
-  
-  .speech-bubble.thinking {
-    font-style: italic;
-  }
-  
-  .speech-tail {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid white;
-  }
-  
-  @keyframes popIn {
-    0% {
-      opacity: 0;
-      transform: translateX(-50%) scale(0.8) translateY(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(-50%) scale(1) translateY(0);
-    }
-  }
-  
-  .cat-instruction {
-    font-size: var(--text-sm);
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: var(--space-2);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
-  }
-  
-  /* Accessibility improvements */
-  .cat:focus {
-    outline: 2px solid rgba(255, 255, 255, 0.8);
-    outline-offset: 4px;
-    border-radius: var(--radius-lg);
-  }
-  
-  .cat:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.8);
-    outline-offset: 4px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   /* Responsive */
+  @media (max-width: 1024px) {
+    .blog-grid {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--space-5);
+    }
+  }
+  
   @media (max-width: 768px) {
     .blog-grid {
       grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    
+    .category-section {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .dashboard-stats {
+      gap: var(--space-3);
     }
     
     .blog-footer {
@@ -1078,96 +859,25 @@
       align-items: flex-start;
       gap: var(--space-3);
     }
-    
-    .whiskers-section {
-      padding: 0 var(--space-3);
-    }
-    
-    .whiskers-content {
-      padding: var(--space-6);
-    }
-    
-    .cat-svg {
-      width: 100px;
-      height: 83px;
-    }
-    
-    .laptop-screen {
-      width: 50px;
-      height: 33px;
-    }
-    
-    .laptop-base {
-      width: 58px;
-    }
-    
-    .speech-bubble {
-      max-width: 200px;
-      font-size: var(--text-xs);
-      padding: var(--space-2) var(--space-3);
-    }
   }
   
   @media (max-width: 480px) {
-    .whiskers-content {
-      padding: var(--space-4);
+    .hero-title {
+      font-size: clamp(2rem, 8vw, 3rem);
     }
     
-    .whiskers-text {
-      font-size: var(--text-base);
+    .security-dashboard {
+      padding: var(--space-3);
     }
     
-    .cat-svg {
-      width: 90px;
-      height: 75px;
+    .dashboard-header {
+      flex-direction: column;
+      gap: var(--space-2);
+      text-align: center;
     }
     
-    .laptop-screen {
-      width: 45px;
-      height: 30px;
-    }
-    
-    .laptop-base {
-      width: 52px;
-    }
-    
-    .speech-bubble {
-      max-width: 180px;
-      bottom: 110%;
-    }
-    
-    .cat-instruction {
-      font-size: var(--text-xs);
-    }
-  }
-  
-  /* Reduce motion for users who prefer it */
-  @media (prefers-reduced-motion: reduce) {
-    .cat,
-    .cat-svg,
-    .speech-bubble,
-    .code-line,
-    .cat-instruction {
-      animation: none !important;
-      transition: none !important;
-    }
-    
-    .cat:hover {
-      transform: none;
-    }
-    
-    .cat.blink .cat-eye-left,
-    .cat.blink .cat-eye-right,
-    .cat.tail-wag .cat-tail,
-    .cat.ear-twitch .cat-ear-left,
-    .cat.ear-twitch .cat-ear-right,
-    .cat:hover .whisker,
-    .cat.sleepy .sleepy-z,
-    .cat.excited .excited-star,
-    .cat.excited .cat-tail,
-    .cat.thinking .thinking-dot,
-    .cat.thinking .cat-head {
-      animation: none;
+    .filters-container {
+      gap: var(--space-3);
     }
   }
 </style>
