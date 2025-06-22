@@ -484,13 +484,12 @@ $ _`;
 </Section>
 
 <style>
-  /* All the existing styles remain the same, just adding this new status color */
+  /* Learning Status Color */
   .status-dot.learning {
     background: var(--neon-cyan);
     animation: pulse 2s ease-in-out infinite;
   }
   
-  /* Keep all the existing styles from the previous version */
   /* Hero Section */
   .hero {
     position: relative;
@@ -880,89 +879,6 @@ $ _`;
     letter-spacing: 1px;
   }
   
-  /* Certifications */
-  .certifications-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: var(--space-8);
-  }
-  
-  .cert-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .cert-header {
-    display: flex;
-    gap: var(--space-4);
-    margin-bottom: var(--space-4);
-  }
-  
-  .cert-icon {
-    width: 64px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid;
-    border-radius: var(--radius-xl);
-    flex-shrink: 0;
-  }
-  
-  .cert-meta {
-    flex: 1;
-  }
-  
-  .cert-year {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: var(--space-1);
-  }
-  
-  .cert-title {
-    font-size: var(--text-xl);
-    font-weight: 600;
-    margin-bottom: var(--space-1);
-    line-height: 1.3;
-  }
-  
-  .cert-issuer {
-    color: var(--text-secondary);
-    font-size: var(--text-sm);
-  }
-  
-  .cert-description {
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: var(--space-6);
-    flex: 1;
-  }
-  
-  .cert-skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-  }
-  
-  .skill-tag {
-    padding: var(--space-1) var(--space-3);
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-backdrop);
-    border: 1px solid;
-    border-radius: var(--radius-full);
-    font-size: var(--text-xs);
-    font-weight: 500;
-  }
-  
-  .skill-tag.more {
-    color: var(--text-muted);
-    border-color: var(--border);
-  }
-  
   /* CTA Section */
   .cta-section {
     display: grid;
@@ -1119,7 +1035,39 @@ $ _`;
     to { height: var(--height, 50%); }
   }
   
-  /* Responsive Design */
+  /* Animations */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+  
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* ===================================
+     MOBILE RESPONSIVE STYLES
+     =================================== */
+  
+  /* Tablets (1024px and below) */
   @media (max-width: 1024px) {
     .cta-section {
       grid-template-columns: 1fr;
@@ -1136,27 +1084,52 @@ $ _`;
     }
   }
   
+  /* Mobile Devices (768px and below) */
   @media (max-width: 768px) {
+    /* Hero Section Mobile Fixes */
     .hero {
-      min-height: 90vh;
+      min-height: 100vh;
       padding: var(--space-4) 0;
     }
     
+    .hero-content {
+      padding: 0 var(--space-3);
+    }
+    
     .hero-title {
-      font-size: clamp(2rem, 12vw, 4rem);
+      font-size: clamp(2rem, 10vw, 3.5rem);
+      margin-bottom: var(--space-4);
+      gap: var(--space-1);
     }
     
-    .hero-actions {
-      flex-direction: column;
-      align-items: center;
+    .hero-subtitle {
+      font-size: var(--text-base);
+      margin-bottom: var(--space-4);
     }
     
-    .hero-stats {
-      gap: var(--space-6);
+    .hero-description {
+      font-size: var(--text-base);
+      margin-bottom: var(--space-6);
+      padding: 0 var(--space-2);
+    }
+    
+    /* Terminal Mobile Optimization */
+    .hero-terminal {
+      margin: 0 var(--space-2) var(--space-6);
+      max-width: calc(100vw - var(--space-4));
     }
     
     .terminal-header {
       padding: var(--space-2) var(--space-3);
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+    
+    .terminal-title {
+      font-size: var(--text-xs);
+      order: 3;
+      width: 100%;
+      text-align: center;
     }
     
     .terminal-body {
@@ -1165,21 +1138,265 @@ $ _`;
     
     .terminal-content {
       font-size: var(--text-xs);
+      line-height: 1.4;
+      word-break: break-all;
+      white-space: pre-wrap;
     }
     
-    .projects-grid,
-    .expertise-grid,
-    .certifications-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-6);
+    /* Hero Actions Mobile */
+    .hero-actions {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+      padding: 0 var(--space-3);
     }
     
+    .hero-actions :global(.btn) {
+      width: 100%;
+      max-width: 280px;
+      justify-content: center;
+    }
+    
+    /* Hero Stats Mobile */
+    .hero-stats {
+      gap: var(--space-4);
+      padding: 0 var(--space-3);
+    }
+    
+    .stat-number {
+      font-size: var(--text-2xl);
+    }
+    
+    .stat-label {
+      font-size: var(--text-xs);
+    }
+    
+    /* Section Headers Mobile */
     .section-header {
-      margin-bottom: var(--space-12);
+      margin-bottom: var(--space-10);
+      padding: 0 var(--space-3);
+    }
+    
+    .section-badge {
+      font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-3);
+    }
+    
+    .heading-2 {
+      font-size: clamp(var(--text-xl), 6vw, var(--text-2xl));
+      margin-bottom: var(--space-3);
+    }
+    
+    .text-lead {
+      font-size: var(--text-base);
+      padding: 0 var(--space-2);
+    }
+    
+    /* Grids Mobile - Force Single Column */
+    .projects-grid,
+    .expertise-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      padding: 0 var(--space-3);
+    }
+    
+    /* Expertise Cards Mobile */
+    .expertise-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: var(--space-4);
+    }
+    
+    .expertise-description {
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-4);
+    }
+    
+    .expertise-skills li {
+      font-size: var(--text-xs);
+      padding: var(--space-1) 0 var(--space-1) var(--space-4);
+    }
+    
+    .expertise-badge {
+      top: var(--space-2);
+      right: var(--space-2);
+      font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-2);
+    }
+    
+    /* CTA Section Mobile */
+    .cta-section {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      text-align: center;
+      padding: 0 var(--space-3);
+    }
+    
+    .cta-content {
+      text-align: center;
+    }
+    
+    .cta-badge {
+      font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-3);
+    }
+    
+    .cta-features {
+      gap: var(--space-2);
+      margin: var(--space-6) 0;
+    }
+    
+    .feature {
+      font-size: var(--text-sm);
+      gap: var(--space-2);
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      gap: var(--space-3);
+      align-items: center;
+      width: 100%;
+    }
+    
+    .cta-buttons :global(.btn) {
+      width: 100%;
+      max-width: 280px;
+    }
+    
+    /* Security Dashboard Mobile */
+    .security-dashboard {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    
+    .dashboard-header {
+      padding: var(--space-3);
+      flex-direction: column;
+      gap: var(--space-2);
+      text-align: center;
+    }
+    
+    .dashboard-metrics {
+      padding: var(--space-4);
+      gap: var(--space-3);
+    }
+    
+    .metric-value {
+      font-size: var(--text-xl);
+    }
+    
+    .metric-label {
+      font-size: var(--text-xs);
+    }
+    
+    .dashboard-chart {
+      padding: var(--space-4);
+    }
+    
+    .chart-bars {
+      height: 60px;
+    }
+    
+    /* Section CTA Mobile */
+    .section-cta {
+      text-align: center;
+      margin-top: var(--space-8);
+      padding: 0 var(--space-3);
+    }
+    
+    .section-cta :global(.btn) {
+      width: 100%;
+      max-width: 280px;
+    }
+    
+    /* Container overflow fixes */
+    :global(.container) {
+      padding: 0 var(--space-3);
+      overflow-x: hidden;
+    }
+    
+    /* Ensure no horizontal scroll */
+    :global(body) {
+      overflow-x: hidden;
+    }
+    
+    /* Fix potential overflow issues */
+    .hero-background {
+      overflow: hidden;
+    }
+    
+    .particle-canvas {
+      display: none; /* Hide particles on mobile for performance */
     }
   }
   
+  /* Extra Small Devices (480px and below) */
   @media (max-width: 480px) {
+    .hero-content {
+      padding: 0 var(--space-2);
+    }
+    
+    .hero-title {
+      font-size: clamp(1.5rem, 12vw, 2.5rem);
+      gap: 0;
+    }
+    
+    .hero-subtitle {
+      font-size: var(--text-sm);
+    }
+    
+    .hero-description {
+      font-size: var(--text-sm);
+      padding: 0;
+    }
+    
+    .hero-terminal {
+      margin: 0 var(--space-1) var(--space-4);
+    }
+    
+    .terminal-content {
+      font-size: 10px;
+      line-height: 1.3;
+    }
+    
+    .hero-actions,
+    .hero-stats,
+    .section-header,
+    .projects-grid,
+    .expertise-grid,
+    .cta-section {
+      padding: 0 var(--space-2);
+    }
+    
+    .heading-2 {
+      font-size: var(--text-xl);
+    }
+    
+    .text-lead {
+      font-size: var(--text-sm);
+      padding: 0;
+    }
+    
+    /* Make terminal responsive on very small screens */
+    .terminal-header {
+      padding: var(--space-2);
+    }
+    
+    .terminal-body {
+      padding: var(--space-2);
+    }
+    
+    /* Floating elements - hide on very small screens */
+    .floating-elements {
+      display: none;
+    }
+    
+    /* Reduce cyber grid intensity on small screens */
+    .cyber-grid {
+      opacity: 0.3;
+    }
+    
     .hero-badge,
     .section-badge,
     .cta-badge {
@@ -1187,17 +1404,29 @@ $ _`;
       padding: var(--space-1) var(--space-3);
     }
     
-    .stat-number {
-      font-size: var(--text-2xl);
-    }
-    
-    .cta-buttons {
-      flex-direction: column;
-      width: 100%;
-    }
-    
     .cta-buttons :global(.btn) {
       width: 100%;
+    }
+  }
+  
+  /* Landscape Mobile Devices */
+  @media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+      min-height: 100vh;
+      padding: var(--space-2) 0;
+    }
+    
+    .hero-title {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+      margin-bottom: var(--space-3);
+    }
+    
+    .hero-description {
+      margin-bottom: var(--space-4);
+    }
+    
+    .hero-terminal {
+      margin-bottom: var(--space-4);
     }
   }
   
