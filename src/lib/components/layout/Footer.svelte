@@ -48,7 +48,6 @@
           </div>
           <div class="brand-text">
             <span class="brand-name">DUARDZ</span>
-            <span class="brand-tagline">CYBERSECURITY_SPECIALIST</span>
           </div>
         </a>
         
