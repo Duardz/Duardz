@@ -97,6 +97,39 @@ export const projects = [
     results:
       'Launched a stylish, functional gym website that is ready for both customer engagement and admin use on mobile or desktop.'
   }
+},
+{
+  id: 'axionark-hacking-journey',
+  title: 'Axionark: The Hacking Journey',
+  description:
+    'A gamified cybersecurity journaling app built with SvelteKit and Firebase, where users log their ethical hacking progress, earn XP, and level up through daily learning goals.',
+  featured: true,
+  image: '/images/projects/axionark.jpg',
+  technologies: ['SvelteKit', 'Tailwind', 'Firebase', 'Vercel'],
+  category: 'App',
+  github: 'https://github.com/Duardz/axionark',
+  demo: 'https://axionark.vercel.app/',
+  details: {
+    overview:
+      'Axionark is a gamified self-paced cybersecurity learning app that blends journaling with progression systems. Users document their hacking journey, define concepts in their own words, and gain XP as they reach milestones and complete daily objectives.',
+    features: [
+      'Gamified XP and leveling system',
+      'Custom journal entries tied to learning goals',
+      'Personal knowledge base with tags and search',
+      'Firebase authentication and real-time Firestore database',
+      'Responsive design for mobile and desktop'
+    ],
+    techStack: [
+      'SvelteKit for reactive components and routing',
+      'Tailwind CSS for clean, fast UI development',
+      'Firebase for auth, Firestore, and deployment-ready backend',
+      'Vercel for smooth deployment and CI integration'
+    ],
+    challenges:
+      'Designing a rewarding XP system that encourages daily use, implementing secure user auth and Firestore writes, and creating a flexible system for journaling and tracking technical terms.',
+    results:
+      'Created a sleek, developer-focused app that encourages consistent learning and reflection, while tracking user growth and knowledge accumulation.'
+  }
 }
 ];
 
